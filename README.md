@@ -20,7 +20,7 @@ RuoYi/
 │   ├── ruoyi-manage/         # 管理模块
 │   ├── ruoyi-quartz/         # 定时任务模块
 │   ├── ruoyi-system/         # 系统业务模块
-│   └── sql/                  # 数据库脚本（ry_20250522.sql、quartz.sql）
+│   └── sql/                  # 数据库脚本（smart_course_management.sql 完整库、quartz.sql 定时任务）
 └── frontend/                 # 前端工程（Vue3 + Vite）
 ```
 
@@ -39,7 +39,7 @@ RuoYi/
 ### 1. 初始化数据库
 
 1. 使用 Navicat 或其他工具新建数据库（如 `smart_course_management`），字符集选择 `utf8mb4`
-2. 导入脚本：执行 `backend/sql/ry_20250522.sql`（若使用定时任务功能，再执行 `quartz.sql`）
+2. 导入脚本：执行 `backend/sql/smart_course_management.sql`（完整库脚本，包含若依系统表 + 课程/学生/教师/成绩/选课等业务表，共 25 张表）；若需使用定时任务功能，再执行 `backend/sql/quartz.sql`
 
 ### 2. 配置并启动后端
 
