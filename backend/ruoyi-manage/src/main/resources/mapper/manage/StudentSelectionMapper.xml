@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.manage.mapper.StudentSelectionMapper">
+    
+    <resultMap type="com.ruoyi.manage.domain.StudentSelection" id="StudentSelectionResult">
+        <result property="id"    column="id"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="status"    column="status"    />
+        <result property="selectTime"    column="select_time"    />
+        <result property="courseName" column="course_name"/>
+        <result property="studentName" column="student_name"/>
+    </resultMap>
+
+    <sql id="selectStudentSelectionVo">
+        select id, course_id, student_id, status, select_time from tb_student_selection
+    </sql>
+
+    <!-- 新增：查询某课程的已选学生ID列表 -->
+    <select id="selectStudentIdsByCourseId" resultType="java.lang.Long">
+        SELECT student_id
+        FROM tb_student_selection
+        WHERE course_id = #{courseId}
+          AND status = 0  -- 假设status=0表示“已选”，需匹配你的表结构
+    </select>
+
+    <select id="countSelectedByCourseId" parameterType="Long" resultType="int">
+        select count(*) from tb_student_selection
+        where course_id = #{courseId} and status = 0 -- 只统计已选状态的学生
+    </select>
+
+    <select id="selectStudentSelectionList" parameterType="com.ruoyi.manage.domain.StudentSelection" resultMap="StudentSelectionResult">
+        SELECT
+        ss.id,
+        ss.course_id,
+        ss.student_id,
+        ss.status,
+        ss.select_time,
+        c.course_name AS course_name,  <!-- 课程名称（关联tb_course） -->
+        stu.student_name AS student_name  <!-- 学生名称（关联tb_student） -->
+        FROM tb_student_selection ss
+        INNER JOIN tb_course c ON ss.course_id = c.id  <!-- 关联课程表 -->
+        INNER JOIN tb_student stu ON ss.student_id = stu.id  <!-- 关联学生表 -->
+        <where>
+
+            <!-- 1. 新增：学生角色过滤（只查自己的选课记录） -->
+            <if test="studentId != null">
+                AND ss.student_id = #{studentId}
+            </if>
+
+            <!-- 2. 新增：教师角色过滤（只查自己课程的选课记录） -->
+            <if test="courseIds != null and courseIds.size() > 0">
+                AND ss.course_id IN
+                <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">
+                    #{courseId}
+                </foreach>
+            </if>
+
+            <!-- 原有条件（如选课状态）保留 -->
+            <if test="status != null">
+                AND ss.status = #{status}
+            </if>
+
+            <!-- 新增：按课程名称搜索 -->
+            <if test="courseName != null and courseName != ''">
+                AND c.course_name LIKE CONCAT('%', #{courseName}, '%')
+            </if>
+
+            <!-- 新增：按学生名称搜索 -->
+            <if test="studentName != null and studentName != ''">
+                AND stu.student_name LIKE CONCAT('%', #{studentName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStudentSelectionById" parameterType="Long" resultMap="StudentSelectionResult">
+        SELECT
+            ss.id,
+            ss.course_id,
+            ss.student_id,
+            ss.status,
+            ss.select_time,
+            c.course_name AS course_name,
+            stu.student_name AS student_name
+        FROM tb_student_selection ss
+                 INNER JOIN tb_course c ON ss.course_id = c.id
+                 INNER JOIN tb_student stu ON ss.student_id = stu.id
+        WHERE ss.id = #{id}
+    </select>
+
+    <insert id="insertStudentSelection" parameterType="com.ruoyi.manage.domain.StudentSelection" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_student_selection
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">course_id,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="status != null">status,</if>
+            <if test="selectTime != null">select_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">#{courseId},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="selectTime != null">#{selectTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStudentSelection" parameterType="com.ruoyi.manage.domain.StudentSelection">
+        update tb_student_selection
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="selectTime != null">select_time = #{selectTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStudentSelectionById" parameterType="Long">
+        delete from tb_student_selection where id = #{id}
+    </delete>
+
+    <delete id="deleteStudentSelectionByIds" parameterType="String">
+        delete from tb_student_selection where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

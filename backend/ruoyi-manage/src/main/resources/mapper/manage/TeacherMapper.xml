@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.manage.mapper.TeacherMapper">
+
+    <resultMap type="com.ruoyi.manage.domain.Teacher" id="TeacherResult">
+        <result property="id"    column="id"    />
+        <result property="teacherNo"    column="teacher_no"    />
+        <result property="teacherName"    column="teacher_name"    />
+        <result property="title"    column="title"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectTeacherVo">
+        select id, teacher_no, teacher_name, title, user_id from tb_teacher
+    </sql>
+
+    <!-- 只保留这一个 selectTeacherByUserId 方法 -->
+    <select id="selectTeacherByUserId" parameterType="Long" resultMap="TeacherResult">
+        <include refid="selectTeacherVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectTeacherList" parameterType="com.ruoyi.manage.domain.Teacher" resultMap="TeacherResult">
+        <include refid="selectTeacherVo"/>
+        <where>
+            <if test="teacherNo != null  and teacherNo != ''"> and teacher_no = #{teacherNo}</if>
+            <if test="teacherName != null  and teacherName != ''"> and teacher_name like concat('%', #{teacherName}, '%')</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="userId != null"> and user_id = #{userId}</if>
+        </where>
+    </select>
+
+    <select id="selectTeacherById" parameterType="Long" resultMap="TeacherResult">
+        <include refid="selectTeacherVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTeacher" parameterType="com.ruoyi.manage.domain.Teacher" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherNo != null and teacherNo != ''">teacher_no,</if>
+            <if test="teacherName != null and teacherName != ''">teacher_name,</if>
+            <if test="title != null">title,</if>
+            <if test="userId != null">user_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherNo != null and teacherNo != ''">#{teacherNo},</if>
+            <if test="teacherName != null and teacherName != ''">#{teacherName},</if>
+            <if test="title != null">#{title},</if>
+            <if test="userId != null">#{userId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTeacher" parameterType="com.ruoyi.manage.domain.Teacher">
+        update tb_teacher
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherNo != null and teacherNo != ''">teacher_no = #{teacherNo},</if>
+            <if test="teacherName != null and teacherName != ''">teacher_name = #{teacherName},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTeacherById" parameterType="Long">
+        delete from tb_teacher where id = #{id}
+    </delete>
+
+    <delete id="deleteTeacherByIds" parameterType="String">
+        delete from tb_teacher where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.manage.mapper.ScoreMapper">
+
+    <resultMap type="com.ruoyi.manage.domain.Score" id="ScoreResult">
+        <result property="id"         column="id"         />
+        <result property="courseId"   column="course_id"   />
+        <result property="studentId"  column="student_id"  />
+        <result property="score"      column="score"       />
+        <result property="remark"     column="remark"      />
+        <result property="courseName" column="course_name" />
+        <result property="studentName" column="student_name"/>
+    </resultMap>
+
+    <sql id="selectScoreVo">
+        select id, course_id, student_id, score, remark from tb_score
+    </sql>
+
+    <!-- 1. 修复CASE语句多余的右括号：删除"60"后的")" -->
+    <select id="statScoreDistribution" parameterType="com.ruoyi.manage.domain.Score" resultType="java.util.Map">
+        SELECT
+        CASE
+        WHEN s.score BETWEEN 0 AND 60 THEN '0-60分'  <!-- 修复：去掉多余的")" -->
+        WHEN s.score BETWEEN 60 AND 69 THEN '60-70分'
+        WHEN s.score BETWEEN 70 AND 79 THEN '70-80分'
+        WHEN s.score BETWEEN 80 AND 89 THEN '80-90分'
+        ELSE '90-100分'
+        END AS score_range,
+        COUNT(*) AS student_count
+        FROM tb_score s
+        <where>
+            <if test="studentId != null">
+                AND s.student_id = #{studentId}
+            </if>
+            <if test="courseIds != null and courseIds.size() > 0">
+                AND s.course_id IN
+                <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">
+                    #{courseId}
+                </foreach>
+            </if>
+            AND s.score IS NOT NULL
+        </where>
+        GROUP BY score_range
+        ORDER BY FIELD(score_range, '0-60分', '60-70分', '70-80分', '80-90分', '90-100分')
+    </select>
+
+    <!-- 2. 修复关联查询逻辑：INNER JOIN→LEFT JOIN，避免缺失课程/学生信息时查不到成绩 -->
+    <select id="selectScoreList" parameterType="com.ruoyi.manage.domain.Score" resultMap="ScoreResult">
+        SELECT
+        s.id,
+        s.course_id,
+        s.student_id,
+        s.score,
+        s.remark,
+        c.course_name AS course_name,
+        stu.student_name AS student_name
+        FROM tb_score s
+        LEFT JOIN tb_course c ON s.course_id = c.id  <!-- 修复：INNER JOIN→LEFT JOIN -->
+        LEFT JOIN tb_student stu ON s.student_id = stu.id  <!-- 修复：INNER JOIN→LEFT JOIN -->
+        <where>
+            <if test="studentId != null">
+                AND s.student_id = #{studentId}
+            </if>
+            <if test="courseIds != null and courseIds.size() > 0">
+                AND s.course_id IN
+                <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">
+                    #{courseId}
+                </foreach>
+            </if>
+            <if test="score != null">
+                AND s.score = #{score}
+            </if>
+            <if test="remark != null and remark != ''">
+                AND s.remark LIKE CONCAT('%', #{remark}, '%')
+            </if>
+            <if test="courseName != null and courseName != ''">
+                AND c.course_name LIKE CONCAT('%', #{courseName}, '%')
+            </if>
+            <if test="studentName != null and studentName != ''">
+                AND stu.student_name LIKE CONCAT('%', #{studentName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 3. 同理：INNER JOIN→LEFT JOIN，确保单个成绩能正常查询 -->
+    <select id="selectScoreById" parameterType="Long" resultMap="ScoreResult">
+        SELECT
+        s.id,
+        s.course_id,
+        s.student_id,
+        s.score,
+        s.remark,
+        c.course_name AS course_name,
+        stu.student_name AS student_name
+        FROM tb_score s
+        LEFT JOIN tb_course c ON s.course_id = c.id  <!-- 修复：INNER JOIN→LEFT JOIN -->
+        LEFT JOIN tb_student stu ON s.student_id = stu.id  <!-- 修复：INNER JOIN→LEFT JOIN -->
+        WHERE s.id = #{id}
+    </select>
+
+    <insert id="insertScore" parameterType="com.ruoyi.manage.domain.Score" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">course_id,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="score != null">score,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">#{courseId},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="score != null">#{score},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateScore" parameterType="com.ruoyi.manage.domain.Score">
+        update tb_score
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScoreById" parameterType="Long">
+        delete from tb_score where id = #{id}
+    </delete>
+
+    <delete id="deleteScoreByIds" parameterType="String">
+        delete from tb_score where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

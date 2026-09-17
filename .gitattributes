@@ -1,0 +1,8 @@
+# 统一换行符处理：Git 自动检测文本/二进制，文本文件统一按仓库规范存储
+* text=auto
+
+# Shell 脚本保持 LF（Linux 环境运行需要）
+*.sh text eol=lf
+
+# Windows 批处理保持 CRLF
+*.bat text eol=crlf
