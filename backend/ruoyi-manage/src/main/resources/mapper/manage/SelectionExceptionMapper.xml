@@ -10,75 +10,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="studentId"    column="student_id"    />
         <result property="exceptionType"    column="exception_type"    />
         <result property="createTime"    column="create_time"    />
-        <!-- 新增：课程名称和学生名称映射 -->
         <result property="courseName" column="course_name"/>
         <result property="studentName" column="student_name"/>
+        <result property="college" column="college"/>
+        <result property="className" column="class_name"/>
+        <result property="grade" column="grade"/>
     </resultMap>
-
-    <sql id="selectSelectionExceptionVo">
-        select id, course_id, student_id, exception_type, create_time from tb_selection_exception
-    </sql>
 
     <select id="selectSelectionExceptionList" parameterType="com.ruoyi.manage.domain.SelectionException" resultMap="SelectionExceptionResult">
         SELECT
-        e.id,
-        e.course_id,
-        e.student_id,
-        e.exception_type,
-        e.create_time,
-        c.course_name AS course_name,  <!-- 关联课程表获取名称 -->
-        s.student_name AS student_name  <!-- 关联学生表获取名称 -->
+        e.id, e.course_id, e.student_id, e.exception_type, e.create_time,
+        c.course_name AS course_name,
+        s.student_name AS student_name,
+        s.college AS college,
+        s.class_name AS class_name,
+        s.grade AS grade
         FROM tb_selection_exception e
-        -- 关联课程表（通过course_id）
         INNER JOIN tb_course c ON e.course_id = c.id
-        -- 关联学生表（通过student_id）
         INNER JOIN tb_student s ON e.student_id = s.id
         <where>
-            <!-- 原有条件保留 -->
-            <if test="courseId != null "> and e.course_id = #{courseId}</if>
-            <if test="studentId != null "> and e.student_id = #{studentId}</if>
-            <if test="exceptionType != null "> and e.exception_type = #{exceptionType}</if>
-
-            <!-- 新增：课程名称模糊搜索 -->
-            <if test="courseName != null and courseName != ''">
-                and c.course_name like concat('%', #{courseName}, '%')
-            </if>
-
-            <!-- 新增：学生名称模糊搜索 -->
-            <if test="studentName != null and studentName != ''">
-                and s.student_name like concat('%', #{studentName}, '%')
-            </if>
+            <if test="courseId != null">AND e.course_id = #{courseId}</if>
+            <if test="studentId != null">AND e.student_id = #{studentId}</if>
+            <if test="exceptionType != null">AND e.exception_type = #{exceptionType}</if>
+            <if test="courseName != null and courseName != ''">AND c.course_name LIKE CONCAT('%', #{courseName}, '%')</if>
+            <if test="studentName != null and studentName != ''">AND s.student_name LIKE CONCAT('%', #{studentName}, '%')</if>
+            <if test="grade != null and grade != ''">AND s.grade = #{grade}</if>
         </where>
     </select>
 
     <select id="selectSelectionExceptionById" parameterType="Long" resultMap="SelectionExceptionResult">
         SELECT
-            e.id,
-            e.course_id,
-            e.student_id,
-            e.exception_type,
-            e.create_time,
-            c.course_name AS course_name,
-            s.student_name AS student_name
+        e.id, e.course_id, e.student_id, e.exception_type, e.create_time,
+        c.course_name AS course_name,
+        s.student_name AS student_name,
+        s.college AS college,
+        s.class_name AS class_name
         FROM tb_selection_exception e
-                 INNER JOIN tb_course c ON e.course_id = c.id
-                 INNER JOIN tb_student s ON e.student_id = s.id
-        where e.id = #{id}
+        INNER JOIN tb_course c ON e.course_id = c.id
+        INNER JOIN tb_student s ON e.student_id = s.id
+        WHERE e.id = #{id}
     </select>
 
     <insert id="insertSelectionException" parameterType="com.ruoyi.manage.domain.SelectionException" useGeneratedKeys="true" keyProperty="id">
         insert into tb_selection_exception
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            course_id,  <!-- 必传，移除if判断 -->
-            student_id, <!-- 必传，移除if判断 -->
-            exception_type,  <!-- 必传，移除if判断 -->
-            create_time  <!-- 由数据库自动生成，无需代码设置 -->
+            course_id, student_id, exception_type, create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{courseId},
-            #{studentId},
-            #{exceptionType},
-            CURRENT_TIMESTAMP  <!-- 数据库当前时间，替代代码中的createTime -->
+            #{courseId}, #{studentId}, #{exceptionType}, CURRENT_TIMESTAMP
          </trim>
     </insert>
 
@@ -99,8 +78,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <delete id="deleteSelectionExceptionByIds" parameterType="String">
         delete from tb_selection_exception where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
+        <foreach item="id" collection="array" open="(" separator="," close=")">#{id}</foreach>
     </delete>
 </mapper>

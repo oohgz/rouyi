@@ -25,6 +25,10 @@ import com.ruoyi.common.utils.file.FileUtils;
 import com.ruoyi.common.utils.file.MimeTypeUtils;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.manage.mapper.StudentMapper;
+import com.ruoyi.manage.domain.Student;
+import com.ruoyi.manage.mapper.TeacherMapper;
+import com.ruoyi.manage.domain.Teacher;
 
 /**
  * 个人信息 业务处理
@@ -40,6 +44,12 @@ public class SysProfileController extends BaseController
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private StudentMapper studentMapper;
+
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     /**
      * 个人信息
@@ -78,6 +88,18 @@ public class SysProfileController extends BaseController
         }
         if (userService.updateUserProfile(currentUser) > 0)
         {
+            // 同步手机号到学生业务表
+            Student student = studentMapper.selectStudentByUserId(loginUser.getUserId());
+            if (student != null) {
+                student.setPhone(user.getPhonenumber());
+                studentMapper.updateStudent(student);
+            }
+            // 同步手机号到教师业务表
+            Teacher teacher = teacherMapper.selectTeacherByUserId(loginUser.getUserId());
+            if (teacher != null) {
+                teacher.setPhone(user.getPhonenumber());
+                teacherMapper.updateTeacher(teacher);
+            }
             // 更新缓存用户信息
             tokenService.setLoginUser(loginUser);
             return success();

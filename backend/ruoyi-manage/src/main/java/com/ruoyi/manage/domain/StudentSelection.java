@@ -21,6 +21,12 @@ public class StudentSelection extends BaseEntity
     private String courseName;
     /** 学生名称 */
     private String studentName;
+    /** 学院（关联学生表） */
+    private String college;
+    /** 班级（关联学生表） */
+    private String className;
+    /** 年级（关联学生表） */
+    private String grade;
 
     /** 选课ID（主键） */
     private Long id;
@@ -118,6 +124,13 @@ public class StudentSelection extends BaseEntity
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
+
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
+    public String getGrade() { return grade; }
+    public void setGrade(String grade) { this.grade = grade; }
 
     public List<Long> getCourseIds() {
         return courseIds;

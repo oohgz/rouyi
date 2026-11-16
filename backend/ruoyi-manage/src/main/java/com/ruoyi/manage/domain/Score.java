@@ -43,6 +43,15 @@ public class Score extends BaseEntity
     /** 学生名称（非数据库字段，关联查询结果） */
     private String studentName;
 
+    /** 学院（非数据库字段，用于统计筛选） */
+    private String college;
+
+    /** 班级（非数据库字段，用于统计筛选） */
+    private String className;
+
+    /** 年级（非数据库字段，用于统计筛选） */
+    private String grade;
+
     public void setId(Long id)
     {
         this.id = id;
@@ -98,6 +107,13 @@ public class Score extends BaseEntity
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
+
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
+    public String getGrade() { return grade; }
+    public void setGrade(String grade) { this.grade = grade; }
 
     // getter/setter
     public List<Long> getCourseIds() {

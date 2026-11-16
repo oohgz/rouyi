@@ -21,6 +21,22 @@ public class SelectionException extends BaseEntity
     /** 学生名称 */
     private String studentName;
 
+    /** 学院 */
+    private String college;
+
+    /** 班级 */
+    private String className;
+
+    /** 年级 */
+    private String grade;
+
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
+    public String getGrade() { return grade; }
+    public void setGrade(String grade) { this.grade = grade; }
+
     // 生成 getter 和 setter 方法
     public String getCourseName() {
         return courseName;

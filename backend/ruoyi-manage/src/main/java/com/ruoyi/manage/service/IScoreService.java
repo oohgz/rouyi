@@ -62,9 +62,8 @@ public interface IScoreService
     public int deleteScoreById(Long id);
 
     /**
-     * 统计成绩分布（用于ECharts）
-     * @return 各分数段的人数统计
+     * 统计成绩分布（用于ECharts饼图）
      */
-    Map<String, Integer> getScoreDistribution();
+    Map<String, Integer> getScoreDistribution(Long courseId, String college, String className);
 
 }

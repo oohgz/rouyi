@@ -12,6 +12,8 @@
         <result property="remark"     column="remark"      />
         <result property="courseName" column="course_name" />
         <result property="studentName" column="student_name"/>
+        <result property="college" column="college"/>
+        <result property="className" column="class_name"/>
     </resultMap>
 
     <sql id="selectScoreVo">
@@ -22,7 +24,7 @@
     <select id="statScoreDistribution" parameterType="com.ruoyi.manage.domain.Score" resultType="java.util.Map">
         SELECT
         CASE
-        WHEN s.score BETWEEN 0 AND 60 THEN '0-60分'  <!-- 修复：去掉多余的")" -->
+        WHEN s.score BETWEEN 0 AND 60 THEN '0-60分'
         WHEN s.score BETWEEN 60 AND 69 THEN '60-70分'
         WHEN s.score BETWEEN 70 AND 79 THEN '70-80分'
         WHEN s.score BETWEEN 80 AND 89 THEN '80-90分'
@@ -30,6 +32,7 @@
         END AS score_range,
         COUNT(*) AS student_count
         FROM tb_score s
+        LEFT JOIN tb_student stu ON s.student_id = stu.id
         <where>
             <if test="studentId != null">
                 AND s.student_id = #{studentId}
@@ -39,6 +42,12 @@
                 <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">
                     #{courseId}
                 </foreach>
+            </if>
+            <if test="college != null and college != ''">
+                AND stu.college = #{college}
+            </if>
+            <if test="className != null and className != ''">
+                AND stu.class_name = #{className}
             </if>
             AND s.score IS NOT NULL
         </where>
@@ -55,10 +64,12 @@
         s.score,
         s.remark,
         c.course_name AS course_name,
-        stu.student_name AS student_name
+        stu.student_name AS student_name,
+        stu.college AS college,
+        stu.class_name AS class_name
         FROM tb_score s
-        LEFT JOIN tb_course c ON s.course_id = c.id  <!-- 修复：INNER JOIN→LEFT JOIN -->
-        LEFT JOIN tb_student stu ON s.student_id = stu.id  <!-- 修复：INNER JOIN→LEFT JOIN -->
+        LEFT JOIN tb_course c ON s.course_id = c.id
+        LEFT JOIN tb_student stu ON s.student_id = stu.id
         <where>
             <if test="studentId != null">
                 AND s.student_id = #{studentId}
@@ -68,6 +79,9 @@
                 <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">
                     #{courseId}
                 </foreach>
+            </if>
+            <if test="courseId != null">
+                AND s.course_id = #{courseId}
             </if>
             <if test="score != null">
                 AND s.score = #{score}
@@ -80,6 +94,15 @@
             </if>
             <if test="studentName != null and studentName != ''">
                 AND stu.student_name LIKE CONCAT('%', #{studentName}, '%')
+            </if>
+            <if test="college != null and college != ''">
+                AND stu.college = #{college}
+            </if>
+            <if test="className != null and className != ''">
+                AND stu.class_name = #{className}
+            </if>
+            <if test="grade != null and grade != ''">
+                AND stu.grade = #{grade}
             </if>
         </where>
     </select>

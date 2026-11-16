@@ -3,9 +3,11 @@ package com.ruoyi.web.controller.ai;
 import com.ruoyi.common.annotation.Anonymous;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.config.AiConfig;
 import com.ruoyi.service.ai.AiService;
 import com.ruoyi.service.ai.AiStatsService;
+import com.ruoyi.service.ai.DeepSeekChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,9 @@ public class AiController
     @Autowired
     private AiService aiService;
 
+    @Autowired
+    private DeepSeekChatService deepSeekChatService;
+
     @Autowired(required = false)  // 设置为可选，数据库不可用时不会报错
     private AiStatsService aiStatsService;
 
@@ -57,27 +62,28 @@ public class AiController
     }
 
     /**
-     * 简单的AI问答接口（模拟实现）
+     * AI智能问答接口（真实调用DeepSeek API + Function Calling）
      */
-    @Anonymous
     @PostMapping("/chat")
     public AjaxResult chat(@RequestBody Map<String, String> requestData)
     {
-        if (!aiConfig.isEnabled()) {
-            return AjaxResult.error("AI功能未启用");
-        }
-
         String message = requestData.get("message");
         if (StringUtils.isEmpty(message)) {
             return AjaxResult.error("请输入有效的问题");
         }
 
-        // 模拟AI处理逻辑
-        String response = processAiQuery(message);
+        Long userId = null;
+        try {
+            userId = SecurityUtils.getUserId();
+        } catch (Exception e) {
+            // 未登录用户也能问，但查个人数据时会失败
+        }
+
+        String answer = deepSeekChatService.chat(message, userId);
 
         Map<String, Object> result = new HashMap<>();
         result.put("question", message);
-        result.put("answer", response);
+        result.put("answer", answer);
         result.put("timestamp", System.currentTimeMillis());
 
         return AjaxResult.success(result);

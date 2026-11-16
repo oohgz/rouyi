@@ -12,23 +12,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="selectTime"    column="select_time"    />
         <result property="courseName" column="course_name"/>
         <result property="studentName" column="student_name"/>
+        <result property="college" column="college"/>
+        <result property="className" column="class_name"/>
+        <result property="grade" column="grade"/>
     </resultMap>
 
-    <sql id="selectStudentSelectionVo">
-        select id, course_id, student_id, status, select_time from tb_student_selection
-    </sql>
-
-    <!-- 新增：查询某课程的已选学生ID列表 -->
     <select id="selectStudentIdsByCourseId" resultType="java.lang.Long">
-        SELECT student_id
-        FROM tb_student_selection
-        WHERE course_id = #{courseId}
-          AND status = 0  -- 假设status=0表示“已选”，需匹配你的表结构
+        SELECT student_id FROM tb_student_selection WHERE course_id = #{courseId} AND status = 0
+    </select>
+
+    <select id="selectStudentIdsByCourseIds" resultType="java.lang.Long">
+        SELECT DISTINCT student_id FROM tb_student_selection WHERE status = 0 AND course_id IN
+        <foreach item="cid" collection="courseIds" open="(" separator="," close=")">#{cid}</foreach>
     </select>
 
     <select id="countSelectedByCourseId" parameterType="Long" resultType="int">
-        select count(*) from tb_student_selection
-        where course_id = #{courseId} and status = 0 -- 只统计已选状态的学生
+        select count(*) from tb_student_selection where course_id = #{courseId} and status = 0
     </select>
 
     <select id="selectStudentSelectionList" parameterType="com.ruoyi.manage.domain.StudentSelection" resultMap="StudentSelectionResult">
@@ -38,55 +37,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ss.student_id,
         ss.status,
         ss.select_time,
-        c.course_name AS course_name,  <!-- 课程名称（关联tb_course） -->
-        stu.student_name AS student_name  <!-- 学生名称（关联tb_student） -->
+        c.course_name AS course_name,
+        stu.student_name AS student_name,
+        stu.college AS college,
+        stu.class_name AS class_name,
+        stu.grade AS grade
         FROM tb_student_selection ss
-        INNER JOIN tb_course c ON ss.course_id = c.id  <!-- 关联课程表 -->
-        INNER JOIN tb_student stu ON ss.student_id = stu.id  <!-- 关联学生表 -->
+        INNER JOIN tb_course c ON ss.course_id = c.id
+        INNER JOIN tb_student stu ON ss.student_id = stu.id
         <where>
-
-            <!-- 1. 新增：学生角色过滤（只查自己的选课记录） -->
-            <if test="studentId != null">
-                AND ss.student_id = #{studentId}
-            </if>
-
-            <!-- 2. 新增：教师角色过滤（只查自己课程的选课记录） -->
+            <if test="studentId != null">AND ss.student_id = #{studentId}</if>
             <if test="courseIds != null and courseIds.size() > 0">
                 AND ss.course_id IN
-                <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">
-                    #{courseId}
-                </foreach>
+                <foreach item="courseId" collection="courseIds" open="(" separator="," close=")">#{courseId}</foreach>
             </if>
-
-            <!-- 原有条件（如选课状态）保留 -->
-            <if test="status != null">
-                AND ss.status = #{status}
-            </if>
-
-            <!-- 新增：按课程名称搜索 -->
-            <if test="courseName != null and courseName != ''">
-                AND c.course_name LIKE CONCAT('%', #{courseName}, '%')
-            </if>
-
-            <!-- 新增：按学生名称搜索 -->
-            <if test="studentName != null and studentName != ''">
-                AND stu.student_name LIKE CONCAT('%', #{studentName}, '%')
-            </if>
+            <if test="status != null">AND ss.status = #{status}</if>
+            <if test="courseName != null and courseName != ''">AND c.course_name LIKE CONCAT('%', #{courseName}, '%')</if>
+            <if test="studentName != null and studentName != ''">AND stu.student_name LIKE CONCAT('%', #{studentName}, '%')</if>
+            <if test="college != null and college != ''">AND stu.college = #{college}</if>
+            <if test="grade != null and grade != ''">AND stu.grade = #{grade}</if>
+            <if test="className != null and className != ''">AND stu.class_name LIKE CONCAT('%', #{className}, '%')</if>
+            <if test="selectTime != null">AND DATE(ss.select_time) = DATE(#{selectTime})</if>
         </where>
     </select>
 
     <select id="selectStudentSelectionById" parameterType="Long" resultMap="StudentSelectionResult">
         SELECT
-            ss.id,
-            ss.course_id,
-            ss.student_id,
-            ss.status,
-            ss.select_time,
-            c.course_name AS course_name,
-            stu.student_name AS student_name
+        ss.id, ss.course_id, ss.student_id, ss.status, ss.select_time,
+        c.course_name AS course_name,
+        stu.student_name AS student_name,
+        stu.college AS college,
+        stu.class_name AS class_name
         FROM tb_student_selection ss
-                 INNER JOIN tb_course c ON ss.course_id = c.id
-                 INNER JOIN tb_student stu ON ss.student_id = stu.id
+        INNER JOIN tb_course c ON ss.course_id = c.id
+        INNER JOIN tb_student stu ON ss.student_id = stu.id
         WHERE ss.id = #{id}
     </select>
 
@@ -123,8 +107,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <delete id="deleteStudentSelectionByIds" parameterType="String">
         delete from tb_student_selection where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
+        <foreach item="id" collection="array" open="(" separator="," close=")">#{id}</foreach>
     </delete>
 </mapper>

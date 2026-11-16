@@ -16,9 +16,11 @@ import com.ruoyi.manage.domain.Student;
 import com.ruoyi.manage.domain.Teacher;
 import com.ruoyi.manage.domain.Course;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.common.exception.ServiceException; // 新增：用于异常提示
+import com.ruoyi.common.exception.ServiceException;
+import com.github.pagehelper.PageHelper;
 import com.ruoyi.manage.service.ISelectionExceptionService; // 新增导入
 import com.ruoyi.manage.domain.SelectionException; // 新增导入
 import java.sql.SQLIntegrityConstraintViolationException; // 新增导入
@@ -124,6 +126,12 @@ public class StudentSelectionServiceImpl implements IStudentSelectionService
         }
 
         // 4. 执行带过滤条件的查询
+        // 上面角色查询和权限过滤会消耗掉 Controller 的 startPage()，这里重新启动分页
+        Integer pageNum = ServletUtils.getParameterToInt("pageNum");
+        Integer pageSize = ServletUtils.getParameterToInt("pageSize");
+        if (pageNum != null && pageSize != null) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
         return studentSelectionMapper.selectStudentSelectionList(studentSelection);
     }
 

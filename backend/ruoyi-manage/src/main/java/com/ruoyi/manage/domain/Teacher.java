@@ -30,7 +30,15 @@ public class Teacher extends BaseEntity
     @Excel(name = "职称", readConverterExp = "如=教授/讲师")
     private String title;
 
-    private Long userId; // 新增字段
+    /** 所属学院 */
+    @Excel(name = "所属学院")
+    private String college;
+
+    /** 联系电话 */
+    @Excel(name = "联系电话")
+    private String phone;
+
+    private Long userId;
 
     public void setId(Long id) 
     {
@@ -75,6 +83,10 @@ public class Teacher extends BaseEntity
     // 新增getter/setter
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
     @Override
     public String toString() {

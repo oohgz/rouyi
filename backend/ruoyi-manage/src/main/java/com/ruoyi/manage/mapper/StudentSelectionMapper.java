@@ -22,6 +22,11 @@ public interface StudentSelectionMapper
     List<Long> selectStudentIdsByCourseId(@Param("courseId") Long courseId);
 
     /**
+     * 查询多个课程的所有已选学生ID
+     */
+    List<Long> selectStudentIdsByCourseIds(@Param("courseIds") List<Long> courseIds);
+
+    /**
      * 查询课程当前已选人数（状态为0-已选）
      */
     int countSelectedByCourseId(Long courseId);

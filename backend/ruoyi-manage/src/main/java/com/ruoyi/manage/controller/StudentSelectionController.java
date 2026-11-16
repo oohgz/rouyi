@@ -1,7 +1,15 @@
 package com.ruoyi.manage.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.manage.domain.Teacher;
+import com.ruoyi.manage.domain.Course;
+import com.ruoyi.manage.mapper.TeacherMapper;
+import com.ruoyi.manage.service.ICourseService;
+import com.ruoyi.system.service.ISysUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +42,15 @@ public class StudentSelectionController extends BaseController
     @Autowired
     private IStudentSelectionService studentSelectionService;
 
+    @Autowired
+    private TeacherMapper teacherMapper;
+
+    @Autowired
+    private ICourseService courseService;
+
+    @Autowired
+    private ISysUserService sysUserService;
+
     /**
      * 新增学生选课（核心修改：判断重复选课，返回成功状态）
      */
@@ -58,6 +75,20 @@ public class StudentSelectionController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(StudentSelection studentSelection)
     {
+        // 教师角色：只查自己教的课程的选课记录
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        List<String> roles = sysUserService.selectRoleKeysByUserId(loginUser.getUserId());
+        if (roles.contains("teacher") && !roles.contains("admin") && !roles.contains("manage")) {
+            Teacher teacher = teacherMapper.selectTeacherByUserId(loginUser.getUserId());
+            if (teacher != null) {
+                List<Course> myCourses = courseService.selectCourseByTeacherUserId(loginUser.getUserId());
+                List<Long> courseIds = myCourses.stream().map(Course::getId).collect(Collectors.toList());
+                if (courseIds.isEmpty()) {
+                    return getDataTable(new java.util.ArrayList<>());
+                }
+                studentSelection.setCourseIds(courseIds);
+            }
+        }
         startPage();
         List<StudentSelection> list = studentSelectionService.selectStudentSelectionList(studentSelection);
         return getDataTable(list);

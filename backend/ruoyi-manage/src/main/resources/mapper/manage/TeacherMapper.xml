@@ -9,14 +9,15 @@
         <result property="teacherNo"    column="teacher_no"    />
         <result property="teacherName"    column="teacher_name"    />
         <result property="title"    column="title"    />
+        <result property="college"    column="college"    />
+        <result property="phone"    column="phone"    />
         <result property="userId"    column="user_id"    />
     </resultMap>
 
     <sql id="selectTeacherVo">
-        select id, teacher_no, teacher_name, title, user_id from tb_teacher
+        select id, teacher_no, teacher_name, title, college, phone, user_id from tb_teacher
     </sql>
 
-    <!-- 只保留这一个 selectTeacherByUserId 方法 -->
     <select id="selectTeacherByUserId" parameterType="Long" resultMap="TeacherResult">
         <include refid="selectTeacherVo"/>
         where user_id = #{userId}
@@ -25,10 +26,11 @@
     <select id="selectTeacherList" parameterType="com.ruoyi.manage.domain.Teacher" resultMap="TeacherResult">
         <include refid="selectTeacherVo"/>
         <where>
-            <if test="teacherNo != null  and teacherNo != ''"> and teacher_no = #{teacherNo}</if>
-            <if test="teacherName != null  and teacherName != ''"> and teacher_name like concat('%', #{teacherName}, '%')</if>
-            <if test="title != null  and title != ''"> and title = #{title}</if>
-            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="teacherNo != null and teacherNo != ''">AND teacher_no = #{teacherNo}</if>
+            <if test="teacherName != null and teacherName != ''">AND teacher_name LIKE CONCAT('%', #{teacherName}, '%')</if>
+            <if test="title != null and title != ''">AND title = #{title}</if>
+            <if test="college != null and college != ''">AND college = #{college}</if>
+            <if test="userId != null">AND user_id = #{userId}</if>
         </where>
     </select>
 
@@ -43,12 +45,16 @@
             <if test="teacherNo != null and teacherNo != ''">teacher_no,</if>
             <if test="teacherName != null and teacherName != ''">teacher_name,</if>
             <if test="title != null">title,</if>
+            <if test="college != null and college != ''">college,</if>
+            <if test="phone != null and phone != ''">phone,</if>
             <if test="userId != null">user_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="teacherNo != null and teacherNo != ''">#{teacherNo},</if>
             <if test="teacherName != null and teacherName != ''">#{teacherName},</if>
             <if test="title != null">#{title},</if>
+            <if test="college != null and college != ''">#{college},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
             <if test="userId != null">#{userId},</if>
         </trim>
     </insert>
@@ -59,6 +65,8 @@
             <if test="teacherNo != null and teacherNo != ''">teacher_no = #{teacherNo},</if>
             <if test="teacherName != null and teacherName != ''">teacher_name = #{teacherName},</if>
             <if test="title != null">title = #{title},</if>
+            <if test="college != null">college = #{college},</if>
+            <if test="phone != null">phone = #{phone},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
         where id = #{id}

@@ -19,15 +19,45 @@ public class Student extends BaseEntity
     private Long id;
 
     /** 学号（如S2023001） */
-    @Excel(name = "学号", readConverterExp = "如=S2023001")
+    @Excel(name = "学号")
     private String studentNo;
 
     /** 学生姓名 */
     @Excel(name = "学生姓名")
     private String studentName;
 
+    /** 性别 */
+    @Excel(name = "性别")
+    private String gender;
+
+    /** 手机号 */
+    @Excel(name = "手机号")
+    private String phone;
+
+    /** 专业 */
+    @Excel(name = "专业")
+    private String major;
+
+    /** 学院 */
+    @Excel(name = "学院")
+    private String college;
+
+    /** 班级 */
+    @Excel(name = "班级")
+    private String className;
+
+    /** 年级（如2023） */
+    @Excel(name = "年级")
+    private String grade;
+
     /** 关联系统用户ID（对应sys_user.id） */
-    private Long userId;  // 新增：关联系统用户的ID
+    private Long userId;
+
+    /** 教师角色：只查选了自己课程的学生ID列表 */
+    private java.util.List<Long> studentIds;
+
+    public java.util.List<Long> getStudentIds() { return studentIds; }
+    public void setStudentIds(java.util.List<Long> studentIds) { this.studentIds = studentIds; }
 
     public void setId(Long id) 
     {
@@ -59,22 +89,40 @@ public class Student extends BaseEntity
         return studentName;
     }
 
-    // 新增：userId的getter和setter
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
-    public Long getUserId() {
-        return userId;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getMajor() { return major; }
+    public void setMajor(String major) { this.major = major; }
+
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
+
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
+
+    public String getGrade() { return grade; }
+    public void setGrade(String grade) { this.grade = grade; }
+
+    public void setUserId(Long userId) { this.userId = userId; }
+    public Long getUserId() { return userId; }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("studentNo", getStudentNo())
             .append("studentName", getStudentName())
-            .append("userId", getUserId())  // 新增：打印userId
+            .append("gender", getGender())
+            .append("phone", getPhone())
+            .append("major", getMajor())
+            .append("college", getCollege())
+            .append("className", getClassName())
+            .append("grade", getGrade())
+            .append("userId", getUserId())
             .toString();
     }
 }

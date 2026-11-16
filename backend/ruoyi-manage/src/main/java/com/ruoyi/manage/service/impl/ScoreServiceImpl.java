@@ -1,13 +1,15 @@
 package com.ruoyi.manage.service.impl;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.common.exception.ServiceException; // 用于权限异常提示
+import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.manage.domain.Course;
 import com.ruoyi.manage.domain.Student;
 import com.ruoyi.manage.domain.Teacher;
@@ -15,6 +17,7 @@ import com.ruoyi.manage.mapper.CourseMapper;
 import com.ruoyi.manage.mapper.StudentMapper;
 import com.ruoyi.manage.mapper.TeacherMapper;
 import com.ruoyi.system.service.ISysUserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.manage.mapper.ScoreMapper;
@@ -130,6 +133,13 @@ public class ScoreServiceImpl implements IScoreService
         }
         // 4. 管理员角色：无过滤（不设置条件）
 
+        // 上面角色查询和权限过滤会消耗掉 Controller 的 startPage()，这里重新启动分页
+        Integer pageNum = ServletUtils.getParameterToInt("pageNum");
+        Integer pageSize = ServletUtils.getParameterToInt("pageSize");
+        if (pageNum != null && pageSize != null) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+
         return scoreMapper.selectScoreList(score);
     }
 
@@ -179,27 +189,26 @@ public class ScoreServiceImpl implements IScoreService
 
     // 新增：统计成绩分布（用于ECharts）
     @Override
-    public Map<String, Integer> getScoreDistribution() {
+    public Map<String, Integer> getScoreDistribution(Long courseId, String college, String className) {
         LoginUser loginUser = SecurityUtils.getLoginUser();
         Long currentUserId = loginUser.getUserId();
         List<String> roles = sysUserService.selectRoleKeysByUserId(currentUserId);
 
         Score scoreQuery = new Score();
-        // 教师角色：仅统计自己课程的成绩
-        if (roles.contains("teacher")) {
+        if (courseId != null) {
+            scoreQuery.setCourseIds(Collections.singletonList(courseId));
+        } else if (roles.contains("teacher")) {
             Teacher teacher = teacherMapper.selectTeacherByUserId(currentUserId);
             if (teacher != null) {
-                // 复用已有逻辑：查询教师的课程ID列表
                 Course courseQuery = new Course();
                 courseQuery.setTeacherId(teacher.getId());
                 List<Course> courses = courseMapper.selectCourseList(courseQuery);
-                List<Long> courseIds = courses.stream().map(Course::getId).collect(Collectors.toList());
-                scoreQuery.setCourseIds(courseIds);
+                scoreQuery.setCourseIds(courses.stream().map(Course::getId).collect(Collectors.toList()));
             }
         }
-        // 管理员：统计所有成绩；学生：不开放此功能（图表不显示）
+        scoreQuery.setCollege(college);
+        scoreQuery.setClassName(className);
 
-        // 调用Mapper统计数据
         List<Map<String, Object>> statList = scoreMapper.statScoreDistribution(scoreQuery);
 
         // 初始化分数段（确保无数据的分数段也显示，图表更完整）

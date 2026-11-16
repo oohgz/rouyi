@@ -4,13 +4,17 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Collections;
 import java.util.List;
 
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.manage.mapper.StudentSelectionMapper;
 import com.ruoyi.system.service.ISysUserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.manage.mapper.StudentMapper;
 import com.ruoyi.manage.domain.Student;
 import com.ruoyi.manage.service.IStudentService;
@@ -98,37 +102,60 @@ public class StudentServiceImpl implements IStudentService
         if (roles.contains("student")) {
             student.setUserId(currentUserId); // 设置当前用户的userId，强制过滤
         }
-        // 教师/管理员：可查看所有（或按条件搜索）
-        // （若教师也需限制，可根据业务补充，通常教师无需查看学生信息）
+
+        // 注意：上面 selectRoleKeysByUserId 这个查询会消耗掉 Controller 里 startPage() 设置的分页，
+        // 所以这里必须在主查询之前重新启动分页，否则会返回全部数据不分页
+        Integer pageNum = ServletUtils.getParameterToInt("pageNum");
+        Integer pageSize = ServletUtils.getParameterToInt("pageSize");
+        if (pageNum != null && pageSize != null) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
 
         return studentMapper.selectStudentList(student);
     }
 
     /**
      * 新增学生信息（学生个人信息）
-     * 
-     * @param student 学生信息（学生个人信息）
-     * @return 结果
+     * 自动创建登录账号：用户名=学号，初始密码=123456，自动分配学生角色(role_id=101)
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insertStudent(Student student)
     {
+        // 1. 先插入学生业务记录
         try {
-            // 尝试插入学生（正常流程）
-            return studentMapper.insertStudent(student);
+            int rows = studentMapper.insertStudent(student);
+            if (rows <= 0) {
+                return 0;
+            }
         } catch (Exception e) {
-            // 捕获“学号重复”的唯一约束异常
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                 SQLIntegrityConstraintViolationException sqlEx =
                         (SQLIntegrityConstraintViolationException) e.getCause();
-                // 匹配学生表的学号唯一索引（tb_student.student_no）
                 if (sqlEx.getMessage().contains("tb_student.student_no")) {
-                    return -4; // 返回-4标识“学号重复”
+                    return -4; // 学号重复
                 }
             }
-            // 其他异常正常抛出
             throw e;
         }
+
+        // 2. 自动创建系统登录账号（用户名=学号，初始密码=123456）
+        SysUser sysUser = new SysUser();
+        sysUser.setUserName(student.getStudentNo());        // 登录名=学号
+        sysUser.setNickName(student.getStudentName());      // 昵称=学生姓名
+        sysUser.setPassword(SecurityUtils.encryptPassword("123456")); // 默认密码
+        sysUser.setDeptId(1L);                               // 默认部门
+        sysUser.setStatus("0");                              // 正常状态
+        sysUser.setRoleIds(new Long[]{101L});                // 学生角色 role_id=101
+
+        sysUserService.insertUser(sysUser);                  // 插入后自动回填 userId
+        Long newUserId = sysUser.getUserId();
+
+        // 3. 把新账号ID回写到 tb_student.user_id（绑定业务学生和登录账号）
+        student.setUserId(newUserId);
+        studentMapper.updateStudent(student);
+
+        return 1;
     }
 
     /**

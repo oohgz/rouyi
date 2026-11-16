@@ -1,1366 +1,859 @@
-/*
- Navicat Premium Dump SQL
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+--
+-- Host: localhost    Database: smart_course_management
+-- ------------------------------------------------------
+-- Server version	8.0.37
 
- Source Server         : localhost_3306
- Source Server Type    : MySQL
- Source Server Version : 80037 (8.0.37)
- Source Host           : localhost:3306
- Source Schema         : smart_course_management
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
- Target Server Type    : MySQL
- Target Server Version : 80037 (8.0.37)
- File Encoding         : 65001
+--
+-- Table structure for table `gen_table`
+--
 
- Date: 31/10/2025 23:29:14
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for gen_table
--- ----------------------------
 DROP TABLE IF EXISTS `gen_table`;
-CREATE TABLE `gen_table`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gen_table` (
   `table_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '表名称',
-  `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '表描述',
-  `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关联子表的表名',
-  `sub_table_fk_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '子表关联的外键名',
-  `class_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '实体类名称',
-  `tpl_category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
-  `tpl_web_type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '前端模板类型（element-ui模版 element-plus模版）',
-  `package_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成包路径',
-  `module_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成模块名',
-  `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成业务名',
-  `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成功能名',
-  `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成功能作者',
-  `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
-  `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
-  `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '其它生成选项',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '表名称',
+  `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '表描述',
+  `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '关联子表的表名',
+  `sub_table_fk_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '子表关联的外键名',
+  `class_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '实体类名称',
+  `tpl_category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
+  `tpl_web_type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '前端模板类型（element-ui模版 element-plus模版）',
+  `package_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '生成包路径',
+  `module_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '生成模块名',
+  `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '生成业务名',
+  `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '生成功能名',
+  `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '生成功能作者',
+  `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
+  `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
+  `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '其它生成选项',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of gen_table
--- ----------------------------
-INSERT INTO `gen_table` VALUES (1, 'tb_student', '学生信息表', NULL, NULL, 'Student', 'crud', 'element-plus', 'com.ruoyi.manage', 'manage', 'student', '学生信息（学生个人信息）', 'hgz', '0', '/', '{\"parentMenuId\":2000}', 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:27', NULL);
-INSERT INTO `gen_table` VALUES (2, 'tb_student_selection', '学生选课表', NULL, NULL, 'StudentSelection', 'crud', 'element-plus', 'com.ruoyi.manage', 'manage', 'selection', '学生选课', 'hgz', '0', '/', '{\"parentMenuId\":2000}', 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:50', NULL);
-INSERT INTO `gen_table` VALUES (3, 'tb_teacher', '教师信息表', NULL, NULL, 'Teacher', 'crud', 'element-plus', 'com.ruoyi.manage', 'manage', 'teacher', '教师信息', 'hgz', '0', '/', '{\"parentMenuId\":2000}', 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:19:25', NULL);
-INSERT INTO `gen_table` VALUES (4, 'tb_course', '课程信息表', NULL, NULL, 'Course', 'crud', 'element-plus', 'com.ruoyi.manage', 'manage', 'course', '课程信息', 'hgz', '0', '/', '{\"parentMenuId\":2000}', 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22', NULL);
-INSERT INTO `gen_table` VALUES (5, 'tb_score', '学生成绩表', NULL, NULL, 'Score', 'crud', 'element-plus', 'com.ruoyi.manage', 'manage', 'score', '学生成绩', 'hgz', '0', '/', '{\"parentMenuId\":2000}', 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:24', NULL);
-INSERT INTO `gen_table` VALUES (6, 'tb_selection_exception', '选课异常记录表', NULL, NULL, 'SelectionException', 'crud', 'element-plus', 'com.ruoyi.manage', 'manage', 'exception', '选课异常记录', 'hgz', '0', '/', '{\"parentMenuId\":2000}', 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:59', NULL);
+--
+-- Dumping data for table `gen_table`
+--
 
--- ----------------------------
--- Table structure for gen_table_column
--- ----------------------------
+LOCK TABLES `gen_table` WRITE;
+/*!40000 ALTER TABLE `gen_table` DISABLE KEYS */;
+INSERT INTO `gen_table` VALUES (1,'tb_student','学生信息表',NULL,NULL,'Student','crud','element-plus','com.ruoyi.manage','manage','student','学生信息（学生个人信息）','hgz','0','/','{\"parentMenuId\":2000}','admin','2025-10-22 23:11:35','','2025-10-22 23:18:27',NULL),(2,'tb_student_selection','学生选课表',NULL,NULL,'StudentSelection','crud','element-plus','com.ruoyi.manage','manage','selection','学生选课','hgz','0','/','{\"parentMenuId\":2000}','admin','2025-10-22 23:11:35','','2025-10-22 23:18:50',NULL),(3,'tb_teacher','教师信息表',NULL,NULL,'Teacher','crud','element-plus','com.ruoyi.manage','manage','teacher','教师信息','hgz','0','/','{\"parentMenuId\":2000}','admin','2025-10-22 23:11:35','','2025-10-22 23:19:25',NULL),(4,'tb_course','课程信息表',NULL,NULL,'Course','crud','element-plus','com.ruoyi.manage','manage','course','课程信息','hgz','0','/','{\"parentMenuId\":2000}','admin','2025-10-22 23:11:42','','2025-10-22 23:16:22',NULL),(5,'tb_score','学生成绩表',NULL,NULL,'Score','crud','element-plus','com.ruoyi.manage','manage','score','学生成绩','hgz','0','/','{\"parentMenuId\":2000}','admin','2025-10-22 23:11:42','','2025-10-22 23:17:24',NULL),(6,'tb_selection_exception','选课异常记录表',NULL,NULL,'SelectionException','crud','element-plus','com.ruoyi.manage','manage','exception','选课异常记录','hgz','0','/','{\"parentMenuId\":2000}','admin','2025-10-22 23:11:42','','2025-10-22 23:17:59',NULL);
+/*!40000 ALTER TABLE `gen_table` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gen_table_column`
+--
+
 DROP TABLE IF EXISTS `gen_table_column`;
-CREATE TABLE `gen_table_column`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gen_table_column` (
   `column_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `table_id` bigint NULL DEFAULT NULL COMMENT '归属表编号',
-  `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列名称',
-  `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列描述',
-  `column_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列类型',
-  `java_type` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'JAVA类型',
-  `java_field` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'JAVA字段名',
-  `is_pk` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否主键（1是）',
-  `is_increment` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否自增（1是）',
-  `is_required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否必填（1是）',
-  `is_insert` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否为插入字段（1是）',
-  `is_edit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否编辑字段（1是）',
-  `is_list` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否列表字段（1是）',
-  `is_query` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否查询字段（1是）',
-  `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
-  `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
-  `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典类型',
-  `sort` int NULL DEFAULT NULL COMMENT '排序',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `table_id` bigint DEFAULT NULL COMMENT '归属表编号',
+  `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '列名称',
+  `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '列描述',
+  `column_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '列类型',
+  `java_type` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'JAVA类型',
+  `java_field` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'JAVA字段名',
+  `is_pk` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否主键（1是）',
+  `is_increment` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否自增（1是）',
+  `is_required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否必填（1是）',
+  `is_insert` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否为插入字段（1是）',
+  `is_edit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否编辑字段（1是）',
+  `is_list` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否列表字段（1是）',
+  `is_query` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否查询字段（1是）',
+  `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
+  `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
+  `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '字典类型',
+  `sort` int DEFAULT NULL COMMENT '排序',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表字段';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of gen_table_column
--- ----------------------------
-INSERT INTO `gen_table_column` VALUES (1, 1, 'id', '学生ID（主键）', 'bigint', 'Long', 'id', '1', '1', '0', '0', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:27');
-INSERT INTO `gen_table_column` VALUES (2, 1, 'student_no', '学号（如S2023001）', 'varchar(20)', 'String', 'studentNo', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:27');
-INSERT INTO `gen_table_column` VALUES (3, 1, 'student_name', '学生姓名', 'varchar(20)', 'String', 'studentName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:27');
-INSERT INTO `gen_table_column` VALUES (4, 2, 'id', '选课ID（主键）', 'bigint', 'Long', 'id', '1', '1', '0', '0', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:50');
-INSERT INTO `gen_table_column` VALUES (5, 2, 'course_id', '课程ID（关联tb_course.id）', 'bigint', 'Long', 'courseId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:50');
-INSERT INTO `gen_table_column` VALUES (6, 2, 'student_id', '学生ID（关联tb_student.id）', 'bigint', 'Long', 'studentId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:50');
-INSERT INTO `gen_table_column` VALUES (7, 2, 'status', '状态（0-已选，1-已退）', 'tinyint', 'Long', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 4, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:50');
-INSERT INTO `gen_table_column` VALUES (8, 2, 'select_time', '选课时间', 'datetime', 'Date', 'selectTime', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'datetime', '', 5, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:18:50');
-INSERT INTO `gen_table_column` VALUES (9, 3, 'id', '教师ID（主键）', 'bigint', 'Long', 'id', '1', '1', '0', '0', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:19:25');
-INSERT INTO `gen_table_column` VALUES (10, 3, 'teacher_no', '教师工号（如T001）', 'varchar(20)', 'String', 'teacherNo', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:19:25');
-INSERT INTO `gen_table_column` VALUES (11, 3, 'teacher_name', '教师姓名', 'varchar(20)', 'String', 'teacherName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:19:25');
-INSERT INTO `gen_table_column` VALUES (12, 3, 'title', '职称（如教授/讲师）', 'varchar(30)', 'String', 'title', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2025-10-22 23:11:35', '', '2025-10-22 23:19:25');
-INSERT INTO `gen_table_column` VALUES (13, 4, 'id', '课程ID（主键）', 'bigint', 'Long', 'id', '1', '1', '0', '0', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22');
-INSERT INTO `gen_table_column` VALUES (14, 4, 'course_code', '课程编码（如JSJ001）', 'varchar(20)', 'String', 'courseCode', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22');
-INSERT INTO `gen_table_column` VALUES (15, 4, 'course_name', '课程名称', 'varchar(100)', 'String', 'courseName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22');
-INSERT INTO `gen_table_column` VALUES (16, 4, 'teacher_id', '授课教师ID（关联tb_teacher.id）', 'bigint', 'Long', 'teacherId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22');
-INSERT INTO `gen_table_column` VALUES (17, 4, 'max_students', '最大选课人数', 'int', 'Long', 'maxStudents', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22');
-INSERT INTO `gen_table_column` VALUES (18, 4, 'status', '状态（0-正常，1-停用）', 'tinyint', 'Long', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', 'sys_normal_disable', 6, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:16:22');
-INSERT INTO `gen_table_column` VALUES (19, 5, 'id', '成绩ID（主键）', 'bigint', 'Long', 'id', '1', '1', '0', '0', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:24');
-INSERT INTO `gen_table_column` VALUES (20, 5, 'course_id', '课程ID（关联tb_course.id）', 'bigint', 'Long', 'courseId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:24');
-INSERT INTO `gen_table_column` VALUES (21, 5, 'student_id', '学生ID（关联tb_student.id）', 'bigint', 'Long', 'studentId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:24');
-INSERT INTO `gen_table_column` VALUES (22, 5, 'score', '成绩（如85.5，NULL表示未录入）', 'decimal(5,2)', 'BigDecimal', 'score', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:24');
-INSERT INTO `gen_table_column` VALUES (23, 5, 'remark', '备注（如缺考/缓考）', 'varchar(50)', 'String', 'remark', '0', '0', '0', '1', '1', '1', NULL, 'EQ', 'input', '', 5, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:24');
-INSERT INTO `gen_table_column` VALUES (24, 6, 'id', '异常ID（主键）', 'bigint', 'Long', 'id', '1', '1', '0', '0', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:59');
-INSERT INTO `gen_table_column` VALUES (25, 6, 'course_id', '课程ID（关联tb_course.id）', 'bigint', 'Long', 'courseId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:59');
-INSERT INTO `gen_table_column` VALUES (26, 6, 'student_id', '学生ID（关联tb_student.id）', 'bigint', 'Long', 'studentId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:59');
-INSERT INTO `gen_table_column` VALUES (27, 6, 'exception_type', '异常类型（1-重复选课，2-超员选课）', 'tinyint', 'Long', 'exceptionType', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'select', '', 4, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:59');
-INSERT INTO `gen_table_column` VALUES (28, 6, 'create_time', '记录时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 5, 'admin', '2025-10-22 23:11:42', '', '2025-10-22 23:17:59');
+--
+-- Dumping data for table `gen_table_column`
+--
 
--- ----------------------------
--- Table structure for sys_config
--- ----------------------------
+LOCK TABLES `gen_table_column` WRITE;
+/*!40000 ALTER TABLE `gen_table_column` DISABLE KEYS */;
+INSERT INTO `gen_table_column` VALUES (1,1,'id','学生ID（主键）','bigint','Long','id','1','1','0','0',NULL,NULL,NULL,'EQ','input','',1,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:27'),(2,1,'student_no','学号（如S2023001）','varchar(20)','String','studentNo','0','0','1','1','1','1','1','EQ','input','',2,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:27'),(3,1,'student_name','学生姓名','varchar(20)','String','studentName','0','0','1','1','1','1','1','LIKE','input','',3,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:27'),(4,2,'id','选课ID（主键）','bigint','Long','id','1','1','0','0',NULL,NULL,NULL,'EQ','input','',1,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:50'),(5,2,'course_id','课程ID（关联tb_course.id）','bigint','Long','courseId','0','0','1','1','1','1','1','EQ','input','',2,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:50'),(6,2,'student_id','学生ID（关联tb_student.id）','bigint','Long','studentId','0','0','1','1','1','1','1','EQ','input','',3,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:50'),(7,2,'status','状态（0-已选，1-已退）','tinyint','Long','status','0','0','0','1','1','1','1','EQ','radio','',4,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:50'),(8,2,'select_time','选课时间','datetime','Date','selectTime','0','0','0','1','1','1','1','EQ','datetime','',5,'admin','2025-10-22 23:11:35','','2025-10-22 23:18:50'),(9,3,'id','教师ID（主键）','bigint','Long','id','1','1','0','0',NULL,NULL,NULL,'EQ','input','',1,'admin','2025-10-22 23:11:35','','2025-10-22 23:19:25'),(10,3,'teacher_no','教师工号（如T001）','varchar(20)','String','teacherNo','0','0','1','1','1','1','1','EQ','input','',2,'admin','2025-10-22 23:11:35','','2025-10-22 23:19:25'),(11,3,'teacher_name','教师姓名','varchar(20)','String','teacherName','0','0','1','1','1','1','1','LIKE','input','',3,'admin','2025-10-22 23:11:35','','2025-10-22 23:19:25'),(12,3,'title','职称（如教授/讲师）','varchar(30)','String','title','0','0','0','1','1','1','1','EQ','input','',4,'admin','2025-10-22 23:11:35','','2025-10-22 23:19:25'),(13,4,'id','课程ID（主键）','bigint','Long','id','1','1','0','0',NULL,NULL,NULL,'EQ','input','',1,'admin','2025-10-22 23:11:42','','2025-10-22 23:16:22'),(14,4,'course_code','课程编码（如JSJ001）','varchar(20)','String','courseCode','0','0','1','1','1','1','1','EQ','input','',2,'admin','2025-10-22 23:11:42','','2025-10-22 23:16:22'),(15,4,'course_name','课程名称','varchar(100)','String','courseName','0','0','1','1','1','1','1','LIKE','input','',3,'admin','2025-10-22 23:11:42','','2025-10-22 23:16:22'),(16,4,'teacher_id','授课教师ID（关联tb_teacher.id）','bigint','Long','teacherId','0','0','1','1','1','1','1','EQ','input','',4,'admin','2025-10-22 23:11:42','','2025-10-22 23:16:22'),(17,4,'max_students','最大选课人数','int','Long','maxStudents','0','0','0','1','1','1','1','EQ','input','',5,'admin','2025-10-22 23:11:42','','2025-10-22 23:16:22'),(18,4,'status','状态（0-正常，1-停用）','tinyint','Long','status','0','0','0','1','1','1','1','EQ','radio','sys_normal_disable',6,'admin','2025-10-22 23:11:42','','2025-10-22 23:16:22'),(19,5,'id','成绩ID（主键）','bigint','Long','id','1','1','0','0',NULL,NULL,NULL,'EQ','input','',1,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:24'),(20,5,'course_id','课程ID（关联tb_course.id）','bigint','Long','courseId','0','0','1','1','1','1','1','EQ','input','',2,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:24'),(21,5,'student_id','学生ID（关联tb_student.id）','bigint','Long','studentId','0','0','1','1','1','1','1','EQ','input','',3,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:24'),(22,5,'score','成绩（如85.5，NULL表示未录入）','decimal(5,2)','BigDecimal','score','0','0','0','1','1','1','1','EQ','input','',4,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:24'),(23,5,'remark','备注（如缺考/缓考）','varchar(50)','String','remark','0','0','0','1','1','1',NULL,'EQ','input','',5,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:24'),(24,6,'id','异常ID（主键）','bigint','Long','id','1','1','0','0',NULL,NULL,NULL,'EQ','input','',1,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:59'),(25,6,'course_id','课程ID（关联tb_course.id）','bigint','Long','courseId','0','0','1','1','1','1','1','EQ','input','',2,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:59'),(26,6,'student_id','学生ID（关联tb_student.id）','bigint','Long','studentId','0','0','1','1','1','1','1','EQ','input','',3,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:59'),(27,6,'exception_type','异常类型（1-重复选课，2-超员选课）','tinyint','Long','exceptionType','0','0','1','1','1','1','1','EQ','select','',4,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:59'),(28,6,'create_time','记录时间','datetime','Date','createTime','0','0','0','1',NULL,NULL,NULL,'EQ','datetime','',5,'admin','2025-10-22 23:11:42','','2025-10-22 23:17:59');
+/*!40000 ALTER TABLE `gen_table_column` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_config`
+--
+
 DROP TABLE IF EXISTS `sys_config`;
-CREATE TABLE `sys_config`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_config` (
   `config_id` int NOT NULL AUTO_INCREMENT COMMENT '参数主键',
-  `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数名称',
-  `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数键名',
-  `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数键值',
-  `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '参数名称',
+  `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '参数键名',
+  `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '参数键值',
+  `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='参数配置表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_config
--- ----------------------------
-INSERT INTO `sys_config` VALUES (1, '主框架页-默认皮肤样式名称', 'sys.index.skinName', 'skin-blue', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
-INSERT INTO `sys_config` VALUES (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '初始化密码 123456');
-INSERT INTO `sys_config` VALUES (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '深色主题theme-dark，浅色主题theme-light');
-INSERT INTO `sys_config` VALUES (4, '账号自助-验证码开关', 'sys.account.captchaEnabled', 'false', 'Y', 'admin', '2025-10-22 23:01:04', 'admin', '2025-10-22 23:07:06', '是否开启验证码功能（true开启，false关闭）');
-INSERT INTO `sys_config` VALUES (5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'false', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '是否开启注册用户功能（true开启，false关闭）');
-INSERT INTO `sys_config` VALUES (6, '用户登录-黑名单列表', 'sys.login.blackIPList', '', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '设置登录IP黑名单限制，多个匹配项以;分隔，支持匹配（*通配、网段）');
-INSERT INTO `sys_config` VALUES (7, '用户管理-初始密码修改策略', 'sys.account.initPasswordModify', '1', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '0：初始密码修改策略关闭，没有任何提示，1：提醒用户，如果未修改初始密码，则在登录时就会提醒修改密码对话框');
-INSERT INTO `sys_config` VALUES (8, '用户管理-账号密码更新周期', 'sys.account.passwordValidateDays', '0', 'Y', 'admin', '2025-10-22 23:01:04', '', NULL, '密码更新周期（填写数字，数据初始化值为0不限制，若修改必须为大于0小于365的正整数），如果超过这个周期登录系统时，则在登录时就会提醒修改密码对话框');
+--
+-- Dumping data for table `sys_config`
+--
 
--- ----------------------------
--- Table structure for sys_dept
--- ----------------------------
+LOCK TABLES `sys_config` WRITE;
+/*!40000 ALTER TABLE `sys_config` DISABLE KEYS */;
+INSERT INTO `sys_config` VALUES (1,'主框架页-默认皮肤样式名称','sys.index.skinName','skin-blue','Y','admin','2025-10-22 23:01:04','',NULL,'蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow'),(2,'用户管理-账号初始密码','sys.user.initPassword','123456','Y','admin','2025-10-22 23:01:04','',NULL,'初始化密码 123456'),(3,'主框架页-侧边栏主题','sys.index.sideTheme','theme-dark','Y','admin','2025-10-22 23:01:04','',NULL,'深色主题theme-dark，浅色主题theme-light'),(4,'账号自助-验证码开关','sys.account.captchaEnabled','false','Y','admin','2025-10-22 23:01:04','admin','2025-10-22 23:07:06','是否开启验证码功能（true开启，false关闭）'),(5,'账号自助-是否开启用户注册功能','sys.account.registerUser','false','Y','admin','2025-10-22 23:01:04','',NULL,'是否开启注册用户功能（true开启，false关闭）'),(6,'用户登录-黑名单列表','sys.login.blackIPList','','Y','admin','2025-10-22 23:01:04','',NULL,'设置登录IP黑名单限制，多个匹配项以;分隔，支持匹配（*通配、网段）'),(7,'用户管理-初始密码修改策略','sys.account.initPasswordModify','1','Y','admin','2025-10-22 23:01:04','',NULL,'0：初始密码修改策略关闭，没有任何提示，1：提醒用户，如果未修改初始密码，则在登录时就会提醒修改密码对话框'),(8,'用户管理-账号密码更新周期','sys.account.passwordValidateDays','0','Y','admin','2025-10-22 23:01:04','',NULL,'密码更新周期（填写数字，数据初始化值为0不限制，若修改必须为大于0小于365的正整数），如果超过这个周期登录系统时，则在登录时就会提醒修改密码对话框');
+/*!40000 ALTER TABLE `sys_config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_dept`
+--
+
 DROP TABLE IF EXISTS `sys_dept`;
-CREATE TABLE `sys_dept`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_dept` (
   `dept_id` bigint NOT NULL AUTO_INCREMENT COMMENT '部门id',
-  `parent_id` bigint NULL DEFAULT 0 COMMENT '父部门id',
-  `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '祖级列表',
-  `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
-  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
-  `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系电话',
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `parent_id` bigint DEFAULT '0' COMMENT '父部门id',
+  `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '祖级列表',
+  `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '部门名称',
+  `order_num` int DEFAULT '0' COMMENT '显示顺序',
+  `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '负责人',
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '联系电话',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '邮箱',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='部门表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_dept
--- ----------------------------
-INSERT INTO `sys_dept` VALUES (100, 0, '0', '若依科技', 0, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (101, 100, '0,100', '深圳总公司', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (102, 100, '0,100', '长沙分公司', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (103, 101, '0,100,101', '研发部门', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (104, 101, '0,100,101', '市场部门', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (105, 101, '0,100,101', '测试部门', 3, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (106, 101, '0,100,101', '财务部门', 4, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (107, 101, '0,100,101', '运维部门', 5, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (108, 102, '0,100,102', '市场部门', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
-INSERT INTO `sys_dept` VALUES (109, 102, '0,100,102', '财务部门', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2025-10-22 23:01:03', '', NULL);
+--
+-- Dumping data for table `sys_dept`
+--
 
--- ----------------------------
--- Table structure for sys_dict_data
--- ----------------------------
+LOCK TABLES `sys_dept` WRITE;
+/*!40000 ALTER TABLE `sys_dept` DISABLE KEYS */;
+INSERT INTO `sys_dept` VALUES (100,0,'0','若依科技',0,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(101,100,'0,100','深圳总公司',1,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(102,100,'0,100','长沙分公司',2,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(103,101,'0,100,101','研发部门',1,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(104,101,'0,100,101','市场部门',2,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(105,101,'0,100,101','测试部门',3,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(106,101,'0,100,101','财务部门',4,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(107,101,'0,100,101','运维部门',5,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(108,102,'0,100,102','市场部门',1,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL),(109,102,'0,100,102','财务部门',2,'若依','15888888888','ry@qq.com','0','0','admin','2025-10-22 23:01:03','',NULL);
+/*!40000 ALTER TABLE `sys_dept` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_dict_data`
+--
+
 DROP TABLE IF EXISTS `sys_dict_data`;
-CREATE TABLE `sys_dict_data`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_dict_data` (
   `dict_code` bigint NOT NULL AUTO_INCREMENT COMMENT '字典编码',
-  `dict_sort` int NULL DEFAULT 0 COMMENT '字典排序',
-  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典标签',
-  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典键值',
-  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典类型',
-  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
-  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表格回显样式',
-  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `dict_sort` int DEFAULT '0' COMMENT '字典排序',
+  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '字典标签',
+  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '字典键值',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '字典类型',
+  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
+  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '表格回显样式',
+  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='字典数据表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_dict_data
--- ----------------------------
-INSERT INTO `sys_dict_data` VALUES (1, 1, '男', '0', 'sys_user_sex', '', '', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '性别男');
-INSERT INTO `sys_dict_data` VALUES (2, 2, '女', '1', 'sys_user_sex', '', '', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '性别女');
-INSERT INTO `sys_dict_data` VALUES (3, 3, '未知', '2', 'sys_user_sex', '', '', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '性别未知');
-INSERT INTO `sys_dict_data` VALUES (4, 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '显示菜单');
-INSERT INTO `sys_dict_data` VALUES (5, 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '隐藏菜单');
-INSERT INTO `sys_dict_data` VALUES (6, 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (7, 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '停用状态');
-INSERT INTO `sys_dict_data` VALUES (8, 1, '正常', '0', 'sys_job_status', '', 'primary', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (9, 2, '暂停', '1', 'sys_job_status', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '停用状态');
-INSERT INTO `sys_dict_data` VALUES (10, 1, '默认', 'DEFAULT', 'sys_job_group', '', '', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '默认分组');
-INSERT INTO `sys_dict_data` VALUES (11, 2, '系统', 'SYSTEM', 'sys_job_group', '', '', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '系统分组');
-INSERT INTO `sys_dict_data` VALUES (12, 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '系统默认是');
-INSERT INTO `sys_dict_data` VALUES (13, 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '系统默认否');
-INSERT INTO `sys_dict_data` VALUES (14, 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '通知');
-INSERT INTO `sys_dict_data` VALUES (15, 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '公告');
-INSERT INTO `sys_dict_data` VALUES (16, 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (17, 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '关闭状态');
-INSERT INTO `sys_dict_data` VALUES (18, 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '其他操作');
-INSERT INTO `sys_dict_data` VALUES (19, 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '新增操作');
-INSERT INTO `sys_dict_data` VALUES (20, 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '修改操作');
-INSERT INTO `sys_dict_data` VALUES (21, 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '删除操作');
-INSERT INTO `sys_dict_data` VALUES (22, 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '授权操作');
-INSERT INTO `sys_dict_data` VALUES (23, 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '导出操作');
-INSERT INTO `sys_dict_data` VALUES (24, 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '导入操作');
-INSERT INTO `sys_dict_data` VALUES (25, 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '强退操作');
-INSERT INTO `sys_dict_data` VALUES (26, 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '生成操作');
-INSERT INTO `sys_dict_data` VALUES (27, 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '清空操作');
-INSERT INTO `sys_dict_data` VALUES (28, 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '正常状态');
-INSERT INTO `sys_dict_data` VALUES (29, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '停用状态');
+--
+-- Dumping data for table `sys_dict_data`
+--
 
--- ----------------------------
--- Table structure for sys_dict_type
--- ----------------------------
+LOCK TABLES `sys_dict_data` WRITE;
+/*!40000 ALTER TABLE `sys_dict_data` DISABLE KEYS */;
+INSERT INTO `sys_dict_data` VALUES (1,1,'男','0','sys_user_sex','','','Y','0','admin','2025-10-22 23:01:04','',NULL,'性别男'),(2,2,'女','1','sys_user_sex','','','N','0','admin','2025-10-22 23:01:04','',NULL,'性别女'),(3,3,'未知','2','sys_user_sex','','','N','0','admin','2025-10-22 23:01:04','',NULL,'性别未知'),(4,1,'显示','0','sys_show_hide','','primary','Y','0','admin','2025-10-22 23:01:04','',NULL,'显示菜单'),(5,2,'隐藏','1','sys_show_hide','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'隐藏菜单'),(6,1,'正常','0','sys_normal_disable','','primary','Y','0','admin','2025-10-22 23:01:04','',NULL,'正常状态'),(7,2,'停用','1','sys_normal_disable','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'停用状态'),(8,1,'正常','0','sys_job_status','','primary','Y','0','admin','2025-10-22 23:01:04','',NULL,'正常状态'),(9,2,'暂停','1','sys_job_status','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'停用状态'),(10,1,'默认','DEFAULT','sys_job_group','','','Y','0','admin','2025-10-22 23:01:04','',NULL,'默认分组'),(11,2,'系统','SYSTEM','sys_job_group','','','N','0','admin','2025-10-22 23:01:04','',NULL,'系统分组'),(12,1,'是','Y','sys_yes_no','','primary','Y','0','admin','2025-10-22 23:01:04','',NULL,'系统默认是'),(13,2,'否','N','sys_yes_no','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'系统默认否'),(14,1,'通知','1','sys_notice_type','','warning','Y','0','admin','2025-10-22 23:01:04','',NULL,'通知'),(15,2,'公告','2','sys_notice_type','','success','N','0','admin','2025-10-22 23:01:04','',NULL,'公告'),(16,1,'正常','0','sys_notice_status','','primary','Y','0','admin','2025-10-22 23:01:04','',NULL,'正常状态'),(17,2,'关闭','1','sys_notice_status','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'关闭状态'),(18,99,'其他','0','sys_oper_type','','info','N','0','admin','2025-10-22 23:01:04','',NULL,'其他操作'),(19,1,'新增','1','sys_oper_type','','info','N','0','admin','2025-10-22 23:01:04','',NULL,'新增操作'),(20,2,'修改','2','sys_oper_type','','info','N','0','admin','2025-10-22 23:01:04','',NULL,'修改操作'),(21,3,'删除','3','sys_oper_type','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'删除操作'),(22,4,'授权','4','sys_oper_type','','primary','N','0','admin','2025-10-22 23:01:04','',NULL,'授权操作'),(23,5,'导出','5','sys_oper_type','','warning','N','0','admin','2025-10-22 23:01:04','',NULL,'导出操作'),(24,6,'导入','6','sys_oper_type','','warning','N','0','admin','2025-10-22 23:01:04','',NULL,'导入操作'),(25,7,'强退','7','sys_oper_type','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'强退操作'),(26,8,'生成代码','8','sys_oper_type','','warning','N','0','admin','2025-10-22 23:01:04','',NULL,'生成操作'),(27,9,'清空数据','9','sys_oper_type','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'清空操作'),(28,1,'成功','0','sys_common_status','','primary','N','0','admin','2025-10-22 23:01:04','',NULL,'正常状态'),(29,2,'失败','1','sys_common_status','','danger','N','0','admin','2025-10-22 23:01:04','',NULL,'停用状态'),(100,1,'计算机学院','计算机学院','sys_college','','primary','Y','0','admin','2026-09-25 19:33:08','',NULL,''),(101,2,'外国语学院','外国语学院','sys_college','','success','N','0','admin','2026-09-25 19:33:08','',NULL,''),(102,3,'经济管理学院','经济管理学院','sys_college','','info','N','0','admin','2026-09-25 19:33:08','',NULL,''),(103,4,'机械工程学院','机械工程学院','sys_college','','warning','N','0','admin','2026-09-25 19:33:08','',NULL,''),(104,1,'软件工程','软件工程','sys_major','','primary','Y','0','admin','2026-09-25 19:33:08','',NULL,''),(105,2,'计算机科学与技术','计算机科学与技术','sys_major','','success','N','0','admin','2026-09-25 19:33:08','',NULL,''),(106,3,'英语','英语','sys_major','','info','N','0','admin','2026-09-25 19:33:08','',NULL,''),(107,4,'工商管理','工商管理','sys_major','','warning','N','0','admin','2026-09-25 19:33:08','',NULL,''),(108,5,'机械设计制造及其自动化','机械设计制造及其自动化','sys_major','','danger','N','0','admin','2026-09-25 19:33:08','',NULL,'');
+/*!40000 ALTER TABLE `sys_dict_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_dict_type`
+--
+
 DROP TABLE IF EXISTS `sys_dict_type`;
-CREATE TABLE `sys_dict_type`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_dict_type` (
   `dict_id` bigint NOT NULL AUTO_INCREMENT COMMENT '字典主键',
-  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典名称',
-  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典类型',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '字典名称',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '字典类型',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
-  UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
+  UNIQUE KEY `dict_type` (`dict_type`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='字典类型表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_dict_type
--- ----------------------------
-INSERT INTO `sys_dict_type` VALUES (1, '用户性别', 'sys_user_sex', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '用户性别列表');
-INSERT INTO `sys_dict_type` VALUES (2, '菜单状态', 'sys_show_hide', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '菜单状态列表');
-INSERT INTO `sys_dict_type` VALUES (3, '系统开关', 'sys_normal_disable', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '系统开关列表');
-INSERT INTO `sys_dict_type` VALUES (4, '任务状态', 'sys_job_status', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '任务状态列表');
-INSERT INTO `sys_dict_type` VALUES (5, '任务分组', 'sys_job_group', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '任务分组列表');
-INSERT INTO `sys_dict_type` VALUES (6, '系统是否', 'sys_yes_no', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '系统是否列表');
-INSERT INTO `sys_dict_type` VALUES (7, '通知类型', 'sys_notice_type', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '通知类型列表');
-INSERT INTO `sys_dict_type` VALUES (8, '通知状态', 'sys_notice_status', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '通知状态列表');
-INSERT INTO `sys_dict_type` VALUES (9, '操作类型', 'sys_oper_type', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '操作类型列表');
-INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '登录状态列表');
-INSERT INTO `sys_dict_type` VALUES (101, '选课状态', 'selection_status', '0', 'admin', '2025-10-23 22:21:24', 'admin', '2025-10-23 22:21:40', '字典标签：已选，字典值：0，排序：1\n字典标签：已退，字典值：1，排序：2');
+--
+-- Dumping data for table `sys_dict_type`
+--
 
--- ----------------------------
--- Table structure for sys_job
--- ----------------------------
+LOCK TABLES `sys_dict_type` WRITE;
+/*!40000 ALTER TABLE `sys_dict_type` DISABLE KEYS */;
+INSERT INTO `sys_dict_type` VALUES (1,'用户性别','sys_user_sex','0','admin','2025-10-22 23:01:04','',NULL,'用户性别列表'),(2,'菜单状态','sys_show_hide','0','admin','2025-10-22 23:01:04','',NULL,'菜单状态列表'),(3,'系统开关','sys_normal_disable','0','admin','2025-10-22 23:01:04','',NULL,'系统开关列表'),(4,'任务状态','sys_job_status','0','admin','2025-10-22 23:01:04','',NULL,'任务状态列表'),(5,'任务分组','sys_job_group','0','admin','2025-10-22 23:01:04','',NULL,'任务分组列表'),(6,'系统是否','sys_yes_no','0','admin','2025-10-22 23:01:04','',NULL,'系统是否列表'),(7,'通知类型','sys_notice_type','0','admin','2025-10-22 23:01:04','',NULL,'通知类型列表'),(8,'通知状态','sys_notice_status','0','admin','2025-10-22 23:01:04','',NULL,'通知状态列表'),(9,'操作类型','sys_oper_type','0','admin','2025-10-22 23:01:04','',NULL,'操作类型列表'),(10,'系统状态','sys_common_status','0','admin','2025-10-22 23:01:04','',NULL,'登录状态列表'),(101,'选课状态','selection_status','0','admin','2025-10-23 22:21:24','admin','2025-10-23 22:21:40','字典标签：已选，字典值：0，排序：1\n字典标签：已退，字典值：1，排序：2'),(102,'学院列表','sys_college','0','admin','2026-09-25 19:33:08','',NULL,'学院列表'),(103,'专业列表','sys_major','0','admin','2026-09-25 19:33:08','',NULL,'专业列表');
+/*!40000 ALTER TABLE `sys_dict_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_job`
+--
+
 DROP TABLE IF EXISTS `sys_job`;
-CREATE TABLE `sys_job`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_job` (
   `job_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务ID',
   `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '任务名称',
   `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
   `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '调用目标字符串',
-  `cron_expression` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT 'cron执行表达式',
-  `misfire_policy` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
-  `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1暂停）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注信息',
-  PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+  `cron_expression` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT 'cron执行表达式',
+  `misfire_policy` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
+  `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '状态（0正常 1暂停）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '备注信息',
+  PRIMARY KEY (`job_id`,`job_name`,`job_group`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='定时任务调度表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_job
--- ----------------------------
-INSERT INTO `sys_job` VALUES (1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams', '0/10 * * * * ?', '3', '1', '1', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_job` VALUES (2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(\'ry\')', '0/15 * * * * ?', '3', '1', '1', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_job` VALUES (3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)', '0/20 * * * * ?', '3', '1', '1', 'admin', '2025-10-22 23:01:04', '', NULL, '');
+--
+-- Dumping data for table `sys_job`
+--
 
--- ----------------------------
--- Table structure for sys_job_log
--- ----------------------------
+LOCK TABLES `sys_job` WRITE;
+/*!40000 ALTER TABLE `sys_job` DISABLE KEYS */;
+INSERT INTO `sys_job` VALUES (1,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','0/10 * * * * ?','3','1','1','admin','2025-10-22 23:01:04','',NULL,''),(2,'系统默认（有参）','DEFAULT','ryTask.ryParams(\'ry\')','0/15 * * * * ?','3','1','1','admin','2025-10-22 23:01:04','',NULL,''),(3,'系统默认（多参）','DEFAULT','ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)','0/20 * * * * ?','3','1','1','admin','2025-10-22 23:01:04','',NULL,'');
+/*!40000 ALTER TABLE `sys_job` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_job_log`
+--
+
 DROP TABLE IF EXISTS `sys_job_log`;
-CREATE TABLE `sys_job_log`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_job_log` (
   `job_log_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
   `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '任务名称',
   `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '任务组名',
   `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '调用目标字符串',
-  `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '日志信息',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
-  `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '异常信息',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '日志信息',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
+  `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '异常信息',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='定时任务调度日志表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_job_log
--- ----------------------------
+--
+-- Dumping data for table `sys_job_log`
+--
 
--- ----------------------------
--- Table structure for sys_logininfor
--- ----------------------------
+LOCK TABLES `sys_job_log` WRITE;
+/*!40000 ALTER TABLE `sys_job_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_job_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_logininfor`
+--
+
 DROP TABLE IF EXISTS `sys_logininfor`;
-CREATE TABLE `sys_logininfor`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_logininfor` (
   `info_id` bigint NOT NULL AUTO_INCREMENT COMMENT '访问ID',
-  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户账号',
-  `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '登录IP地址',
-  `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '登录地点',
-  `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '浏览器类型',
-  `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作系统',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
-  `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '提示消息',
-  `login_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '用户账号',
+  `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '登录IP地址',
+  `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '登录地点',
+  `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '浏览器类型',
+  `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '操作系统',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
+  `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '提示消息',
+  `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE,
-  INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
-  INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 295 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+  KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
+  KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=359 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_logininfor
--- ----------------------------
-INSERT INTO `sys_logininfor` VALUES (100, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-22 23:06:50');
-INSERT INTO `sys_logininfor` VALUES (101, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-22 23:06:54');
-INSERT INTO `sys_logininfor` VALUES (102, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 10:22:07');
-INSERT INTO `sys_logininfor` VALUES (103, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:00:19');
-INSERT INTO `sys_logininfor` VALUES (104, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:00:23');
-INSERT INTO `sys_logininfor` VALUES (105, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:00:30');
-INSERT INTO `sys_logininfor` VALUES (106, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:01:55');
-INSERT INTO `sys_logininfor` VALUES (107, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:02:00');
-INSERT INTO `sys_logininfor` VALUES (108, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:02:11');
-INSERT INTO `sys_logininfor` VALUES (109, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:02:16');
-INSERT INTO `sys_logininfor` VALUES (110, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:03:07');
-INSERT INTO `sys_logininfor` VALUES (111, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:03:15');
-INSERT INTO `sys_logininfor` VALUES (112, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:03:44');
-INSERT INTO `sys_logininfor` VALUES (113, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:03:46');
-INSERT INTO `sys_logininfor` VALUES (114, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:07:19');
-INSERT INTO `sys_logininfor` VALUES (115, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:07:27');
-INSERT INTO `sys_logininfor` VALUES (116, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:07:31');
-INSERT INTO `sys_logininfor` VALUES (117, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:07:54');
-INSERT INTO `sys_logininfor` VALUES (118, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:07:55');
-INSERT INTO `sys_logininfor` VALUES (119, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:10:14');
-INSERT INTO `sys_logininfor` VALUES (120, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:10:21');
-INSERT INTO `sys_logininfor` VALUES (121, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:10:45');
-INSERT INTO `sys_logininfor` VALUES (122, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:10:48');
-INSERT INTO `sys_logininfor` VALUES (123, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:14:30');
-INSERT INTO `sys_logininfor` VALUES (124, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:14:36');
-INSERT INTO `sys_logininfor` VALUES (125, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:14:40');
-INSERT INTO `sys_logininfor` VALUES (126, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:14:49');
-INSERT INTO `sys_logininfor` VALUES (127, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:15:34');
-INSERT INTO `sys_logininfor` VALUES (128, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 11:15:37');
-INSERT INTO `sys_logininfor` VALUES (129, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:15:43');
-INSERT INTO `sys_logininfor` VALUES (130, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 11:15:57');
-INSERT INTO `sys_logininfor` VALUES (131, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 11:16:08');
-INSERT INTO `sys_logininfor` VALUES (132, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 18:01:18');
-INSERT INTO `sys_logininfor` VALUES (133, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 18:02:01');
-INSERT INTO `sys_logininfor` VALUES (134, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 18:02:06');
-INSERT INTO `sys_logininfor` VALUES (135, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 19:58:19');
-INSERT INTO `sys_logininfor` VALUES (136, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 20:05:57');
-INSERT INTO `sys_logininfor` VALUES (137, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 20:06:06');
-INSERT INTO `sys_logininfor` VALUES (138, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 20:20:01');
-INSERT INTO `sys_logininfor` VALUES (139, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 20:20:10');
-INSERT INTO `sys_logininfor` VALUES (140, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 21:16:07');
-INSERT INTO `sys_logininfor` VALUES (141, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 21:18:31');
-INSERT INTO `sys_logininfor` VALUES (142, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 21:18:34');
-INSERT INTO `sys_logininfor` VALUES (143, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 21:21:11');
-INSERT INTO `sys_logininfor` VALUES (144, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 21:21:16');
-INSERT INTO `sys_logininfor` VALUES (145, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 22:56:21');
-INSERT INTO `sys_logininfor` VALUES (146, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 22:56:25');
-INSERT INTO `sys_logininfor` VALUES (147, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 22:57:43');
-INSERT INTO `sys_logininfor` VALUES (148, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 22:57:47');
-INSERT INTO `sys_logininfor` VALUES (149, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:08:12');
-INSERT INTO `sys_logininfor` VALUES (150, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:08:15');
-INSERT INTO `sys_logininfor` VALUES (151, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:10:23');
-INSERT INTO `sys_logininfor` VALUES (152, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:10:28');
-INSERT INTO `sys_logininfor` VALUES (153, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:21:34');
-INSERT INTO `sys_logininfor` VALUES (154, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:21:38');
-INSERT INTO `sys_logininfor` VALUES (155, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:24:09');
-INSERT INTO `sys_logininfor` VALUES (156, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:24:16');
-INSERT INTO `sys_logininfor` VALUES (157, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:24:31');
-INSERT INTO `sys_logininfor` VALUES (158, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-23 23:24:35');
-INSERT INTO `sys_logininfor` VALUES (159, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:24:41');
-INSERT INTO `sys_logininfor` VALUES (160, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:24:56');
-INSERT INTO `sys_logininfor` VALUES (161, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:25:06');
-INSERT INTO `sys_logininfor` VALUES (162, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:25:17');
-INSERT INTO `sys_logininfor` VALUES (163, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:25:25');
-INSERT INTO `sys_logininfor` VALUES (164, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:25:38');
-INSERT INTO `sys_logininfor` VALUES (165, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:25:42');
-INSERT INTO `sys_logininfor` VALUES (166, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:25:44');
-INSERT INTO `sys_logininfor` VALUES (167, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:26:00');
-INSERT INTO `sys_logininfor` VALUES (168, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-23 23:26:13');
-INSERT INTO `sys_logininfor` VALUES (169, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-23 23:26:30');
-INSERT INTO `sys_logininfor` VALUES (170, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 14:43:24');
-INSERT INTO `sys_logininfor` VALUES (171, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:26:23');
-INSERT INTO `sys_logininfor` VALUES (172, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:26:33');
-INSERT INTO `sys_logininfor` VALUES (173, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:26:36');
-INSERT INTO `sys_logininfor` VALUES (174, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:26:53');
-INSERT INTO `sys_logininfor` VALUES (175, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:26:57');
-INSERT INTO `sys_logininfor` VALUES (176, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:29:16');
-INSERT INTO `sys_logininfor` VALUES (177, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:29:19');
-INSERT INTO `sys_logininfor` VALUES (178, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:29:35');
-INSERT INTO `sys_logininfor` VALUES (179, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:29:38');
-INSERT INTO `sys_logininfor` VALUES (180, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:29:47');
-INSERT INTO `sys_logininfor` VALUES (181, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:29:51');
-INSERT INTO `sys_logininfor` VALUES (182, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:30:28');
-INSERT INTO `sys_logininfor` VALUES (183, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:30:33');
-INSERT INTO `sys_logininfor` VALUES (184, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:30:45');
-INSERT INTO `sys_logininfor` VALUES (185, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:30:49');
-INSERT INTO `sys_logininfor` VALUES (186, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:31:43');
-INSERT INTO `sys_logininfor` VALUES (187, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:31:46');
-INSERT INTO `sys_logininfor` VALUES (188, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:31:54');
-INSERT INTO `sys_logininfor` VALUES (189, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:31:58');
-INSERT INTO `sys_logininfor` VALUES (190, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:32:02');
-INSERT INTO `sys_logininfor` VALUES (191, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-31 16:32:43');
-INSERT INTO `sys_logininfor` VALUES (192, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '1', '用户不存在/密码错误', '2025-10-31 16:32:50');
-INSERT INTO `sys_logininfor` VALUES (193, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:32:55');
-INSERT INTO `sys_logininfor` VALUES (194, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:33:12');
-INSERT INTO `sys_logininfor` VALUES (195, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:33:21');
-INSERT INTO `sys_logininfor` VALUES (196, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 16:33:35');
-INSERT INTO `sys_logininfor` VALUES (197, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 16:33:40');
-INSERT INTO `sys_logininfor` VALUES (198, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 17:10:42');
-INSERT INTO `sys_logininfor` VALUES (199, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 17:11:12');
-INSERT INTO `sys_logininfor` VALUES (200, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 17:11:18');
-INSERT INTO `sys_logininfor` VALUES (201, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 17:11:32');
-INSERT INTO `sys_logininfor` VALUES (202, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 17:11:35');
-INSERT INTO `sys_logininfor` VALUES (203, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 17:13:37');
-INSERT INTO `sys_logininfor` VALUES (204, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 17:13:40');
-INSERT INTO `sys_logininfor` VALUES (205, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 18:16:54');
-INSERT INTO `sys_logininfor` VALUES (206, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 18:37:04');
-INSERT INTO `sys_logininfor` VALUES (207, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 18:37:09');
-INSERT INTO `sys_logininfor` VALUES (208, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 18:37:15');
-INSERT INTO `sys_logininfor` VALUES (209, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 18:37:19');
-INSERT INTO `sys_logininfor` VALUES (210, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 18:50:13');
-INSERT INTO `sys_logininfor` VALUES (211, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:05:36');
-INSERT INTO `sys_logininfor` VALUES (212, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:14:10');
-INSERT INTO `sys_logininfor` VALUES (213, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:14:13');
-INSERT INTO `sys_logininfor` VALUES (214, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:26:24');
-INSERT INTO `sys_logininfor` VALUES (215, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:26:27');
-INSERT INTO `sys_logininfor` VALUES (216, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:26:37');
-INSERT INTO `sys_logininfor` VALUES (217, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:26:40');
-INSERT INTO `sys_logininfor` VALUES (218, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:30:29');
-INSERT INTO `sys_logininfor` VALUES (219, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:30:31');
-INSERT INTO `sys_logininfor` VALUES (220, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:47:55');
-INSERT INTO `sys_logininfor` VALUES (221, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:47:59');
-INSERT INTO `sys_logininfor` VALUES (222, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:48:17');
-INSERT INTO `sys_logininfor` VALUES (223, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:48:21');
-INSERT INTO `sys_logininfor` VALUES (224, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:48:27');
-INSERT INTO `sys_logininfor` VALUES (225, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:48:31');
-INSERT INTO `sys_logininfor` VALUES (226, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:54:49');
-INSERT INTO `sys_logininfor` VALUES (227, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:54:53');
-INSERT INTO `sys_logininfor` VALUES (228, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 19:55:05');
-INSERT INTO `sys_logininfor` VALUES (229, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 19:55:08');
-INSERT INTO `sys_logininfor` VALUES (230, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:04:08');
-INSERT INTO `sys_logininfor` VALUES (231, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:04:12');
-INSERT INTO `sys_logininfor` VALUES (232, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:06:20');
-INSERT INTO `sys_logininfor` VALUES (233, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:06:23');
-INSERT INTO `sys_logininfor` VALUES (234, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:07:19');
-INSERT INTO `sys_logininfor` VALUES (235, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:07:22');
-INSERT INTO `sys_logininfor` VALUES (236, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:07:28');
-INSERT INTO `sys_logininfor` VALUES (237, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:07:31');
-INSERT INTO `sys_logininfor` VALUES (238, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:11:25');
-INSERT INTO `sys_logininfor` VALUES (239, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:11:28');
-INSERT INTO `sys_logininfor` VALUES (240, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:11:36');
-INSERT INTO `sys_logininfor` VALUES (241, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:11:40');
-INSERT INTO `sys_logininfor` VALUES (242, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:11:47');
-INSERT INTO `sys_logininfor` VALUES (243, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:11:52');
-INSERT INTO `sys_logininfor` VALUES (244, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:12:00');
-INSERT INTO `sys_logininfor` VALUES (245, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:12:06');
-INSERT INTO `sys_logininfor` VALUES (246, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:12:13');
-INSERT INTO `sys_logininfor` VALUES (247, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:12:18');
-INSERT INTO `sys_logininfor` VALUES (248, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:13:04');
-INSERT INTO `sys_logininfor` VALUES (249, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:13:08');
-INSERT INTO `sys_logininfor` VALUES (250, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:14:28');
-INSERT INTO `sys_logininfor` VALUES (251, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:14:31');
-INSERT INTO `sys_logininfor` VALUES (252, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:14:48');
-INSERT INTO `sys_logininfor` VALUES (253, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:14:51');
-INSERT INTO `sys_logininfor` VALUES (254, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:16:37');
-INSERT INTO `sys_logininfor` VALUES (255, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:16:41');
-INSERT INTO `sys_logininfor` VALUES (256, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:19:48');
-INSERT INTO `sys_logininfor` VALUES (257, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:19:52');
-INSERT INTO `sys_logininfor` VALUES (258, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:21:14');
-INSERT INTO `sys_logininfor` VALUES (259, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:21:17');
-INSERT INTO `sys_logininfor` VALUES (260, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:26:54');
-INSERT INTO `sys_logininfor` VALUES (261, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:26:58');
-INSERT INTO `sys_logininfor` VALUES (262, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:27:46');
-INSERT INTO `sys_logininfor` VALUES (263, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:27:48');
-INSERT INTO `sys_logininfor` VALUES (264, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:28:38');
-INSERT INTO `sys_logininfor` VALUES (265, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:28:40');
-INSERT INTO `sys_logininfor` VALUES (266, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:33:48');
-INSERT INTO `sys_logininfor` VALUES (267, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:33:50');
-INSERT INTO `sys_logininfor` VALUES (268, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:35:40');
-INSERT INTO `sys_logininfor` VALUES (269, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:35:43');
-INSERT INTO `sys_logininfor` VALUES (270, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:41:49');
-INSERT INTO `sys_logininfor` VALUES (271, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:41:54');
-INSERT INTO `sys_logininfor` VALUES (272, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:42:08');
-INSERT INTO `sys_logininfor` VALUES (273, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:42:11');
-INSERT INTO `sys_logininfor` VALUES (274, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:42:17');
-INSERT INTO `sys_logininfor` VALUES (275, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:42:19');
-INSERT INTO `sys_logininfor` VALUES (276, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:42:50');
-INSERT INTO `sys_logininfor` VALUES (277, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:42:53');
-INSERT INTO `sys_logininfor` VALUES (278, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 20:42:57');
-INSERT INTO `sys_logininfor` VALUES (279, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 20:42:59');
-INSERT INTO `sys_logininfor` VALUES (280, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 21:03:06');
-INSERT INTO `sys_logininfor` VALUES (281, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 21:37:52');
-INSERT INTO `sys_logininfor` VALUES (282, 'admin', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 23:03:21');
-INSERT INTO `sys_logininfor` VALUES (283, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:03:25');
-INSERT INTO `sys_logininfor` VALUES (284, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 23:05:16');
-INSERT INTO `sys_logininfor` VALUES (285, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:05:20');
-INSERT INTO `sys_logininfor` VALUES (286, 'student-xh', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 23:06:24');
-INSERT INTO `sys_logininfor` VALUES (287, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:06:28');
-INSERT INTO `sys_logininfor` VALUES (288, 'student-xm', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 23:06:45');
-INSERT INTO `sys_logininfor` VALUES (289, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:06:50');
-INSERT INTO `sys_logininfor` VALUES (290, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:24:00');
-INSERT INTO `sys_logininfor` VALUES (291, 'teacher-zhang', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 23:25:27');
-INSERT INTO `sys_logininfor` VALUES (292, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:25:30');
-INSERT INTO `sys_logininfor` VALUES (293, 'teacher-li', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '退出成功', '2025-10-31 23:25:55');
-INSERT INTO `sys_logininfor` VALUES (294, 'manage', '127.0.0.1', '内网IP', 'Chrome 14', 'Windows 10', '0', '登录成功', '2025-10-31 23:25:59');
+--
+-- Dumping data for table `sys_logininfor`
+--
 
--- ----------------------------
--- Table structure for sys_menu
--- ----------------------------
+LOCK TABLES `sys_logininfor` WRITE;
+/*!40000 ALTER TABLE `sys_logininfor` DISABLE KEYS */;
+INSERT INTO `sys_logininfor` VALUES (100,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-22 23:06:50'),(101,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-22 23:06:54'),(102,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 10:22:07'),(103,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:00:19'),(104,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:00:23'),(105,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:00:30'),(106,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:01:55'),(107,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:02:00'),(108,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:02:11'),(109,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:02:16'),(110,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:03:07'),(111,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:03:15'),(112,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:03:44'),(113,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:03:46'),(114,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:07:19'),(115,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:07:27'),(116,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:07:31'),(117,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:07:54'),(118,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:07:55'),(119,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:10:14'),(120,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:10:21'),(121,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:10:45'),(122,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:10:48'),(123,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:14:30'),(124,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:14:36'),(125,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:14:40'),(126,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:14:49'),(127,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:15:34'),(128,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 11:15:37'),(129,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:15:43'),(130,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 11:15:57'),(131,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 11:16:08'),(132,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 18:01:18'),(133,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 18:02:01'),(134,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 18:02:06'),(135,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 19:58:19'),(136,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 20:05:57'),(137,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 20:06:06'),(138,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 20:20:01'),(139,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 20:20:10'),(140,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 21:16:07'),(141,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 21:18:31'),(142,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 21:18:34'),(143,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 21:21:11'),(144,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 21:21:16'),(145,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 22:56:21'),(146,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 22:56:25'),(147,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 22:57:43'),(148,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 22:57:47'),(149,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:08:12'),(150,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:08:15'),(151,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:10:23'),(152,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:10:28'),(153,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:21:34'),(154,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:21:38'),(155,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:24:09'),(156,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:24:16'),(157,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:24:31'),(158,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-23 23:24:35'),(159,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:24:41'),(160,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:24:56'),(161,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:25:06'),(162,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:25:17'),(163,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:25:25'),(164,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:25:38'),(165,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:25:42'),(166,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:25:44'),(167,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:26:00'),(168,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-23 23:26:13'),(169,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-23 23:26:30'),(170,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 14:43:24'),(171,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:26:23'),(172,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:26:33'),(173,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:26:36'),(174,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:26:53'),(175,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:26:57'),(176,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:29:16'),(177,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:29:19'),(178,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:29:35'),(179,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:29:38'),(180,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:29:47'),(181,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:29:51'),(182,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:30:28'),(183,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:30:33'),(184,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:30:45'),(185,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:30:49'),(186,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:31:43'),(187,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:31:46'),(188,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:31:54'),(189,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:31:58'),(190,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:32:02'),(191,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-31 16:32:43'),(192,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','1','用户不存在/密码错误','2025-10-31 16:32:50'),(193,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:32:55'),(194,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:33:12'),(195,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:33:21'),(196,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 16:33:35'),(197,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 16:33:40'),(198,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 17:10:42'),(199,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 17:11:12'),(200,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 17:11:18'),(201,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 17:11:32'),(202,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 17:11:35'),(203,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 17:13:37'),(204,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 17:13:40'),(205,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 18:16:54'),(206,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 18:37:04'),(207,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 18:37:09'),(208,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 18:37:15'),(209,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 18:37:19'),(210,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 18:50:13'),(211,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:05:36'),(212,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:14:10'),(213,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:14:13'),(214,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:26:24'),(215,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:26:27'),(216,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:26:37'),(217,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:26:40'),(218,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:30:29'),(219,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:30:31'),(220,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:47:55'),(221,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:47:59'),(222,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:48:17'),(223,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:48:21'),(224,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:48:27'),(225,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:48:31'),(226,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:54:49'),(227,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:54:53'),(228,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 19:55:05'),(229,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 19:55:08'),(230,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:04:08'),(231,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:04:12'),(232,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:06:20'),(233,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:06:23'),(234,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:07:19'),(235,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:07:22'),(236,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:07:28'),(237,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:07:31'),(238,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:11:25'),(239,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:11:28'),(240,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:11:36'),(241,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:11:40'),(242,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:11:47'),(243,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:11:52'),(244,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:12:00'),(245,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:12:06'),(246,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:12:13'),(247,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:12:18'),(248,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:13:04'),(249,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:13:08'),(250,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:14:28'),(251,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:14:31'),(252,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:14:48'),(253,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:14:51'),(254,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:16:37'),(255,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:16:41'),(256,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:19:48'),(257,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:19:52'),(258,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:21:14'),(259,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:21:17'),(260,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:26:54'),(261,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:26:58'),(262,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:27:46'),(263,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:27:48'),(264,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:28:38'),(265,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:28:40'),(266,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:33:48'),(267,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:33:50'),(268,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:35:40'),(269,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:35:43'),(270,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:41:49'),(271,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:41:54'),(272,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:42:08'),(273,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:42:11'),(274,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:42:17'),(275,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:42:19'),(276,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:42:50'),(277,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:42:53'),(278,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 20:42:57'),(279,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 20:42:59'),(280,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 21:03:06'),(281,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 21:37:52'),(282,'admin','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 23:03:21'),(283,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:03:25'),(284,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 23:05:16'),(285,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:05:20'),(286,'student-xh','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 23:06:24'),(287,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:06:28'),(288,'student-xm','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 23:06:45'),(289,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:06:50'),(290,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:24:00'),(291,'teacher-zhang','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 23:25:27'),(292,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:25:30'),(293,'teacher-li','127.0.0.1','内网IP','Chrome 14','Windows 10','0','退出成功','2025-10-31 23:25:55'),(294,'manage','127.0.0.1','内网IP','Chrome 14','Windows 10','0','登录成功','2025-10-31 23:25:59'),(295,'admin','183.217.30.55','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-24 23:50:00'),(296,'admin','183.217.30.55','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-24 23:54:01'),(297,'admin','183.217.27.8','XX XX','Chrome 14','Windows 10','0','登录成功','2026-09-25 00:15:49'),(298,'admin','183.217.27.204','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 00:44:33'),(299,'admin','183.217.27.204','XX XX','Chrome 14','Windows 10','0','登录成功','2026-09-25 00:57:54'),(300,'admin','183.217.27.204','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 00:59:46'),(301,'admin','127.0.0.1','内网IP','Downloading Tool','Unknown','1','用户不存在/密码错误','2026-09-25 02:29:12'),(302,'admin','183.217.27.204','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-25 02:32:14'),(303,'manage','183.217.27.204','XX XX','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-09-25 02:32:26'),(304,'manage','183.217.27.204','XX XX','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-09-25 02:32:34'),(305,'manage','183.217.27.204','XX XX','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-09-25 02:32:42'),(306,'manage','183.217.27.204','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 02:32:49'),(307,'manage','183.217.27.8','XX XX','Chrome 14','Windows 10','0','登录成功','2026-09-25 02:34:31'),(308,'admin','127.0.0.1','内网IP','Downloading Tool','Unknown','1','用户不存在/密码错误','2026-09-25 02:40:44'),(309,'manage','183.217.27.204','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-25 02:56:16'),(310,'admin','183.217.27.204','XX XX','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-09-25 02:56:36'),(311,'admin','183.217.27.204','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 02:56:48'),(312,'admin','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:11:01'),(313,'admin','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:11:14'),(314,'admin','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:11:18'),(315,'admin','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:11:25'),(316,'admin','117.164.17.52','XX XX','Chrome 14','Windows 10','0','登录成功','2026-09-25 18:12:04'),(317,'Tl_94364','223.160.218.57','XX XX','Chrome Mobile','Android 1.x','1','用户不存在/密码错误','2026-09-25 18:23:16'),(318,'Tl_94364','223.160.218.57','XX XX','Chrome Mobile','Android 1.x','0','登录成功','2026-09-25 18:23:29'),(319,'manage','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:26:39'),(320,'manage','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:26:41'),(321,'manage','117.164.17.52','XX XX','Chrome 14','Windows 10','1','用户不存在/密码错误','2026-09-25 18:26:43'),(322,'manage','117.164.17.52','XX XX','Chrome 14','Windows 10','0','登录成功','2026-09-25 18:26:57'),(323,'manage','117.164.17.52','XX XX','Chrome 14','Windows 10','0','退出成功','2026-09-25 18:29:18'),(324,'Tl_94364','117.164.17.52','XX XX','Chrome 14','Windows 10','0','登录成功','2026-09-25 18:29:37'),(325,'TL_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-09-25 18:39:27'),(326,'TL_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 18:39:31'),(327,'TL_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 19:17:11'),(328,'Tl_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-25 19:46:05'),(329,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 19:46:13'),(330,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 20:04:49'),(331,'Tl_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 20:05:26'),(332,'Tl_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-25 20:09:36'),(333,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 20:09:39'),(334,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-25 20:29:25'),(335,'Tl_94364','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 20:29:27'),(336,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 21:00:11'),(337,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','退出成功','2026-09-25 21:06:23'),(338,'admin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 21:06:32'),(339,'lihuimin','117.164.17.52','XX XX','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-09-25 21:07:09'),(340,'lihuimin','117.164.17.52','XX XX','Chrome 15','Windows 10','0','登录成功','2026-09-25 21:07:30'),(341,'manage','127.0.0.1','内网IP','Chrome 15','Windows 10','0','登录成功','2026-10-11 22:30:47'),(342,'manage','127.0.0.1','内网IP','Chrome 15','Windows 10','0','退出成功','2026-10-11 22:44:40'),(343,'student-xh','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 22:44:43'),(344,'student-xh','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 22:44:55'),(345,'manage','127.0.0.1','内网IP','Chrome 15','Windows 10','0','登录成功','2026-10-11 22:45:10'),(346,'manage','127.0.0.1','内网IP','Chrome 15','Windows 10','0','退出成功','2026-10-11 22:45:14'),(347,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 22:45:17'),(348,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 22:45:27'),(349,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','0','登录成功','2026-10-11 22:46:22'),(350,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','0','退出成功','2026-10-11 22:55:52'),(351,'S2024000','127.0.0.1','内网IP','Chrome 15','Windows 10','0','登录成功','2026-10-11 22:56:14'),(352,'S2024000','127.0.0.1','内网IP','Chrome 15','Windows 10','0','退出成功','2026-10-11 23:03:01'),(353,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 23:03:08'),(354,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 23:03:12'),(355,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','1','用户不存在/密码错误','2026-10-11 23:03:18'),(356,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','0','登录成功','2026-10-11 23:03:26'),(357,'admin','127.0.0.1','内网IP','Chrome 15','Windows 10','0','退出成功','2026-10-11 23:05:46'),(358,'manage','127.0.0.1','内网IP','Chrome 15','Windows 10','0','登录成功','2026-10-11 23:05:50');
+/*!40000 ALTER TABLE `sys_logininfor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_menu`
+--
+
 DROP TABLE IF EXISTS `sys_menu`;
-CREATE TABLE `sys_menu`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_menu` (
   `menu_id` bigint NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
   `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '菜单名称',
-  `parent_id` bigint NULL DEFAULT 0 COMMENT '父菜单ID',
-  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
-  `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '路由地址',
-  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
-  `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由参数',
-  `route_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '路由名称',
-  `is_frame` int NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
-  `is_cache` int NULL DEFAULT 0 COMMENT '是否缓存（0缓存 1不缓存）',
-  `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
-  `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
-  `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
-  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '#' COMMENT '菜单图标',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注',
+  `parent_id` bigint DEFAULT '0' COMMENT '父菜单ID',
+  `order_num` int DEFAULT '0' COMMENT '显示顺序',
+  `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '路由地址',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '组件路径',
+  `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '路由参数',
+  `route_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '路由名称',
+  `is_frame` int DEFAULT '1' COMMENT '是否为外链（0是 1否）',
+  `is_cache` int DEFAULT '0' COMMENT '是否缓存（0缓存 1不缓存）',
+  `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
+  `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
+  `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '权限标识',
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '#' COMMENT '菜单图标',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2037 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=2037 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='菜单权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_menu
--- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 1, 'system', NULL, '', '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2025-10-22 23:01:04', '', NULL, '系统管理目录');
-INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 2, 'monitor', NULL, '', '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2025-10-22 23:01:04', '', NULL, '系统监控目录');
-INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 3, 'tool', NULL, '', '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2025-10-22 23:01:04', '', NULL, '系统工具目录');
-INSERT INTO `sys_menu` VALUES (4, '若依官网', 0, 4, 'http://ruoyi.vip', NULL, '', '', 0, 0, 'M', '0', '0', '', 'guide', 'admin', '2025-10-22 23:01:04', '', NULL, '若依官网地址');
-INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, 'user', 'system/user/index', '', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin', '2025-10-22 23:01:04', '', NULL, '用户管理菜单');
-INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, 'role', 'system/role/index', '', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin', '2025-10-22 23:01:04', '', NULL, '角色管理菜单');
-INSERT INTO `sys_menu` VALUES (102, '菜单管理', 1, 3, 'menu', 'system/menu/index', '', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table', 'admin', '2025-10-22 23:01:04', '', NULL, '菜单管理菜单');
-INSERT INTO `sys_menu` VALUES (103, '部门管理', 1, 4, 'dept', 'system/dept/index', '', '', 1, 0, 'C', '0', '0', 'system:dept:list', 'tree', 'admin', '2025-10-22 23:01:04', '', NULL, '部门管理菜单');
-INSERT INTO `sys_menu` VALUES (104, '岗位管理', 1, 5, 'post', 'system/post/index', '', '', 1, 0, 'C', '0', '0', 'system:post:list', 'post', 'admin', '2025-10-22 23:01:04', '', NULL, '岗位管理菜单');
-INSERT INTO `sys_menu` VALUES (105, '字典管理', 1, 6, 'dict', 'system/dict/index', '', '', 1, 0, 'C', '0', '0', 'system:dict:list', 'dict', 'admin', '2025-10-22 23:01:04', '', NULL, '字典管理菜单');
-INSERT INTO `sys_menu` VALUES (106, '参数设置', 1, 7, 'config', 'system/config/index', '', '', 1, 0, 'C', '0', '0', 'system:config:list', 'edit', 'admin', '2025-10-22 23:01:04', '', NULL, '参数设置菜单');
-INSERT INTO `sys_menu` VALUES (107, '通知公告', 1, 8, 'notice', 'system/notice/index', '', '', 1, 0, 'C', '0', '0', 'system:notice:list', 'message', 'admin', '2025-10-22 23:01:04', '', NULL, '通知公告菜单');
-INSERT INTO `sys_menu` VALUES (108, '日志管理', 1, 9, 'log', '', '', '', 1, 0, 'M', '0', '0', '', 'log', 'admin', '2025-10-22 23:01:04', '', NULL, '日志管理菜单');
-INSERT INTO `sys_menu` VALUES (109, '在线用户', 2, 1, 'online', 'monitor/online/index', '', '', 1, 0, 'C', '0', '0', 'monitor:online:list', 'online', 'admin', '2025-10-22 23:01:04', '', NULL, '在线用户菜单');
-INSERT INTO `sys_menu` VALUES (110, '定时任务', 2, 2, 'job', 'monitor/job/index', '', '', 1, 0, 'C', '0', '0', 'monitor:job:list', 'job', 'admin', '2025-10-22 23:01:04', '', NULL, '定时任务菜单');
-INSERT INTO `sys_menu` VALUES (111, '数据监控', 2, 3, 'druid', 'monitor/druid/index', '', '', 1, 0, 'C', '0', '0', 'monitor:druid:list', 'druid', 'admin', '2025-10-22 23:01:04', '', NULL, '数据监控菜单');
-INSERT INTO `sys_menu` VALUES (112, '服务监控', 2, 4, 'server', 'monitor/server/index', '', '', 1, 0, 'C', '0', '0', 'monitor:server:list', 'server', 'admin', '2025-10-22 23:01:04', '', NULL, '服务监控菜单');
-INSERT INTO `sys_menu` VALUES (113, '缓存监控', 2, 5, 'cache', 'monitor/cache/index', '', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis', 'admin', '2025-10-22 23:01:04', '', NULL, '缓存监控菜单');
-INSERT INTO `sys_menu` VALUES (114, '缓存列表', 2, 6, 'cacheList', 'monitor/cache/list', '', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis-list', 'admin', '2025-10-22 23:01:04', '', NULL, '缓存列表菜单');
-INSERT INTO `sys_menu` VALUES (115, '表单构建', 3, 1, 'build', 'tool/build/index', '', '', 1, 0, 'C', '0', '0', 'tool:build:list', 'build', 'admin', '2025-10-22 23:01:04', '', NULL, '表单构建菜单');
-INSERT INTO `sys_menu` VALUES (116, '代码生成', 3, 2, 'gen', 'tool/gen/index', '', '', 1, 0, 'C', '0', '0', 'tool:gen:list', 'code', 'admin', '2025-10-22 23:01:04', '', NULL, '代码生成菜单');
-INSERT INTO `sys_menu` VALUES (117, '系统接口', 3, 3, 'swagger', 'tool/swagger/index', '', '', 1, 0, 'C', '0', '0', 'tool:swagger:list', 'swagger', 'admin', '2025-10-22 23:01:04', '', NULL, '系统接口菜单');
-INSERT INTO `sys_menu` VALUES (500, '操作日志', 108, 1, 'operlog', 'monitor/operlog/index', '', '', 1, 0, 'C', '0', '0', 'monitor:operlog:list', 'form', 'admin', '2025-10-22 23:01:04', '', NULL, '操作日志菜单');
-INSERT INTO `sys_menu` VALUES (501, '登录日志', 108, 2, 'logininfor', 'monitor/logininfor/index', '', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor', 'admin', '2025-10-22 23:01:04', '', NULL, '登录日志菜单');
-INSERT INTO `sys_menu` VALUES (1000, '用户查询', 100, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1001, '用户新增', 100, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1002, '用户修改', 100, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1003, '用户删除', 100, 4, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1004, '用户导出', 100, 5, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1005, '用户导入', 100, 6, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:import', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1006, '重置密码', 100, 7, '', '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1007, '角色查询', 101, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'system:role:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1008, '角色新增', 101, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'system:role:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1009, '角色修改', 101, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1010, '角色删除', 101, 4, '', '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1011, '角色导出', 101, 5, '', '', '', '', 1, 0, 'F', '0', '0', 'system:role:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1012, '菜单查询', 102, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1013, '菜单新增', 102, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1014, '菜单修改', 102, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1015, '菜单删除', 102, 4, '', '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1016, '部门查询', 103, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1017, '部门新增', 103, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1018, '部门修改', 103, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1019, '部门删除', 103, 4, '', '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1020, '岗位查询', 104, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'system:post:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1021, '岗位新增', 104, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'system:post:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1022, '岗位修改', 104, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1023, '岗位删除', 104, 4, '', '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1024, '岗位导出', 104, 5, '', '', '', '', 1, 0, 'F', '0', '0', 'system:post:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1025, '字典查询', 105, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:dict:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1026, '字典新增', 105, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:dict:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1027, '字典修改', 105, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1028, '字典删除', 105, 4, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1029, '字典导出', 105, 5, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:dict:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1030, '参数查询', 106, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:config:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1031, '参数新增', 106, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:config:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1032, '参数修改', 106, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:config:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1033, '参数删除', 106, 4, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:config:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1034, '参数导出', 106, 5, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:config:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1035, '公告查询', 107, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:notice:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1036, '公告新增', 107, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:notice:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1037, '公告修改', 107, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1038, '公告删除', 107, 4, '#', '', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1039, '操作查询', 500, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1040, '操作删除', 500, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1041, '日志导出', 500, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1042, '登录查询', 501, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1043, '登录删除', 501, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1044, '日志导出', 501, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1045, '账户解锁', 501, 4, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:unlock', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1046, '在线查询', 109, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1047, '批量强退', 109, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1048, '单条强退', 109, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1049, '任务查询', 110, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1050, '任务新增', 110, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1051, '任务修改', 110, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1052, '任务删除', 110, 4, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1053, '状态修改', 110, 5, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1054, '任务导出', 110, 6, '#', '', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1055, '生成查询', 116, 1, '#', '', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1056, '生成修改', 116, 2, '#', '', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1057, '生成删除', 116, 3, '#', '', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1058, '导入代码', 116, 4, '#', '', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1059, '预览代码', 116, 5, '#', '', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1060, '生成代码', 116, 6, '#', '', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2000, '智慧课程管理系统', 0, 0, 'manage', NULL, NULL, '', 1, 0, 'M', '0', '0', NULL, '#', 'admin', '2025-10-22 23:11:17', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2001, '课程信息', 2000, 1, 'course', 'manage/course/index', NULL, '', 1, 0, 'C', '0', '0', 'manage:course:list', '#', 'admin', '2025-10-22 23:20:16', 'admin', '2025-10-23 11:12:20', '课程信息菜单');
-INSERT INTO `sys_menu` VALUES (2002, '课程信息查询', 2001, 1, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:course:query', '#', 'admin', '2025-10-22 23:20:16', 'admin', '2025-10-23 11:12:40', '');
-INSERT INTO `sys_menu` VALUES (2003, '课程信息新增', 2001, 2, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:course:add', '#', 'admin', '2025-10-22 23:20:16', 'admin', '2025-10-23 11:12:47', '');
-INSERT INTO `sys_menu` VALUES (2004, '课程信息修改', 2001, 3, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:course:edit', '#', 'admin', '2025-10-22 23:20:16', 'admin', '2025-10-23 11:12:55', '');
-INSERT INTO `sys_menu` VALUES (2005, '课程信息删除', 2001, 4, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:course:remove', '#', 'admin', '2025-10-22 23:20:16', 'admin', '2025-10-23 11:13:06', '');
-INSERT INTO `sys_menu` VALUES (2006, '课程信息导出', 2001, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:course:export', '#', 'admin', '2025-10-22 23:20:16', 'admin', '2025-10-23 11:13:15', '');
-INSERT INTO `sys_menu` VALUES (2007, '选课异常记录', 2000, 1, 'exception', 'manage/exception/index', NULL, '', 1, 0, 'C', '0', '0', 'manage:exception:list', '#', 'admin', '2025-10-22 23:20:22', 'admin', '2025-10-23 11:10:06', '选课异常记录菜单');
-INSERT INTO `sys_menu` VALUES (2008, '选课异常记录查询', 2007, 1, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:exception:query', '#', 'admin', '2025-10-22 23:20:22', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2009, '选课异常记录新增', 2007, 2, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:exception:add', '#', 'admin', '2025-10-22 23:20:22', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2010, '选课异常记录修改', 2007, 3, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:exception:edit', '#', 'admin', '2025-10-22 23:20:22', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2011, '选课异常记录删除', 2007, 4, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:exception:remove', '#', 'admin', '2025-10-22 23:20:22', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2012, '选课异常记录导出', 2007, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:exception:export', '#', 'admin', '2025-10-22 23:20:22', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2013, '学生成绩', 2000, 1, 'score', 'manage/score/index', NULL, '', 1, 0, 'C', '0', '0', 'manage:score:list', '#', 'admin', '2025-10-22 23:20:28', 'admin', '2025-10-23 11:13:33', '学生成绩菜单');
-INSERT INTO `sys_menu` VALUES (2014, '学生成绩查询', 2013, 1, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:score:query', '#', 'admin', '2025-10-22 23:20:28', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2015, '学生成绩新增', 2013, 2, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:score:add', '#', 'admin', '2025-10-22 23:20:28', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2016, '学生成绩修改', 2013, 3, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:score:edit', '#', 'admin', '2025-10-22 23:20:28', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2017, '学生成绩删除', 2013, 4, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:score:remove', '#', 'admin', '2025-10-22 23:20:28', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2018, '学生成绩导出', 2013, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:score:export', '#', 'admin', '2025-10-22 23:20:28', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2019, '学生选课', 2000, 1, 'selection', 'manage/selection/index', NULL, '', 1, 0, 'C', '0', '0', 'manage:selection:list', '#', 'admin', '2025-10-22 23:20:35', 'admin', '2025-10-23 11:13:47', '学生选课菜单');
-INSERT INTO `sys_menu` VALUES (2020, '学生选课查询', 2019, 1, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:selection:query', '#', 'admin', '2025-10-22 23:20:35', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2021, '学生选课新增', 2019, 2, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:selection:add', '#', 'admin', '2025-10-22 23:20:35', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2022, '学生选课修改', 2019, 3, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:selection:edit', '#', 'admin', '2025-10-22 23:20:35', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2023, '学生选课删除', 2019, 4, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:selection:remove', '#', 'admin', '2025-10-22 23:20:35', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2024, '学生选课导出', 2019, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:selection:export', '#', 'admin', '2025-10-22 23:20:35', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2025, '学生信息', 2000, 1, 'student', 'manage/student/index', NULL, '', 1, 0, 'C', '0', '0', 'manage:student:list', '#', 'admin', '2025-10-22 23:20:41', 'admin', '2025-10-23 11:13:58', '学生信息（学生个人信息）菜单');
-INSERT INTO `sys_menu` VALUES (2026, '学生信息（学生个人信息）查询', 2025, 1, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:student:query', '#', 'admin', '2025-10-22 23:20:41', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2027, '学生信息（学生个人信息）新增', 2025, 2, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:student:add', '#', 'admin', '2025-10-22 23:20:41', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2028, '学生信息（学生个人信息）修改', 2025, 3, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:student:edit', '#', 'admin', '2025-10-22 23:20:41', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2029, '学生信息（学生个人信息）删除', 2025, 4, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:student:remove', '#', 'admin', '2025-10-22 23:20:41', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2030, '学生信息（学生个人信息）导出', 2025, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:student:export', '#', 'admin', '2025-10-22 23:20:41', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2031, '教师信息', 2000, 1, 'teacher', 'manage/teacher/index', NULL, '', 1, 0, 'C', '0', '0', 'manage:teacher:list', '#', 'admin', '2025-10-22 23:20:46', 'admin', '2025-10-23 11:14:11', '教师信息菜单');
-INSERT INTO `sys_menu` VALUES (2032, '教师信息查询', 2031, 1, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:teacher:query', '#', 'admin', '2025-10-22 23:20:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2033, '教师信息新增', 2031, 2, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:teacher:add', '#', 'admin', '2025-10-22 23:20:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2034, '教师信息修改', 2031, 3, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:teacher:edit', '#', 'admin', '2025-10-22 23:20:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2035, '教师信息删除', 2031, 4, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:teacher:remove', '#', 'admin', '2025-10-22 23:20:46', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2036, '教师信息导出', 2031, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'manage:teacher:export', '#', 'admin', '2025-10-22 23:20:46', '', NULL, '');
+--
+-- Dumping data for table `sys_menu`
+--
 
--- ----------------------------
--- Table structure for sys_notice
--- ----------------------------
+LOCK TABLES `sys_menu` WRITE;
+/*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
+INSERT INTO `sys_menu` VALUES (1,'系统管理',0,1,'system',NULL,'','',1,0,'M','0','0','','system','admin','2025-10-22 23:01:04','',NULL,'系统管理目录'),(2,'系统监控',0,2,'monitor',NULL,'','',1,0,'M','0','0','','monitor','admin','2025-10-22 23:01:04','',NULL,'系统监控目录'),(3,'系统工具',0,3,'tool',NULL,'','',1,0,'M','0','0','','tool','admin','2025-10-22 23:01:04','',NULL,'系统工具目录'),(4,'若依官网',0,4,'http://ruoyi.vip',NULL,'','',0,0,'M','0','0','','guide','admin','2025-10-22 23:01:04','',NULL,'若依官网地址'),(100,'用户管理',1,1,'user','system/user/index','','',1,0,'C','0','0','system:user:list','user','admin','2025-10-22 23:01:04','',NULL,'用户管理菜单'),(101,'角色管理',1,2,'role','system/role/index','','',1,0,'C','0','0','system:role:list','peoples','admin','2025-10-22 23:01:04','',NULL,'角色管理菜单'),(102,'菜单管理',1,3,'menu','system/menu/index','','',1,0,'C','0','0','system:menu:list','tree-table','admin','2025-10-22 23:01:04','',NULL,'菜单管理菜单'),(103,'部门管理',1,4,'dept','system/dept/index','','',1,0,'C','0','0','system:dept:list','tree','admin','2025-10-22 23:01:04','',NULL,'部门管理菜单'),(104,'岗位管理',1,5,'post','system/post/index','','',1,0,'C','0','0','system:post:list','post','admin','2025-10-22 23:01:04','',NULL,'岗位管理菜单'),(105,'字典管理',1,6,'dict','system/dict/index','','',1,0,'C','0','0','system:dict:list','dict','admin','2025-10-22 23:01:04','',NULL,'字典管理菜单'),(106,'参数设置',1,7,'config','system/config/index','','',1,0,'C','0','0','system:config:list','edit','admin','2025-10-22 23:01:04','',NULL,'参数设置菜单'),(107,'通知公告',1,8,'notice','system/notice/index','','',1,0,'C','0','0','system:notice:list','message','admin','2025-10-22 23:01:04','',NULL,'通知公告菜单'),(108,'日志管理',1,9,'log','','','',1,0,'M','0','0','','log','admin','2025-10-22 23:01:04','',NULL,'日志管理菜单'),(109,'在线用户',2,1,'online','monitor/online/index','','',1,0,'C','0','0','monitor:online:list','online','admin','2025-10-22 23:01:04','',NULL,'在线用户菜单'),(110,'定时任务',2,2,'job','monitor/job/index','','',1,0,'C','0','0','monitor:job:list','job','admin','2025-10-22 23:01:04','',NULL,'定时任务菜单'),(111,'数据监控',2,3,'druid','monitor/druid/index','','',1,0,'C','0','0','monitor:druid:list','druid','admin','2025-10-22 23:01:04','',NULL,'数据监控菜单'),(112,'服务监控',2,4,'server','monitor/server/index','','',1,0,'C','0','0','monitor:server:list','server','admin','2025-10-22 23:01:04','',NULL,'服务监控菜单'),(113,'缓存监控',2,5,'cache','monitor/cache/index','','',1,0,'C','0','0','monitor:cache:list','redis','admin','2025-10-22 23:01:04','',NULL,'缓存监控菜单'),(114,'缓存列表',2,6,'cacheList','monitor/cache/list','','',1,0,'C','0','0','monitor:cache:list','redis-list','admin','2025-10-22 23:01:04','',NULL,'缓存列表菜单'),(115,'表单构建',3,1,'build','tool/build/index','','',1,0,'C','0','0','tool:build:list','build','admin','2025-10-22 23:01:04','',NULL,'表单构建菜单'),(116,'代码生成',3,2,'gen','tool/gen/index','','',1,0,'C','0','0','tool:gen:list','code','admin','2025-10-22 23:01:04','',NULL,'代码生成菜单'),(117,'系统接口',3,3,'swagger','tool/swagger/index','','',1,0,'C','0','0','tool:swagger:list','swagger','admin','2025-10-22 23:01:04','',NULL,'系统接口菜单'),(500,'操作日志',108,1,'operlog','monitor/operlog/index','','',1,0,'C','0','0','monitor:operlog:list','form','admin','2025-10-22 23:01:04','',NULL,'操作日志菜单'),(501,'登录日志',108,2,'logininfor','monitor/logininfor/index','','',1,0,'C','0','0','monitor:logininfor:list','logininfor','admin','2025-10-22 23:01:04','',NULL,'登录日志菜单'),(1000,'用户查询',100,1,'','','','',1,0,'F','0','0','system:user:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1001,'用户新增',100,2,'','','','',1,0,'F','0','0','system:user:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1002,'用户修改',100,3,'','','','',1,0,'F','0','0','system:user:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1003,'用户删除',100,4,'','','','',1,0,'F','0','0','system:user:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1004,'用户导出',100,5,'','','','',1,0,'F','0','0','system:user:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1005,'用户导入',100,6,'','','','',1,0,'F','0','0','system:user:import','#','admin','2025-10-22 23:01:04','',NULL,''),(1006,'重置密码',100,7,'','','','',1,0,'F','0','0','system:user:resetPwd','#','admin','2025-10-22 23:01:04','',NULL,''),(1007,'角色查询',101,1,'','','','',1,0,'F','0','0','system:role:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1008,'角色新增',101,2,'','','','',1,0,'F','0','0','system:role:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1009,'角色修改',101,3,'','','','',1,0,'F','0','0','system:role:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1010,'角色删除',101,4,'','','','',1,0,'F','0','0','system:role:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1011,'角色导出',101,5,'','','','',1,0,'F','0','0','system:role:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1012,'菜单查询',102,1,'','','','',1,0,'F','0','0','system:menu:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1013,'菜单新增',102,2,'','','','',1,0,'F','0','0','system:menu:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1014,'菜单修改',102,3,'','','','',1,0,'F','0','0','system:menu:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1015,'菜单删除',102,4,'','','','',1,0,'F','0','0','system:menu:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1016,'部门查询',103,1,'','','','',1,0,'F','0','0','system:dept:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1017,'部门新增',103,2,'','','','',1,0,'F','0','0','system:dept:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1018,'部门修改',103,3,'','','','',1,0,'F','0','0','system:dept:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1019,'部门删除',103,4,'','','','',1,0,'F','0','0','system:dept:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1020,'岗位查询',104,1,'','','','',1,0,'F','0','0','system:post:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1021,'岗位新增',104,2,'','','','',1,0,'F','0','0','system:post:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1022,'岗位修改',104,3,'','','','',1,0,'F','0','0','system:post:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1023,'岗位删除',104,4,'','','','',1,0,'F','0','0','system:post:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1024,'岗位导出',104,5,'','','','',1,0,'F','0','0','system:post:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1025,'字典查询',105,1,'#','','','',1,0,'F','0','0','system:dict:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1026,'字典新增',105,2,'#','','','',1,0,'F','0','0','system:dict:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1027,'字典修改',105,3,'#','','','',1,0,'F','0','0','system:dict:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1028,'字典删除',105,4,'#','','','',1,0,'F','0','0','system:dict:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1029,'字典导出',105,5,'#','','','',1,0,'F','0','0','system:dict:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1030,'参数查询',106,1,'#','','','',1,0,'F','0','0','system:config:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1031,'参数新增',106,2,'#','','','',1,0,'F','0','0','system:config:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1032,'参数修改',106,3,'#','','','',1,0,'F','0','0','system:config:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1033,'参数删除',106,4,'#','','','',1,0,'F','0','0','system:config:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1034,'参数导出',106,5,'#','','','',1,0,'F','0','0','system:config:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1035,'公告查询',107,1,'#','','','',1,0,'F','0','0','system:notice:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1036,'公告新增',107,2,'#','','','',1,0,'F','0','0','system:notice:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1037,'公告修改',107,3,'#','','','',1,0,'F','0','0','system:notice:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1038,'公告删除',107,4,'#','','','',1,0,'F','0','0','system:notice:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1039,'操作查询',500,1,'#','','','',1,0,'F','0','0','monitor:operlog:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1040,'操作删除',500,2,'#','','','',1,0,'F','0','0','monitor:operlog:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1041,'日志导出',500,3,'#','','','',1,0,'F','0','0','monitor:operlog:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1042,'登录查询',501,1,'#','','','',1,0,'F','0','0','monitor:logininfor:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1043,'登录删除',501,2,'#','','','',1,0,'F','0','0','monitor:logininfor:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1044,'日志导出',501,3,'#','','','',1,0,'F','0','0','monitor:logininfor:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1045,'账户解锁',501,4,'#','','','',1,0,'F','0','0','monitor:logininfor:unlock','#','admin','2025-10-22 23:01:04','',NULL,''),(1046,'在线查询',109,1,'#','','','',1,0,'F','0','0','monitor:online:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1047,'批量强退',109,2,'#','','','',1,0,'F','0','0','monitor:online:batchLogout','#','admin','2025-10-22 23:01:04','',NULL,''),(1048,'单条强退',109,3,'#','','','',1,0,'F','0','0','monitor:online:forceLogout','#','admin','2025-10-22 23:01:04','',NULL,''),(1049,'任务查询',110,1,'#','','','',1,0,'F','0','0','monitor:job:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1050,'任务新增',110,2,'#','','','',1,0,'F','0','0','monitor:job:add','#','admin','2025-10-22 23:01:04','',NULL,''),(1051,'任务修改',110,3,'#','','','',1,0,'F','0','0','monitor:job:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1052,'任务删除',110,4,'#','','','',1,0,'F','0','0','monitor:job:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1053,'状态修改',110,5,'#','','','',1,0,'F','0','0','monitor:job:changeStatus','#','admin','2025-10-22 23:01:04','',NULL,''),(1054,'任务导出',110,6,'#','','','',1,0,'F','0','0','monitor:job:export','#','admin','2025-10-22 23:01:04','',NULL,''),(1055,'生成查询',116,1,'#','','','',1,0,'F','0','0','tool:gen:query','#','admin','2025-10-22 23:01:04','',NULL,''),(1056,'生成修改',116,2,'#','','','',1,0,'F','0','0','tool:gen:edit','#','admin','2025-10-22 23:01:04','',NULL,''),(1057,'生成删除',116,3,'#','','','',1,0,'F','0','0','tool:gen:remove','#','admin','2025-10-22 23:01:04','',NULL,''),(1058,'导入代码',116,4,'#','','','',1,0,'F','0','0','tool:gen:import','#','admin','2025-10-22 23:01:04','',NULL,''),(1059,'预览代码',116,5,'#','','','',1,0,'F','0','0','tool:gen:preview','#','admin','2025-10-22 23:01:04','',NULL,''),(1060,'生成代码',116,6,'#','','','',1,0,'F','0','0','tool:gen:code','#','admin','2025-10-22 23:01:04','',NULL,''),(2000,'智慧课程管理系统',0,0,'manage',NULL,NULL,'',1,0,'M','0','0',NULL,'education','admin','2025-10-22 23:11:17','',NULL,''),(2001,'课程信息',2000,1,'course','manage/course/index',NULL,'',1,0,'C','0','0','manage:course:list','education','admin','2025-10-22 23:20:16','admin','2025-10-23 11:12:20','课程信息菜单'),(2002,'课程信息查询',2001,1,'#','',NULL,'',1,0,'F','0','0','manage:course:query','#','admin','2025-10-22 23:20:16','admin','2025-10-23 11:12:40',''),(2003,'课程信息新增',2001,2,'#','',NULL,'',1,0,'F','0','0','manage:course:add','#','admin','2025-10-22 23:20:16','admin','2025-10-23 11:12:47',''),(2004,'课程信息修改',2001,3,'#','',NULL,'',1,0,'F','0','0','manage:course:edit','#','admin','2025-10-22 23:20:16','admin','2025-10-23 11:12:55',''),(2005,'课程信息删除',2001,4,'#','',NULL,'',1,0,'F','0','0','manage:course:remove','#','admin','2025-10-22 23:20:16','admin','2025-10-23 11:13:06',''),(2006,'课程信息导出',2001,5,'#','',NULL,'',1,0,'F','0','0','manage:course:export','#','admin','2025-10-22 23:20:16','admin','2025-10-23 11:13:15',''),(2007,'选课异常记录',2000,1,'exception','manage/exception/index',NULL,'',1,0,'C','0','0','manage:exception:list','bug','admin','2025-10-22 23:20:22','admin','2025-10-23 11:10:06','选课异常记录菜单'),(2008,'选课异常记录查询',2007,1,'#','',NULL,'',1,0,'F','0','0','manage:exception:query','#','admin','2025-10-22 23:20:22','',NULL,''),(2009,'选课异常记录新增',2007,2,'#','',NULL,'',1,0,'F','0','0','manage:exception:add','#','admin','2025-10-22 23:20:22','',NULL,''),(2010,'选课异常记录修改',2007,3,'#','',NULL,'',1,0,'F','0','0','manage:exception:edit','#','admin','2025-10-22 23:20:22','',NULL,''),(2011,'选课异常记录删除',2007,4,'#','',NULL,'',1,0,'F','0','0','manage:exception:remove','#','admin','2025-10-22 23:20:22','',NULL,''),(2012,'选课异常记录导出',2007,5,'#','',NULL,'',1,0,'F','0','0','manage:exception:export','#','admin','2025-10-22 23:20:22','',NULL,''),(2013,'学生成绩',2000,1,'score','manage/score/index',NULL,'',1,0,'C','0','0','manage:score:list','chart','admin','2025-10-22 23:20:28','admin','2025-10-23 11:13:33','学生成绩菜单'),(2014,'学生成绩查询',2013,1,'#','',NULL,'',1,0,'F','0','0','manage:score:query','#','admin','2025-10-22 23:20:28','',NULL,''),(2015,'学生成绩新增',2013,2,'#','',NULL,'',1,0,'F','0','0','manage:score:add','#','admin','2025-10-22 23:20:28','',NULL,''),(2016,'学生成绩修改',2013,3,'#','',NULL,'',1,0,'F','0','0','manage:score:edit','#','admin','2025-10-22 23:20:28','',NULL,''),(2017,'学生成绩删除',2013,4,'#','',NULL,'',1,0,'F','0','0','manage:score:remove','#','admin','2025-10-22 23:20:28','',NULL,''),(2018,'学生成绩导出',2013,5,'#','',NULL,'',1,0,'F','0','0','manage:score:export','#','admin','2025-10-22 23:20:28','',NULL,''),(2019,'学生选课',2000,1,'selection','manage/selection/index',NULL,'',1,0,'C','0','0','manage:selection:list','date','admin','2025-10-22 23:20:35','admin','2025-10-23 11:13:47','学生选课菜单'),(2020,'学生选课查询',2019,1,'#','',NULL,'',1,0,'F','0','0','manage:selection:query','#','admin','2025-10-22 23:20:35','',NULL,''),(2021,'学生选课新增',2019,2,'#','',NULL,'',1,0,'F','0','0','manage:selection:add','#','admin','2025-10-22 23:20:35','',NULL,''),(2022,'学生选课修改',2019,3,'#','',NULL,'',1,0,'F','0','0','manage:selection:edit','#','admin','2025-10-22 23:20:35','',NULL,''),(2023,'学生选课删除',2019,4,'#','',NULL,'',1,0,'F','0','0','manage:selection:remove','#','admin','2025-10-22 23:20:35','',NULL,''),(2024,'学生选课导出',2019,5,'#','',NULL,'',1,0,'F','0','0','manage:selection:export','#','admin','2025-10-22 23:20:35','',NULL,''),(2025,'学生信息',2000,1,'student','manage/student/index',NULL,'',1,0,'C','0','0','manage:student:list','peoples','admin','2025-10-22 23:20:41','admin','2025-10-23 11:13:58','学生信息（学生个人信息）菜单'),(2026,'学生信息（学生个人信息）查询',2025,1,'#','',NULL,'',1,0,'F','0','0','manage:student:query','#','admin','2025-10-22 23:20:41','',NULL,''),(2027,'学生信息（学生个人信息）新增',2025,2,'#','',NULL,'',1,0,'F','0','0','manage:student:add','#','admin','2025-10-22 23:20:41','',NULL,''),(2028,'学生信息（学生个人信息）修改',2025,3,'#','',NULL,'',1,0,'F','0','0','manage:student:edit','#','admin','2025-10-22 23:20:41','',NULL,''),(2029,'学生信息（学生个人信息）删除',2025,4,'#','',NULL,'',1,0,'F','0','0','manage:student:remove','#','admin','2025-10-22 23:20:41','',NULL,''),(2030,'学生信息（学生个人信息）导出',2025,5,'#','',NULL,'',1,0,'F','0','0','manage:student:export','#','admin','2025-10-22 23:20:41','',NULL,''),(2031,'教师信息',2000,1,'teacher','manage/teacher/index',NULL,'',1,0,'C','0','0','manage:teacher:list','user','admin','2025-10-22 23:20:46','admin','2025-10-23 11:14:11','教师信息菜单'),(2032,'教师信息查询',2031,1,'#','',NULL,'',1,0,'F','0','0','manage:teacher:query','#','admin','2025-10-22 23:20:46','',NULL,''),(2033,'教师信息新增',2031,2,'#','',NULL,'',1,0,'F','0','0','manage:teacher:add','#','admin','2025-10-22 23:20:46','',NULL,''),(2034,'教师信息修改',2031,3,'#','',NULL,'',1,0,'F','0','0','manage:teacher:edit','#','admin','2025-10-22 23:20:46','',NULL,''),(2035,'教师信息删除',2031,4,'#','',NULL,'',1,0,'F','0','0','manage:teacher:remove','#','admin','2025-10-22 23:20:46','',NULL,''),(2036,'教师信息导出',2031,5,'#','',NULL,'',1,0,'F','0','0','manage:teacher:export','#','admin','2025-10-22 23:20:46','',NULL,'');
+/*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_notice`
+--
+
 DROP TABLE IF EXISTS `sys_notice`;
-CREATE TABLE `sys_notice`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_notice` (
   `notice_id` int NOT NULL AUTO_INCREMENT COMMENT '公告ID',
   `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告标题',
   `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告类型（1通知 2公告）',
-  `notice_content` longblob NULL COMMENT '公告内容',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `notice_content` longblob COMMENT '公告内容',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='通知公告表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_notice
--- ----------------------------
-INSERT INTO `sys_notice` VALUES (1, '温馨提醒：2018-07-01 若依新版本发布啦', '2', 0xE696B0E78988E69CACE58685E5AEB9, '0', 'admin', '2025-10-22 23:01:04', '', NULL, '管理员');
-INSERT INTO `sys_notice` VALUES (2, '维护通知：2018-07-01 若依系统凌晨维护', '1', 0xE7BBB4E68AA4E58685E5AEB9, '0', 'admin', '2025-10-22 23:01:04', '', NULL, '管理员');
+--
+-- Dumping data for table `sys_notice`
+--
 
--- ----------------------------
--- Table structure for sys_oper_log
--- ----------------------------
+LOCK TABLES `sys_notice` WRITE;
+/*!40000 ALTER TABLE `sys_notice` DISABLE KEYS */;
+INSERT INTO `sys_notice` VALUES (1,'温馨提醒：2018-07-01 若依新版本发布啦','2',_binary '新版本内容','0','admin','2025-10-22 23:01:04','',NULL,'管理员'),(2,'维护通知：2018-07-01 若依系统凌晨维护','1',_binary '维护内容','0','admin','2025-10-22 23:01:04','',NULL,'管理员');
+/*!40000 ALTER TABLE `sys_notice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_oper_log`
+--
+
 DROP TABLE IF EXISTS `sys_oper_log`;
-CREATE TABLE `sys_oper_log`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_oper_log` (
   `oper_id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志主键',
-  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '模块标题',
-  `business_type` int NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
-  `method` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '方法名称',
-  `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求方式',
-  `operator_type` int NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
-  `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作人员',
-  `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
-  `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求URL',
-  `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '主机地址',
-  `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作地点',
-  `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求参数',
-  `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '返回参数',
-  `status` int NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
-  `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '错误消息',
-  `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  `cost_time` bigint NULL DEFAULT 0 COMMENT '消耗时间',
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '模块标题',
+  `business_type` int DEFAULT '0' COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+  `method` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '方法名称',
+  `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '请求方式',
+  `operator_type` int DEFAULT '0' COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+  `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '操作人员',
+  `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '部门名称',
+  `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '请求URL',
+  `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '主机地址',
+  `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '操作地点',
+  `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '请求参数',
+  `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '返回参数',
+  `status` int DEFAULT '0' COMMENT '操作状态（0正常 1异常）',
+  `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '错误消息',
+  `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
+  `cost_time` bigint DEFAULT '0' COMMENT '消耗时间',
   PRIMARY KEY (`oper_id`) USING BTREE,
-  INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
-  INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
-  INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 251 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+  KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
+  KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
+  KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_oper_log
--- ----------------------------
-INSERT INTO `sys_oper_log` VALUES (100, '参数管理', 2, 'com.ruoyi.web.controller.system.SysConfigController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/config', '127.0.0.1', '内网IP', '{\"configId\":4,\"configKey\":\"sys.account.captchaEnabled\",\"configName\":\"账号自助-验证码开关\",\"configType\":\"Y\",\"configValue\":\"false\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:01:04\",\"params\":{},\"remark\":\"是否开启验证码功能（true开启，false关闭）\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:07:06', 15);
-INSERT INTO `sys_oper_log` VALUES (101, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"智慧课程管理系统\",\"menuType\":\"M\",\"orderNum\":0,\"params\":{},\"parentId\":0,\"path\":\"manage\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:11:17', 16);
-INSERT INTO `sys_oper_log` VALUES (102, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":\"tb_student,tb_student_selection,tb_teacher\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:11:35', 65);
-INSERT INTO `sys_oper_log` VALUES (103, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":\"tb_course,tb_score,tb_selection_exception\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:11:42', 37);
-INSERT INTO `sys_oper_log` VALUES (104, '字典类型', 1, 'com.ruoyi.web.controller.system.SysDictTypeController.add()', 'POST', 1, 'admin', '研发部门', '/system/dict/type', '127.0.0.1', '内网IP', '{\"createBy\":\"admin\",\"dictName\":\"课程状态\",\"dictType\":\"int\",\"params\":{},\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:13:16', 9);
-INSERT INTO `sys_oper_log` VALUES (105, '字典类型', 3, 'com.ruoyi.web.controller.system.SysDictTypeController.remove()', 'DELETE', 1, 'admin', '研发部门', '/system/dict/type/100', '127.0.0.1', '内网IP', '[100]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:13:45', 10);
-INSERT INTO `sys_oper_log` VALUES (106, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"course\",\"className\":\"Course\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"课程ID（主键）\",\"columnId\":13,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":4,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseCode\",\"columnComment\":\"课程编码（如JSJ001）\",\"columnId\":14,\"columnName\":\"course_code\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseCode\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":4,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseName\",\"columnComment\":\"课程名称\",\"columnId\":15,\"columnName\":\"course_name\",\"columnType\":\"varchar(100)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseName\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"LIKE\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":4,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"TeacherId\",\"columnComment\":\"授课教师ID（关联tb_teacher.id）\",\"columnId\":16,\"columnName\":\"teacher_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:16:22', 24);
-INSERT INTO `sys_oper_log` VALUES (107, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"score\",\"className\":\"Score\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"成绩ID（主键）\",\"columnId\":19,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseId\",\"columnComment\":\"课程ID（关联tb_course.id）\",\"columnId\":20,\"columnName\":\"course_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentId\",\"columnComment\":\"学生ID（关联tb_student.id）\",\"columnId\":21,\"columnName\":\"student_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Score\",\"columnComment\":\"成绩（如85.5，NULL表示未录入）\",\"columnId\":22,\"columnName\":\"score\",\"columnType\":\"decimal(5,2)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\"', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:17:24', 10);
-INSERT INTO `sys_oper_log` VALUES (108, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"exception\",\"className\":\"SelectionException\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"异常ID（主键）\",\"columnId\":24,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":6,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseId\",\"columnComment\":\"课程ID（关联tb_course.id）\",\"columnId\":25,\"columnName\":\"course_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":6,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentId\",\"columnComment\":\"学生ID（关联tb_student.id）\",\"columnId\":26,\"columnName\":\"student_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":6,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"ExceptionType\",\"columnComment\":\"异常类型（1-重复选课，2-超员选课）\",\"columnId\":27,\"columnName\":\"exception_type\",\"columnType\":\"tinyint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"select\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"is', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:17:59', 16);
-INSERT INTO `sys_oper_log` VALUES (109, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"student\",\"className\":\"Student\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"学生ID（主键）\",\"columnId\":1,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":1,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentNo\",\"columnComment\":\"学号（如S2023001）\",\"columnId\":2,\"columnName\":\"student_no\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentNo\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":1,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentName\",\"columnComment\":\"学生姓名\",\"columnId\":3,\"columnName\":\"student_name\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentName\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"LIKE\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":1,\"updateBy\":\"\",\"usableColumn\":false}],\"crud\":true,\"functionAuthor\":\"hgz\",\"functionName\":\"学生信息（学生个人信息）\",\"genPath\":\"/\",\"genType\":\"0\",\"moduleName\":\"manage\",\"options\":\"{\\\"parentMenuId\\\":2000}\",\"packageName\":\"com.ruoyi.manage\",\"params\":{\"parentMenuId\":2000},\"parentMenuId\":2000,\"sub\":false,\"tableComment\":\"学生信息表\",\"tableId\":1,\"tableName\":\"tb_student\",\"tplCategory\":\"crud\",\"tpl', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:18:27', 10);
-INSERT INTO `sys_oper_log` VALUES (110, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"selection\",\"className\":\"StudentSelection\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"选课ID（主键）\",\"columnId\":4,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":2,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseId\",\"columnComment\":\"课程ID（关联tb_course.id）\",\"columnId\":5,\"columnName\":\"course_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":2,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentId\",\"columnComment\":\"学生ID（关联tb_student.id）\",\"columnId\":6,\"columnName\":\"student_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":2,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Status\",\"columnComment\":\"状态（0-已选，1-已退）\",\"columnId\":7,\"columnName\":\"status\",\"columnType\":\"tinyint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"radio\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuer', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:18:50', 10);
-INSERT INTO `sys_oper_log` VALUES (111, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"teacher\",\"className\":\"Teacher\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"教师ID（主键）\",\"columnId\":9,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":3,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"TeacherNo\",\"columnComment\":\"教师工号（如T001）\",\"columnId\":10,\"columnName\":\"teacher_no\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"teacherNo\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":3,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"TeacherName\",\"columnComment\":\"教师姓名\",\"columnId\":11,\"columnName\":\"teacher_name\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"teacherName\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"LIKE\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":3,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Title\",\"columnComment\":\"职称（如教授/讲师）\",\"columnId\":12,\"columnName\":\"title\",\"columnType\":\"varchar(30)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"is', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:19:25', 13);
-INSERT INTO `sys_oper_log` VALUES (112, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":\"tb_course,tb_score,tb_selection_exception,tb_student,tb_student_selection,tb_teacher\"}', NULL, 0, NULL, '2025-10-22 23:19:30', 283);
-INSERT INTO `sys_oper_log` VALUES (113, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/student/index\",\"createTime\":\"2025-10-22 23:20:41\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2025,\"menuName\":\"学生信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"student\",\"perms\":\"manage:student:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:21:12', 7);
-INSERT INTO `sys_oper_log` VALUES (114, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"123\",\"courseName\":\"123\",\"params\":{},\"teacherId\":21}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\n; Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)', '2025-10-22 23:45:53', 150);
-INSERT INTO `sys_oper_log` VALUES (115, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"123\",\"courseName\":\"123\",\"params\":{},\"teacherId\":21}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\n; Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)', '2025-10-22 23:46:05', 9);
-INSERT INTO `sys_oper_log` VALUES (116, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/course/index\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2001,\"menuName\":\"课程信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"course\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:56:03', 30);
-INSERT INTO `sys_oper_log` VALUES (117, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/teacher/index\",\"createTime\":\"2025-10-22 23:20:46\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2031,\"menuName\":\"教师信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"teacher\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:56:10', 8);
-INSERT INTO `sys_oper_log` VALUES (118, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/student/index\",\"createTime\":\"2025-10-22 23:20:41\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2025,\"menuName\":\"学生信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"student\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:56:12', 8);
-INSERT INTO `sys_oper_log` VALUES (119, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/selection/index\",\"createTime\":\"2025-10-22 23:20:35\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2019,\"menuName\":\"学生选课\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"selection\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:56:15', 7);
-INSERT INTO `sys_oper_log` VALUES (120, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/score/index\",\"createTime\":\"2025-10-22 23:20:28\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2013,\"menuName\":\"学生成绩\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"score\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:56:18', 10);
-INSERT INTO `sys_oper_log` VALUES (121, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/exception/index\",\"createTime\":\"2025-10-22 23:20:22\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2007,\"menuName\":\"选课异常记录\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"exception\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-22 23:56:20', 8);
-INSERT INTO `sys_oper_log` VALUES (122, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"123\",\"courseName\":\"123\",\"id\":6,\"maxStudents\":222,\"params\":{},\"status\":0,\"teacherId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 00:05:54', 103);
-INSERT INTO `sys_oper_log` VALUES (123, '课程信息', 3, 'com.ruoyi.manage.controller.CourseController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/course/6', '127.0.0.1', '内网IP', '[6]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 00:06:21', 12);
-INSERT INTO `sys_oper_log` VALUES (124, '角色管理', 1, 'com.ruoyi.web.controller.system.SysRoleController.add()', 'POST', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"campus_admin\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 10:54:29', 46);
-INSERT INTO `sys_oper_log` VALUES (125, '角色管理', 1, 'com.ruoyi.web.controller.system.SysRoleController.add()', 'POST', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"campus_student\",\"roleName\":\"student\",\"roleSort\":1,\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 10:57:44', 16);
-INSERT INTO `sys_oper_log` VALUES (126, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"campus_student\",\"roleName\":\"student\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 10:57:54', 17);
-INSERT INTO `sys_oper_log` VALUES (127, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"campus_student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 10:58:09', 14);
-INSERT INTO `sys_oper_log` VALUES (128, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:54:29\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 10:58:23', 19);
-INSERT INTO `sys_oper_log` VALUES (129, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 10:58:56', 12);
-INSERT INTO `sys_oper_log` VALUES (130, '角色管理', 1, 'com.ruoyi.web.controller.system.SysRoleController.add()', 'POST', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2026,2030,2032,2036],\"params\":{},\"roleKey\":\"student\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\"}', '{\"msg\":\"新增角色\'老师\'失败，角色权限已存在\",\"code\":500}', 0, NULL, '2025-10-23 11:00:01', 1);
-INSERT INTO `sys_oper_log` VALUES (131, '角色管理', 1, 'com.ruoyi.web.controller.system.SysRoleController.add()', 'POST', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2026,2030,2032,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:00:10', 18);
-INSERT INTO `sys_oper_log` VALUES (132, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"教务员\",\"params\":{},\"postIds\":[],\"roleIds\":[100],\"status\":\"0\",\"userId\":100,\"userName\":\"manage\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:01:06', 80);
-INSERT INTO `sys_oper_log` VALUES (133, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"李讲师\",\"params\":{},\"postIds\":[],\"roleIds\":[102],\"status\":\"0\",\"userId\":101,\"userName\":\"teacher-li\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:01:49', 83);
-INSERT INTO `sys_oper_log` VALUES (134, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-10-23 11:01:06\",\"delFlag\":\"0\",\"email\":\"\",\"loginIp\":\"\",\"nickName\":\"教务员\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[100],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":100,\"userName\":\"manage\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:02:46', 10);
-INSERT INTO `sys_oper_log` VALUES (135, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2002,\"menuName\":\"课程信息查询\",\"menuType\":\"F\",\"orderNum\":1,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:07:04', 12);
-INSERT INTO `sys_oper_log` VALUES (136, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2003,\"menuName\":\"课程信息新增\",\"menuType\":\"F\",\"orderNum\":2,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:07:06', 12);
-INSERT INTO `sys_oper_log` VALUES (137, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2004,\"menuName\":\"课程信息修改\",\"menuType\":\"F\",\"orderNum\":3,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:07:10', 6);
-INSERT INTO `sys_oper_log` VALUES (138, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2005,\"menuName\":\"课程信息删除\",\"menuType\":\"F\",\"orderNum\":4,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:07:13', 5);
-INSERT INTO `sys_oper_log` VALUES (139, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2006,\"menuName\":\"课程信息导出\",\"menuType\":\"F\",\"orderNum\":5,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:07:16', 6);
-INSERT INTO `sys_oper_log` VALUES (140, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:54:29\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:08:18', 12);
-INSERT INTO `sys_oper_log` VALUES (141, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/exception/index\",\"createTime\":\"2025-10-22 23:20:22\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2007,\"menuName\":\"选课异常记录\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"exception\",\"perms\":\"manage:exception:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:10:06', 8);
-INSERT INTO `sys_oper_log` VALUES (142, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/course/index\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2001,\"menuName\":\"课程信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"course\",\"perms\":\"manage:course:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:12:20', 6);
-INSERT INTO `sys_oper_log` VALUES (143, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2002,\"menuName\":\"课程信息查询\",\"menuType\":\"F\",\"orderNum\":1,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:query\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:12:40', 9);
-INSERT INTO `sys_oper_log` VALUES (144, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2003,\"menuName\":\"课程信息新增\",\"menuType\":\"F\",\"orderNum\":2,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:add\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:12:47', 3);
-INSERT INTO `sys_oper_log` VALUES (145, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2004,\"menuName\":\"课程信息修改\",\"menuType\":\"F\",\"orderNum\":3,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:edit\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:12:55', 11);
-INSERT INTO `sys_oper_log` VALUES (146, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2005,\"menuName\":\"课程信息删除\",\"menuType\":\"F\",\"orderNum\":4,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:remove\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:13:06', 8);
-INSERT INTO `sys_oper_log` VALUES (147, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2006,\"menuName\":\"课程信息导出\",\"menuType\":\"F\",\"orderNum\":5,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:export\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:13:15', 11);
-INSERT INTO `sys_oper_log` VALUES (148, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/score/index\",\"createTime\":\"2025-10-22 23:20:28\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2013,\"menuName\":\"学生成绩\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"score\",\"perms\":\"manage:score:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:13:33', 8);
-INSERT INTO `sys_oper_log` VALUES (149, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/selection/index\",\"createTime\":\"2025-10-22 23:20:35\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2019,\"menuName\":\"学生选课\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"selection\",\"perms\":\"manage:selection:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:13:47', 5);
-INSERT INTO `sys_oper_log` VALUES (150, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/student/index\",\"createTime\":\"2025-10-22 23:20:41\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2025,\"menuName\":\"学生信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"student\",\"perms\":\"manage:student:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:13:58', 7);
-INSERT INTO `sys_oper_log` VALUES (151, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"manage/teacher/index\",\"createTime\":\"2025-10-22 23:20:46\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2031,\"menuName\":\"教师信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"teacher\",\"perms\":\"manage:teacher:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:14:12', 6);
-INSERT INTO `sys_oper_log` VALUES (152, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'admin', '研发部门', '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}', 0, NULL, '2025-10-23 11:15:21', 74);
-INSERT INTO `sys_oper_log` VALUES (153, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'admin', '研发部门', '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 11:15:29', 218);
-INSERT INTO `sys_oper_log` VALUES (154, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"小明\",\"params\":{},\"postIds\":[],\"roleIds\":[101],\"status\":\"0\",\"userId\":102,\"userName\":\"student-xm\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 20:05:54', 91);
-INSERT INTO `sys_oper_log` VALUES (155, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"张教授\",\"params\":{},\"postIds\":[],\"roleIds\":[102],\"status\":\"0\",\"userId\":103,\"userName\":\"teacher-zhang\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 21:17:34', 87);
-INSERT INTO `sys_oper_log` VALUES (156, '用户管理', 1, 'com.ruoyi.web.controller.system.SysUserController.add()', 'POST', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"小红\",\"params\":{},\"postIds\":[],\"roleIds\":[],\"status\":\"0\",\"userId\":104,\"userName\":\"student-xh\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 21:18:13', 78);
-INSERT INTO `sys_oper_log` VALUES (157, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-10-23 21:18:13\",\"delFlag\":\"0\",\"email\":\"\",\"loginIp\":\"\",\"nickName\":\"小红\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[101],\"roles\":[],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":104,\"userName\":\"student-xh\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 21:18:28', 10);
-INSERT INTO `sys_oper_log` VALUES (158, '选课异常记录', 5, 'com.ruoyi.manage.controller.SelectionExceptionController.export()', 'POST', 1, 'admin', '研发部门', '/manage/exception/export', '127.0.0.1', '内网IP', '{\"pageSize\":\"10\",\"pageNum\":\"1\"}', NULL, 0, NULL, '2025-10-23 21:44:03', 704);
-INSERT INTO `sys_oper_log` VALUES (159, '字典类型', 1, 'com.ruoyi.web.controller.system.SysDictTypeController.add()', 'POST', 1, 'admin', '研发部门', '/system/dict/type', '127.0.0.1', '内网IP', '{\"createBy\":\"admin\",\"dictName\":\"选课状态\",\"dictType\":\"selection_status\",\"params\":{},\"status\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 22:21:24', 77);
-INSERT INTO `sys_oper_log` VALUES (160, '字典类型', 2, 'com.ruoyi.web.controller.system.SysDictTypeController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/dict/type', '127.0.0.1', '内网IP', '{\"createBy\":\"admin\",\"createTime\":\"2025-10-23 22:21:24\",\"dictId\":101,\"dictName\":\"选课状态\",\"dictType\":\"selection_status\",\"params\":{},\"remark\":\"字典标签：已选，字典值：0，排序：1\\n字典标签：已退，字典值：1，排序：2\",\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 22:21:40', 29);
-INSERT INTO `sys_oper_log` VALUES (161, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentSelectionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentSelectionMapper.insertStudentSelection-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student_selection          ( course_id,             student_id,             status )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'', '2025-10-23 22:44:03', 44);
-INSERT INTO `sys_oper_log` VALUES (162, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"1\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id,             max_students,             status )           values ( ?,             ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\n; Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'', '2025-10-23 22:45:25', 8);
-INSERT INTO `sys_oper_log` VALUES (163, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:54:29\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2007,2001,2002,2003,2004,2005,2006,2008,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 22:54:27', 19);
-INSERT INTO `sys_oper_log` VALUES (164, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2025,2002,2006,2014,2018,2019,2020,2021,2022,2023,2024,2026,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 22:55:12', 13);
-INSERT INTO `sys_oper_log` VALUES (165, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2032,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 22:56:17', 12);
-INSERT INTO `sys_oper_log` VALUES (166, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2026,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 23:10:42', 11);
-INSERT INTO `sys_oper_log` VALUES (167, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'manage', NULL, '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 23:24:05', 205);
-INSERT INTO `sys_oper_log` VALUES (168, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'admin', '研发部门', '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 23:24:29', 207);
-INSERT INTO `sys_oper_log` VALUES (169, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'teacher-li', NULL, '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 23:25:15', 211);
-INSERT INTO `sys_oper_log` VALUES (170, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'student-xh', NULL, '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 23:25:35', 210);
-INSERT INTO `sys_oper_log` VALUES (171, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'student-xm', NULL, '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-23 23:26:11', 212);
-INSERT INTO `sys_oper_log` VALUES (172, '个人信息', 2, 'com.ruoyi.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'teacher-zhang', NULL, '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 16:33:32', 211);
-INSERT INTO `sys_oper_log` VALUES (173, '课程信息', 5, 'com.ruoyi.manage.controller.CourseController.export()', 'POST', 1, 'student-xh', NULL, '/manage/course/export', '127.0.0.1', '内网IP', '{\"pageSize\":\"10\",\"pageNum\":\"1\",\"status\":\"0\"}', NULL, 0, NULL, '2025-10-31 17:13:13', 712);
-INSERT INTO `sys_oper_log` VALUES (174, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"id\":3,\"params\":{},\"teacherName\":\"王讲师\",\"teacherNo\":\"T003\",\"title\":\"讲师\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 17:14:25', 12);
-INSERT INTO `sys_oper_log` VALUES (175, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'manage', NULL, '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"123\",\"courseName\":\"123\",\"id\":8,\"maxStudents\":123,\"params\":{},\"status\":1,\"teacherId\":3}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:21:56', 19);
-INSERT INTO `sys_oper_log` VALUES (176, '课程信息', 3, 'com.ruoyi.manage.controller.CourseController.remove()', 'DELETE', 1, 'manage', NULL, '/manage/course/8', '127.0.0.1', '内网IP', '[8]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:21:59', 16);
-INSERT INTO `sys_oper_log` VALUES (177, '课程信息', 2, 'com.ruoyi.manage.controller.CourseController.edit()', 'PUT', 1, 'manage', NULL, '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"DB001\",\"courseName\":\"数据库原理\",\"id\":3,\"maxStudents\":25,\"params\":{},\"status\":0,\"teacherId\":3,\"teacherName\":\"李讲师\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:22:07', 8);
-INSERT INTO `sys_oper_log` VALUES (178, '课程信息', 2, 'com.ruoyi.manage.controller.CourseController.edit()', 'PUT', 1, 'manage', NULL, '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"DB001\",\"courseName\":\"数据库原理\",\"id\":3,\"maxStudents\":25,\"params\":{},\"status\":0,\"teacherId\":2,\"teacherName\":\"王讲师\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:22:10', 10);
-INSERT INTO `sys_oper_log` VALUES (179, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'manage', NULL, '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentSelectionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentSelectionMapper.insertStudentSelection-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student_selection          ( course_id,             student_id,             status )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'', '2025-10-31 20:24:17', 54);
-INSERT INTO `sys_oper_log` VALUES (180, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'manage', NULL, '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentSelectionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentSelectionMapper.insertStudentSelection-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student_selection          ( course_id,             student_id,             status )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'', '2025-10-31 20:24:30', 8);
-INSERT INTO `sys_oper_log` VALUES (181, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:28:16', 17);
-INSERT INTO `sys_oper_log` VALUES (182, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:28:35', 6);
-INSERT INTO `sys_oper_log` VALUES (183, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:36:00', 12);
-INSERT INTO `sys_oper_log` VALUES (184, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:41:33', 11);
-INSERT INTO `sys_oper_log` VALUES (185, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-10-23 11:01:49\",\"delFlag\":\"0\",\"email\":\"\",\"loginDate\":\"2025-10-31 20:33:51\",\"loginIp\":\"127.0.0.1\",\"nickName\":\"李讲师\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"pwdUpdateDate\":\"2025-10-23 23:25:15\",\"roleIds\":[102],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":101,\"userName\":\"teacher-li\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:41:45', 10);
-INSERT INTO `sys_oper_log` VALUES (186, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:42:47', 9);
-INSERT INTO `sys_oper_log` VALUES (187, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 20:43:07', 9);
-INSERT INTO `sys_oper_log` VALUES (188, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', '{\"msg\":\"您已选过该课程，系统已自动记录异常\",\"code\":200}', 0, NULL, '2025-10-31 21:03:24', 63);
-INSERT INTO `sys_oper_log` VALUES (189, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', '{\"msg\":\"您已选过该课程，系统已自动记录异常\",\"code\":200}', 0, NULL, '2025-10-31 21:07:04', 10);
-INSERT INTO `sys_oper_log` VALUES (190, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', '{\"msg\":\"您已选过该课程，系统已自动记录异常\",\"code\":200}', 0, NULL, '2025-10-31 21:07:20', 10);
-INSERT INTO `sys_oper_log` VALUES (191, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/1', '127.0.0.1', '内网IP', '[1]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:07:34', 6);
-INSERT INTO `sys_oper_log` VALUES (192, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/3', '127.0.0.1', '内网IP', '[3]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:07:36', 6);
-INSERT INTO `sys_oper_log` VALUES (193, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/4', '127.0.0.1', '内网IP', '[4]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:07:37', 6);
-INSERT INTO `sys_oper_log` VALUES (194, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', '{\"msg\":\"您已选过该课程，系统已记录重复选课异常\",\"code\":200}', 0, NULL, '2025-10-31 21:23:09', 135);
-INSERT INTO `sys_oper_log` VALUES (195, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/5', '127.0.0.1', '内网IP', '[5]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:23:19', 9);
-INSERT INTO `sys_oper_log` VALUES (196, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/2', '127.0.0.1', '内网IP', '[2]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:23:21', 6);
-INSERT INTO `sys_oper_log` VALUES (197, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ003\",\"courseName\":\"操作系统\",\"id\":9,\"maxStudents\":1,\"params\":{},\"status\":0,\"teacherId\":3}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:23:59', 8);
-INSERT INTO `sys_oper_log` VALUES (198, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":9,\"id\":14,\"params\":{},\"selectTime\":\"2025-10-31\",\"status\":0,\"studentId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:24:20', 10);
-INSERT INTO `sys_oper_log` VALUES (199, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":9,\"params\":{},\"selectTime\":\"2025-10-31\",\"status\":0,\"studentId\":2}', '{\"msg\":\"该课程已达最大选课人数，系统已记录超员异常\",\"code\":200}', 0, NULL, '2025-10-31 21:24:34', 11);
-INSERT INTO `sys_oper_log` VALUES (200, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"123\",\"courseName\":\"123\",\"id\":10,\"maxStudents\":123,\"params\":{},\"teacherId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:25:08', 9);
-INSERT INTO `sys_oper_log` VALUES (201, '课程信息', 3, 'com.ruoyi.manage.controller.CourseController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/course/10', '127.0.0.1', '内网IP', '[10]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:25:11', 5);
-INSERT INTO `sys_oper_log` VALUES (202, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"123\",\"maxStudents\":123,\"params\":{},\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id,             max_students )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\n; Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'', '2025-10-31 21:25:24', 5);
-INSERT INTO `sys_oper_log` VALUES (203, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ004\",\"courseName\":\"操作系统\",\"id\":12,\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":3}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:28:42', 8);
-INSERT INTO `sys_oper_log` VALUES (204, '课程信息', 3, 'com.ruoyi.manage.controller.CourseController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/course/12', '127.0.0.1', '内网IP', '[12]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:28:49', 8);
-INSERT INTO `sys_oper_log` VALUES (205, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value', '2025-10-31 21:37:26', 16);
-INSERT INTO `sys_oper_log` VALUES (206, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value', '2025-10-31 21:38:09', 45);
-INSERT INTO `sys_oper_log` VALUES (207, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value', '2025-10-31 21:38:13', 5);
-INSERT INTO `sys_oper_log` VALUES (208, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"11\",\"maxStudents\":1,\"params\":{},\"status\":0,\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value', '2025-10-31 21:38:44', 10);
-INSERT INTO `sys_oper_log` VALUES (209, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":123,\"params\":{},\"status\":0,\"teacherId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column \'course_id\' cannot be null\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( course_id,               student_id,              exception_type,               create_time )           values ( ?,             ?,             ?,             CURRENT_TIMESTAMP )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Column \'course_id\' cannot be null\n; Column \'course_id\' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column \'course_id\' cannot be null', '2025-10-31 21:45:14', 15);
-INSERT INTO `sys_oper_log` VALUES (210, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSj001\",\"courseName\":\"123\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}', '{\"msg\":\"课程编码已存在，系统已记录异常\",\"code\":200}', 0, NULL, '2025-10-31 21:49:33', 14);
-INSERT INTO `sys_oper_log` VALUES (211, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"123\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}', '{\"msg\":\"课程编码已存在\",\"code\":200}', 0, NULL, '2025-10-31 21:53:38', 9);
-INSERT INTO `sys_oper_log` VALUES (212, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'', '2025-10-31 21:54:58', 8);
-INSERT INTO `sys_oper_log` VALUES (213, '学生信息（学生个人信息）', 1, 'com.ruoyi.manage.controller.StudentController.add()', 'POST', 1, 'admin', '研发部门', '/manage/student', '127.0.0.1', '内网IP', '{\"params\":{},\"studentName\":\"12\",\"studentNo\":\"S2023002\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentMapper.insertStudent-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student          ( student_no,             student_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\n; Duplicate entry \'S2023002\' for key \'tb_student.student_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'', '2025-10-31 21:55:12', 5);
-INSERT INTO `sys_oper_log` VALUES (214, '学生信息（学生个人信息）', 1, 'com.ruoyi.manage.controller.StudentController.add()', 'POST', 1, 'admin', '研发部门', '/manage/student', '127.0.0.1', '内网IP', '{\"params\":{},\"studentName\":\"12\",\"studentNo\":\"S2023002\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentMapper.insertStudent-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student          ( student_no,             student_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\n; Duplicate entry \'S2023002\' for key \'tb_student.student_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'', '2025-10-31 21:55:40', 3);
-INSERT INTO `sys_oper_log` VALUES (215, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"id\":5,\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T0001\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:55:53', 6);
-INSERT INTO `sys_oper_log` VALUES (216, '教师信息', 3, 'com.ruoyi.manage.controller.TeacherController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/teacher/5', '127.0.0.1', '内网IP', '[5]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 21:55:57', 10);
-INSERT INTO `sys_oper_log` VALUES (217, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'', '2025-10-31 21:56:03', 6);
-INSERT INTO `sys_oper_log` VALUES (218, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name,             title )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'', '2025-10-31 22:12:22', 14);
-INSERT INTO `sys_oper_log` VALUES (219, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name,             title )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'', '2025-10-31 22:12:47', 4);
-INSERT INTO `sys_oper_log` VALUES (220, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\",\"title\":\"1\"}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name,             title )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'', '2025-10-31 22:13:43', 110);
-INSERT INTO `sys_oper_log` VALUES (221, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:15:22', 114);
-INSERT INTO `sys_oper_log` VALUES (222, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:22:27', 106);
-INSERT INTO `sys_oper_log` VALUES (223, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:25:47', 109);
-INSERT INTO `sys_oper_log` VALUES (224, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"1\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:26:14', 6);
-INSERT INTO `sys_oper_log` VALUES (225, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:26:43', 5);
-INSERT INTO `sys_oper_log` VALUES (226, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:32:17', 13);
-INSERT INTO `sys_oper_log` VALUES (227, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:33:12', 106);
-INSERT INTO `sys_oper_log` VALUES (228, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:34:09', 108);
-INSERT INTO `sys_oper_log` VALUES (229, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}', 0, NULL, '2025-10-31 22:38:50', 4);
-INSERT INTO `sys_oper_log` VALUES (230, '学生信息（学生个人信息）', 1, 'com.ruoyi.manage.controller.StudentController.add()', 'POST', 1, 'admin', '研发部门', '/manage/student', '127.0.0.1', '内网IP', '{\"id\":7,\"params\":{},\"studentName\":\"123\",\"studentNo\":\"S1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 22:39:06', 9);
-INSERT INTO `sys_oper_log` VALUES (231, '学生信息（学生个人信息）', 1, 'com.ruoyi.manage.controller.StudentController.add()', 'POST', 1, 'admin', '研发部门', '/manage/student', '127.0.0.1', '内网IP', '{\"params\":{},\"studentName\":\"1\",\"studentNo\":\"S1\"}', '{\"msg\":\"您输入的学号已存在，请更换学号\",\"code\":200}', 0, NULL, '2025-10-31 22:39:11', 7);
-INSERT INTO `sys_oper_log` VALUES (232, '学生信息（学生个人信息）', 1, 'com.ruoyi.manage.controller.StudentController.add()', 'POST', 1, 'admin', '研发部门', '/manage/student', '127.0.0.1', '内网IP', '{\"params\":{},\"studentName\":\"1233\",\"studentNo\":\"S1\"}', '{\"msg\":\"您输入的学号已存在，请更换学号\",\"code\":200}', 0, NULL, '2025-10-31 22:39:48', 6);
-INSERT INTO `sys_oper_log` VALUES (233, '学生信息（学生个人信息）', 3, 'com.ruoyi.manage.controller.StudentController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/student/7', '127.0.0.1', '内网IP', '[7]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 22:39:50', 10);
-INSERT INTO `sys_oper_log` VALUES (234, '学生成绩', 1, 'com.ruoyi.manage.controller.ScoreController.add()', 'POST', 1, 'admin', '研发部门', '/manage/score', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"score\":12,\"studentId\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\ScoreMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.ScoreMapper.insertScore-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_score          ( course_id,             student_id,             score )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'', '2025-10-31 22:46:09', 9);
-INSERT INTO `sys_oper_log` VALUES (235, '学生成绩', 1, 'com.ruoyi.manage.controller.ScoreController.add()', 'POST', 1, 'admin', '研发部门', '/manage/score', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"score\":12,\"studentId\":1}', '{\"msg\":\"操作失败\",\"code\":500}', 0, NULL, '2025-10-31 22:51:33', 110);
-INSERT INTO `sys_oper_log` VALUES (236, '学生成绩', 1, 'com.ruoyi.manage.controller.ScoreController.add()', 'POST', 1, 'admin', '研发部门', '/manage/score', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"score\":12,\"studentId\":1}', '{\"msg\":\"该学生在该课程中的成绩已存在，请不要重复添加\",\"code\":200}', 0, NULL, '2025-10-31 22:52:53', 11);
-INSERT INTO `sys_oper_log` VALUES (237, '学生成绩', 1, 'com.ruoyi.manage.controller.ScoreController.add()', 'POST', 1, 'admin', '研发部门', '/manage/score', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"remark\":\"1\",\"score\":12,\"studentId\":1}', '{\"msg\":\"该学生在该课程中的成绩已存在，请不要重复添加\",\"code\":500}', 0, NULL, '2025-10-31 22:59:19', 14);
-INSERT INTO `sys_oper_log` VALUES (238, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"teacherId\":1}', '{\"msg\":\"课程编码已存在\",\"code\":500}', 0, NULL, '2025-10-31 23:00:27', 110);
-INSERT INTO `sys_oper_log` VALUES (239, '课程信息', 1, 'com.ruoyi.manage.controller.CourseController.add()', 'POST', 1, 'admin', '研发部门', '/manage/course', '127.0.0.1', '内网IP', '{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":1,\"params\":{},\"status\":0,\"teacherId\":1}', '{\"msg\":\"课程编码已存在\",\"code\":500}', 0, NULL, '2025-10-31 23:01:39', 110);
-INSERT INTO `sys_oper_log` VALUES (240, '学生成绩', 1, 'com.ruoyi.manage.controller.ScoreController.add()', 'POST', 1, 'admin', '研发部门', '/manage/score', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"remark\":\"2\",\"score\":12,\"studentId\":2}', '{\"msg\":\"该学生在该课程中的成绩已存在，请不要重复添加\",\"code\":500}', 0, NULL, '2025-10-31 23:01:57', 10);
-INSERT INTO `sys_oper_log` VALUES (241, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}', '{\"msg\":\"您已选过该课程，系统已记录重复选课异常\",\"code\":500}', 0, NULL, '2025-10-31 23:02:10', 28);
-INSERT INTO `sys_oper_log` VALUES (242, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/6', '127.0.0.1', '内网IP', '[6]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 23:02:26', 8);
-INSERT INTO `sys_oper_log` VALUES (243, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'admin', '研发部门', '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":9,\"params\":{},\"status\":0,\"studentId\":2}', '{\"msg\":\"该课程已达最大选课人数，系统已记录超员异常\",\"code\":500}', 0, NULL, '2025-10-31 23:02:39', 11);
-INSERT INTO `sys_oper_log` VALUES (244, '选课异常记录', 3, 'com.ruoyi.manage.controller.SelectionExceptionController.remove()', 'DELETE', 1, 'admin', '研发部门', '/manage/exception/7', '127.0.0.1', '内网IP', '[7]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 23:02:47', 5);
-INSERT INTO `sys_oper_log` VALUES (245, '学生信息（学生个人信息）', 1, 'com.ruoyi.manage.controller.StudentController.add()', 'POST', 1, 'admin', '研发部门', '/manage/student', '127.0.0.1', '内网IP', '{\"params\":{},\"studentName\":\"12\",\"studentNo\":\"S2023003\"}', '{\"msg\":\"您输入的学号已存在，请更换学号\",\"code\":500}', 0, NULL, '2025-10-31 23:03:00', 7);
-INSERT INTO `sys_oper_log` VALUES (246, '教师信息', 1, 'com.ruoyi.manage.controller.TeacherController.add()', 'POST', 1, 'admin', '研发部门', '/manage/teacher', '127.0.0.1', '内网IP', '{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}', '{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":500}', 0, NULL, '2025-10-31 23:03:13', 7);
-INSERT INTO `sys_oper_log` VALUES (247, '学生成绩', 1, 'com.ruoyi.manage.controller.ScoreController.add()', 'POST', 1, 'manage', NULL, '/manage/score', '127.0.0.1', '内网IP', '{\"courseId\":9,\"id\":12,\"params\":{},\"score\":67,\"studentId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 23:04:09', 9);
-INSERT INTO `sys_oper_log` VALUES (248, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'manage', NULL, '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"id\":16,\"params\":{},\"selectTime\":\"2025-10-31\",\"status\":0,\"studentId\":4}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 23:04:42', 9);
-INSERT INTO `sys_oper_log` VALUES (249, '学生选课', 3, 'com.ruoyi.manage.controller.StudentSelectionController.remove()', 'DELETE', 1, 'manage', NULL, '/manage/selection/16', '127.0.0.1', '内网IP', '[16]', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2025-10-31 23:04:44', 4);
-INSERT INTO `sys_oper_log` VALUES (250, '学生选课', 1, 'com.ruoyi.manage.controller.StudentSelectionController.add()', 'POST', 1, 'manage', NULL, '/manage/selection', '127.0.0.1', '内网IP', '{\"courseId\":1,\"params\":{},\"selectTime\":\"2025-10-03\",\"status\":0,\"studentId\":1}', '{\"msg\":\"您已选过该课程，系统已记录重复选课异常\",\"code\":500}', 0, NULL, '2025-10-31 23:04:50', 8);
+--
+-- Dumping data for table `sys_oper_log`
+--
 
--- ----------------------------
--- Table structure for sys_post
--- ----------------------------
+LOCK TABLES `sys_oper_log` WRITE;
+/*!40000 ALTER TABLE `sys_oper_log` DISABLE KEYS */;
+INSERT INTO `sys_oper_log` VALUES (100,'参数管理',2,'com.ruoyi.web.controller.system.SysConfigController.edit()','PUT',1,'admin','研发部门','/system/config','127.0.0.1','内网IP','{\"configId\":4,\"configKey\":\"sys.account.captchaEnabled\",\"configName\":\"账号自助-验证码开关\",\"configType\":\"Y\",\"configValue\":\"false\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:01:04\",\"params\":{},\"remark\":\"是否开启验证码功能（true开启，false关闭）\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:07:06',15),(101,'菜单管理',1,'com.ruoyi.web.controller.system.SysMenuController.add()','POST',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"智慧课程管理系统\",\"menuType\":\"M\",\"orderNum\":0,\"params\":{},\"parentId\":0,\"path\":\"manage\",\"status\":\"0\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:11:17',16),(102,'代码生成',6,'com.ruoyi.generator.controller.GenController.importTableSave()','POST',1,'admin','研发部门','/tool/gen/importTable','127.0.0.1','内网IP','{\"tables\":\"tb_student,tb_student_selection,tb_teacher\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:11:35',65),(103,'代码生成',6,'com.ruoyi.generator.controller.GenController.importTableSave()','POST',1,'admin','研发部门','/tool/gen/importTable','127.0.0.1','内网IP','{\"tables\":\"tb_course,tb_score,tb_selection_exception\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:11:42',37),(104,'字典类型',1,'com.ruoyi.web.controller.system.SysDictTypeController.add()','POST',1,'admin','研发部门','/system/dict/type','127.0.0.1','内网IP','{\"createBy\":\"admin\",\"dictName\":\"课程状态\",\"dictType\":\"int\",\"params\":{},\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:13:16',9),(105,'字典类型',3,'com.ruoyi.web.controller.system.SysDictTypeController.remove()','DELETE',1,'admin','研发部门','/system/dict/type/100','127.0.0.1','内网IP','[100]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:13:45',10),(106,'代码生成',2,'com.ruoyi.generator.controller.GenController.editSave()','PUT',1,'admin','研发部门','/tool/gen','127.0.0.1','内网IP','{\"businessName\":\"course\",\"className\":\"Course\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"课程ID（主键）\",\"columnId\":13,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":4,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseCode\",\"columnComment\":\"课程编码（如JSJ001）\",\"columnId\":14,\"columnName\":\"course_code\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseCode\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":4,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseName\",\"columnComment\":\"课程名称\",\"columnId\":15,\"columnName\":\"course_name\",\"columnType\":\"varchar(100)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseName\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"LIKE\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":4,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"TeacherId\",\"columnComment\":\"授课教师ID（关联tb_teacher.id）\",\"columnId\":16,\"columnName\":\"teacher_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:16:22',24),(107,'代码生成',2,'com.ruoyi.generator.controller.GenController.editSave()','PUT',1,'admin','研发部门','/tool/gen','127.0.0.1','内网IP','{\"businessName\":\"score\",\"className\":\"Score\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"成绩ID（主键）\",\"columnId\":19,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseId\",\"columnComment\":\"课程ID（关联tb_course.id）\",\"columnId\":20,\"columnName\":\"course_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentId\",\"columnComment\":\"学生ID（关联tb_student.id）\",\"columnId\":21,\"columnName\":\"student_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Score\",\"columnComment\":\"成绩（如85.5，NULL表示未录入）\",\"columnId\":22,\"columnName\":\"score\",\"columnType\":\"decimal(5,2)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\"','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:17:24',10),(108,'代码生成',2,'com.ruoyi.generator.controller.GenController.editSave()','PUT',1,'admin','研发部门','/tool/gen','127.0.0.1','内网IP','{\"businessName\":\"exception\",\"className\":\"SelectionException\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"异常ID（主键）\",\"columnId\":24,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":6,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseId\",\"columnComment\":\"课程ID（关联tb_course.id）\",\"columnId\":25,\"columnName\":\"course_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":6,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentId\",\"columnComment\":\"学生ID（关联tb_student.id）\",\"columnId\":26,\"columnName\":\"student_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":6,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"ExceptionType\",\"columnComment\":\"异常类型（1-重复选课，2-超员选课）\",\"columnId\":27,\"columnName\":\"exception_type\",\"columnType\":\"tinyint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:42\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"select\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"is','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:17:59',16),(109,'代码生成',2,'com.ruoyi.generator.controller.GenController.editSave()','PUT',1,'admin','研发部门','/tool/gen','127.0.0.1','内网IP','{\"businessName\":\"student\",\"className\":\"Student\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"学生ID（主键）\",\"columnId\":1,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":1,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentNo\",\"columnComment\":\"学号（如S2023001）\",\"columnId\":2,\"columnName\":\"student_no\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentNo\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":1,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentName\",\"columnComment\":\"学生姓名\",\"columnId\":3,\"columnName\":\"student_name\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentName\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"LIKE\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":1,\"updateBy\":\"\",\"usableColumn\":false}],\"crud\":true,\"functionAuthor\":\"hgz\",\"functionName\":\"学生信息（学生个人信息）\",\"genPath\":\"/\",\"genType\":\"0\",\"moduleName\":\"manage\",\"options\":\"{\\\"parentMenuId\\\":2000}\",\"packageName\":\"com.ruoyi.manage\",\"params\":{\"parentMenuId\":2000},\"parentMenuId\":2000,\"sub\":false,\"tableComment\":\"学生信息表\",\"tableId\":1,\"tableName\":\"tb_student\",\"tplCategory\":\"crud\",\"tpl','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:18:27',10),(110,'代码生成',2,'com.ruoyi.generator.controller.GenController.editSave()','PUT',1,'admin','研发部门','/tool/gen','127.0.0.1','内网IP','{\"businessName\":\"selection\",\"className\":\"StudentSelection\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"选课ID（主键）\",\"columnId\":4,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":2,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"CourseId\",\"columnComment\":\"课程ID（关联tb_course.id）\",\"columnId\":5,\"columnName\":\"course_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"courseId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":2,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"StudentId\",\"columnComment\":\"学生ID（关联tb_student.id）\",\"columnId\":6,\"columnName\":\"student_id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"studentId\",\"javaType\":\"Long\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":2,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Status\",\"columnComment\":\"状态（0-已选，1-已退）\",\"columnId\":7,\"columnName\":\"status\",\"columnType\":\"tinyint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"radio\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuer','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:18:50',10),(111,'代码生成',2,'com.ruoyi.generator.controller.GenController.editSave()','PUT',1,'admin','研发部门','/tool/gen','127.0.0.1','内网IP','{\"businessName\":\"teacher\",\"className\":\"Teacher\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"教师ID（主键）\",\"columnId\":9,\"columnName\":\"id\",\"columnType\":\"bigint\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":true,\"insert\":false,\"isIncrement\":\"1\",\"isInsert\":\"0\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":3,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"TeacherNo\",\"columnComment\":\"教师工号（如T001）\",\"columnId\":10,\"columnName\":\"teacher_no\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"teacherNo\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":true,\"sort\":2,\"superColumn\":false,\"tableId\":3,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"TeacherName\",\"columnComment\":\"教师姓名\",\"columnId\":11,\"columnName\":\"teacher_name\",\"columnType\":\"varchar(20)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"1\",\"javaField\":\"teacherName\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"LIKE\",\"required\":true,\"sort\":3,\"superColumn\":false,\"tableId\":3,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Title\",\"columnComment\":\"职称（如教授/讲师）\",\"columnId\":12,\"columnName\":\"title\",\"columnType\":\"varchar(30)\",\"createBy\":\"admin\",\"createTime\":\"2025-10-22 23:11:35\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"is','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:19:25',13),(112,'代码生成',8,'com.ruoyi.generator.controller.GenController.batchGenCode()','GET',1,'admin','研发部门','/tool/gen/batchGenCode','127.0.0.1','内网IP','{\"tables\":\"tb_course,tb_score,tb_selection_exception,tb_student,tb_student_selection,tb_teacher\"}',NULL,0,NULL,'2025-10-22 23:19:30',283),(113,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/student/index\",\"createTime\":\"2025-10-22 23:20:41\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2025,\"menuName\":\"学生信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"student\",\"perms\":\"manage:student:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:21:12',7),(114,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"123\",\"courseName\":\"123\",\"params\":{},\"teacherId\":21}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\n; Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)','2025-10-22 23:45:53',150),(115,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"123\",\"courseName\":\"123\",\"params\":{},\"teacherId\":21}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)\n; Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT); nested exception is java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`smart_course_management`.`tb_course`, CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT)','2025-10-22 23:46:05',9),(116,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/course/index\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2001,\"menuName\":\"课程信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"course\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:56:03',30),(117,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/teacher/index\",\"createTime\":\"2025-10-22 23:20:46\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2031,\"menuName\":\"教师信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"teacher\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:56:10',8),(118,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/student/index\",\"createTime\":\"2025-10-22 23:20:41\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2025,\"menuName\":\"学生信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"student\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:56:12',8),(119,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/selection/index\",\"createTime\":\"2025-10-22 23:20:35\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2019,\"menuName\":\"学生选课\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"selection\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:56:15',7),(120,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/score/index\",\"createTime\":\"2025-10-22 23:20:28\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2013,\"menuName\":\"学生成绩\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"score\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:56:18',10),(121,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/exception/index\",\"createTime\":\"2025-10-22 23:20:22\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2007,\"menuName\":\"选课异常记录\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"exception\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-22 23:56:20',8),(122,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"123\",\"courseName\":\"123\",\"id\":6,\"maxStudents\":222,\"params\":{},\"status\":0,\"teacherId\":1}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 00:05:54',103),(123,'课程信息',3,'com.ruoyi.manage.controller.CourseController.remove()','DELETE',1,'admin','研发部门','/manage/course/6','127.0.0.1','内网IP','[6]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 00:06:21',12),(124,'角色管理',1,'com.ruoyi.web.controller.system.SysRoleController.add()','POST',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"campus_admin\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 10:54:29',46),(125,'角色管理',1,'com.ruoyi.web.controller.system.SysRoleController.add()','POST',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"campus_student\",\"roleName\":\"student\",\"roleSort\":1,\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 10:57:44',16),(126,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"campus_student\",\"roleName\":\"student\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 10:57:54',17),(127,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"campus_student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 10:58:09',14),(128,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:54:29\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 10:58:23',19),(129,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2002,2014,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 10:58:56',12),(130,'角色管理',1,'com.ruoyi.web.controller.system.SysRoleController.add()','POST',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2026,2030,2032,2036],\"params\":{},\"roleKey\":\"student\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\"}','{\"msg\":\"新增角色\'老师\'失败，角色权限已存在\",\"code\":500}',0,NULL,'2025-10-23 11:00:01',1),(131,'角色管理',1,'com.ruoyi.web.controller.system.SysRoleController.add()','POST',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"deptCheckStrictly\":true,\"deptIds\":[],\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2026,2030,2032,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:00:10',18),(132,'用户管理',1,'com.ruoyi.web.controller.system.SysUserController.add()','POST',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"教务员\",\"params\":{},\"postIds\":[],\"roleIds\":[100],\"status\":\"0\",\"userId\":100,\"userName\":\"manage\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:01:06',80),(133,'用户管理',1,'com.ruoyi.web.controller.system.SysUserController.add()','POST',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"李讲师\",\"params\":{},\"postIds\":[],\"roleIds\":[102],\"status\":\"0\",\"userId\":101,\"userName\":\"teacher-li\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:01:49',83),(134,'用户管理',2,'com.ruoyi.web.controller.system.SysUserController.edit()','PUT',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-10-23 11:01:06\",\"delFlag\":\"0\",\"email\":\"\",\"loginIp\":\"\",\"nickName\":\"教务员\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[100],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":100,\"userName\":\"manage\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:02:46',10),(135,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2002,\"menuName\":\"课程信息查询\",\"menuType\":\"F\",\"orderNum\":1,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:07:04',12),(136,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2003,\"menuName\":\"课程信息新增\",\"menuType\":\"F\",\"orderNum\":2,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:07:06',12),(137,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2004,\"menuName\":\"课程信息修改\",\"menuType\":\"F\",\"orderNum\":3,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:07:10',6),(138,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2005,\"menuName\":\"课程信息删除\",\"menuType\":\"F\",\"orderNum\":4,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:07:13',5),(139,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2006,\"menuName\":\"课程信息导出\",\"menuType\":\"F\",\"orderNum\":5,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:07:16',6),(140,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:54:29\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:08:18',12),(141,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/exception/index\",\"createTime\":\"2025-10-22 23:20:22\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2007,\"menuName\":\"选课异常记录\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"exception\",\"perms\":\"manage:exception:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:10:06',8),(142,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/course/index\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2001,\"menuName\":\"课程信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"course\",\"perms\":\"manage:course:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:12:20',6),(143,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2002,\"menuName\":\"课程信息查询\",\"menuType\":\"F\",\"orderNum\":1,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:query\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:12:40',9),(144,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2003,\"menuName\":\"课程信息新增\",\"menuType\":\"F\",\"orderNum\":2,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:add\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:12:47',3),(145,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2004,\"menuName\":\"课程信息修改\",\"menuType\":\"F\",\"orderNum\":3,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:edit\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:12:55',11),(146,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2005,\"menuName\":\"课程信息删除\",\"menuType\":\"F\",\"orderNum\":4,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:remove\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:13:06',8),(147,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"\",\"createTime\":\"2025-10-22 23:20:16\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2006,\"menuName\":\"课程信息导出\",\"menuType\":\"F\",\"orderNum\":5,\"params\":{},\"parentId\":2001,\"path\":\"#\",\"perms\":\"manage:course:export\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:13:15',11),(148,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/score/index\",\"createTime\":\"2025-10-22 23:20:28\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2013,\"menuName\":\"学生成绩\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"score\",\"perms\":\"manage:score:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:13:33',8),(149,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/selection/index\",\"createTime\":\"2025-10-22 23:20:35\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2019,\"menuName\":\"学生选课\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"selection\",\"perms\":\"manage:selection:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:13:47',5),(150,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/student/index\",\"createTime\":\"2025-10-22 23:20:41\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2025,\"menuName\":\"学生信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"student\",\"perms\":\"manage:student:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:13:58',7),(151,'菜单管理',2,'com.ruoyi.web.controller.system.SysMenuController.edit()','PUT',1,'admin','研发部门','/system/menu','127.0.0.1','内网IP','{\"children\":[],\"component\":\"manage/teacher/index\",\"createTime\":\"2025-10-22 23:20:46\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2031,\"menuName\":\"教师信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"teacher\",\"perms\":\"manage:teacher:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:14:12',6),(152,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}',0,NULL,'2025-10-23 11:15:21',74),(153,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 11:15:29',218),(154,'用户管理',1,'com.ruoyi.web.controller.system.SysUserController.add()','POST',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"小明\",\"params\":{},\"postIds\":[],\"roleIds\":[101],\"status\":\"0\",\"userId\":102,\"userName\":\"student-xm\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 20:05:54',91),(155,'用户管理',1,'com.ruoyi.web.controller.system.SysUserController.add()','POST',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"张教授\",\"params\":{},\"postIds\":[],\"roleIds\":[102],\"status\":\"0\",\"userId\":103,\"userName\":\"teacher-zhang\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 21:17:34',87),(156,'用户管理',1,'com.ruoyi.web.controller.system.SysUserController.add()','POST',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"小红\",\"params\":{},\"postIds\":[],\"roleIds\":[],\"status\":\"0\",\"userId\":104,\"userName\":\"student-xh\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 21:18:13',78),(157,'用户管理',2,'com.ruoyi.web.controller.system.SysUserController.edit()','PUT',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-10-23 21:18:13\",\"delFlag\":\"0\",\"email\":\"\",\"loginIp\":\"\",\"nickName\":\"小红\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[101],\"roles\":[],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":104,\"userName\":\"student-xh\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 21:18:28',10),(158,'选课异常记录',5,'com.ruoyi.manage.controller.SelectionExceptionController.export()','POST',1,'admin','研发部门','/manage/exception/export','127.0.0.1','内网IP','{\"pageSize\":\"10\",\"pageNum\":\"1\"}',NULL,0,NULL,'2025-10-23 21:44:03',704),(159,'字典类型',1,'com.ruoyi.web.controller.system.SysDictTypeController.add()','POST',1,'admin','研发部门','/system/dict/type','127.0.0.1','内网IP','{\"createBy\":\"admin\",\"dictName\":\"选课状态\",\"dictType\":\"selection_status\",\"params\":{},\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 22:21:24',77),(160,'字典类型',2,'com.ruoyi.web.controller.system.SysDictTypeController.edit()','PUT',1,'admin','研发部门','/system/dict/type','127.0.0.1','内网IP','{\"createBy\":\"admin\",\"createTime\":\"2025-10-23 22:21:24\",\"dictId\":101,\"dictName\":\"选课状态\",\"dictType\":\"selection_status\",\"params\":{},\"remark\":\"字典标签：已选，字典值：0，排序：1\\n字典标签：已退，字典值：1，排序：2\",\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 22:21:40',29),(161,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentSelectionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentSelectionMapper.insertStudentSelection-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student_selection          ( course_id,             student_id,             status )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'','2025-10-23 22:44:03',44),(162,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"1\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id,             max_students,             status )           values ( ?,             ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\n; Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'','2025-10-23 22:45:25',8),(163,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:54:29\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2007,2001,2002,2003,2004,2005,2006,2008,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":100,\"roleKey\":\"manage\",\"roleName\":\"教务员\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 22:54:27',19),(164,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2025,2002,2006,2014,2018,2019,2020,2021,2022,2023,2024,2026,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 22:55:12',13),(165,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2032,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 22:56:17',12),(166,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2026,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 23:10:42',11),(167,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'manage',NULL,'/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 23:24:05',205),(168,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 23:24:29',207),(169,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'teacher-li',NULL,'/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 23:25:15',211),(170,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'student-xh',NULL,'/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 23:25:35',210),(171,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'student-xm',NULL,'/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-23 23:26:11',212),(172,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'teacher-zhang',NULL,'/system/user/profile/updatePwd','127.0.0.1','内网IP','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 16:33:32',211),(173,'课程信息',5,'com.ruoyi.manage.controller.CourseController.export()','POST',1,'student-xh',NULL,'/manage/course/export','127.0.0.1','内网IP','{\"pageSize\":\"10\",\"pageNum\":\"1\",\"status\":\"0\"}',NULL,0,NULL,'2025-10-31 17:13:13',712),(174,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"id\":3,\"params\":{},\"teacherName\":\"王讲师\",\"teacherNo\":\"T003\",\"title\":\"讲师\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 17:14:25',12),(175,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'manage',NULL,'/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"123\",\"courseName\":\"123\",\"id\":8,\"maxStudents\":123,\"params\":{},\"status\":1,\"teacherId\":3}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:21:56',19),(176,'课程信息',3,'com.ruoyi.manage.controller.CourseController.remove()','DELETE',1,'manage',NULL,'/manage/course/8','127.0.0.1','内网IP','[8]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:21:59',16),(177,'课程信息',2,'com.ruoyi.manage.controller.CourseController.edit()','PUT',1,'manage',NULL,'/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"DB001\",\"courseName\":\"数据库原理\",\"id\":3,\"maxStudents\":25,\"params\":{},\"status\":0,\"teacherId\":3,\"teacherName\":\"李讲师\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:22:07',8),(178,'课程信息',2,'com.ruoyi.manage.controller.CourseController.edit()','PUT',1,'manage',NULL,'/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"DB001\",\"courseName\":\"数据库原理\",\"id\":3,\"maxStudents\":25,\"params\":{},\"status\":0,\"teacherId\":2,\"teacherName\":\"王讲师\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:22:10',10),(179,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'manage',NULL,'/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentSelectionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentSelectionMapper.insertStudentSelection-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student_selection          ( course_id,             student_id,             status )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'','2025-10-31 20:24:17',54),(180,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'manage',NULL,'/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentSelectionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentSelectionMapper.insertStudentSelection-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student_selection          ( course_id,             student_id,             status )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_student_selection.uk_course_student\'','2025-10-31 20:24:30',8),(181,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:28:16',17),(182,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:28:35',6),(183,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:36:00',12),(184,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 11:00:10\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2019,2025,2031,2002,2006,2013,2014,2015,2016,2017,2018,2020,2024,2026,2030,2036],\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:41:33',11),(185,'用户管理',2,'com.ruoyi.web.controller.system.SysUserController.edit()','PUT',1,'admin','研发部门','/system/user','127.0.0.1','内网IP','{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2025-10-23 11:01:49\",\"delFlag\":\"0\",\"email\":\"\",\"loginDate\":\"2025-10-31 20:33:51\",\"loginIp\":\"127.0.0.1\",\"nickName\":\"李讲师\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"pwdUpdateDate\":\"2025-10-23 23:25:15\",\"roleIds\":[102],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":102,\"roleKey\":\"teacher\",\"roleName\":\"老师\",\"roleSort\":0,\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":101,\"userName\":\"teacher-li\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:41:45',10),(186,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2030,2031,2032,2033,2034,2035,2036],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:42:47',9),(187,'角色管理',2,'com.ruoyi.web.controller.system.SysRoleController.edit()','PUT',1,'admin','研发部门','/system/role','127.0.0.1','内网IP','{\"admin\":false,\"createTime\":\"2025-10-23 10:57:44\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2000,2001,2013,2019,2025,2002,2006,2014,2018,2020,2024,2030],\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\",\"updateBy\":\"admin\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 20:43:07',9),(188,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}','{\"msg\":\"您已选过该课程，系统已自动记录异常\",\"code\":200}',0,NULL,'2025-10-31 21:03:24',63),(189,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}','{\"msg\":\"您已选过该课程，系统已自动记录异常\",\"code\":200}',0,NULL,'2025-10-31 21:07:04',10),(190,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}','{\"msg\":\"您已选过该课程，系统已自动记录异常\",\"code\":200}',0,NULL,'2025-10-31 21:07:20',10),(191,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/1','127.0.0.1','内网IP','[1]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:07:34',6),(192,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/3','127.0.0.1','内网IP','[3]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:07:36',6),(193,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/4','127.0.0.1','内网IP','[4]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:07:37',6),(194,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}','{\"msg\":\"您已选过该课程，系统已记录重复选课异常\",\"code\":200}',0,NULL,'2025-10-31 21:23:09',135),(195,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/5','127.0.0.1','内网IP','[5]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:23:19',9),(196,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/2','127.0.0.1','内网IP','[2]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:23:21',6),(197,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ003\",\"courseName\":\"操作系统\",\"id\":9,\"maxStudents\":1,\"params\":{},\"status\":0,\"teacherId\":3}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:23:59',8),(198,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":9,\"id\":14,\"params\":{},\"selectTime\":\"2025-10-31\",\"status\":0,\"studentId\":1}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:24:20',10),(199,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":9,\"params\":{},\"selectTime\":\"2025-10-31\",\"status\":0,\"studentId\":2}','{\"msg\":\"该课程已达最大选课人数，系统已记录超员异常\",\"code\":200}',0,NULL,'2025-10-31 21:24:34',11),(200,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"123\",\"courseName\":\"123\",\"id\":10,\"maxStudents\":123,\"params\":{},\"teacherId\":1}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:25:08',9),(201,'课程信息',3,'com.ruoyi.manage.controller.CourseController.remove()','DELETE',1,'admin','研发部门','/manage/course/10','127.0.0.1','内网IP','[10]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:25:11',5),(202,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"123\",\"maxStudents\":123,\"params\":{},\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\CourseMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.CourseMapper.insertCourse-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_course          ( course_code,             course_name,             teacher_id,             max_students )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'\n; Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'JSJ001\' for key \'tb_course.course_code\'','2025-10-31 21:25:24',5),(203,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ004\",\"courseName\":\"操作系统\",\"id\":12,\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":3}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:28:42',8),(204,'课程信息',3,'com.ruoyi.manage.controller.CourseController.remove()','DELETE',1,'admin','研发部门','/manage/course/12','127.0.0.1','内网IP','[12]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:28:49',8),(205,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value','2025-10-31 21:37:26',16),(206,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value','2025-10-31 21:38:09',45),(207,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value','2025-10-31 21:38:13',5),(208,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"11\",\"maxStudents\":1,\"params\":{},\"status\":0,\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( exception_type,             create_time )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'course_id\' doesn\'t have a default value\n; Field \'course_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'course_id\' doesn\'t have a default value','2025-10-31 21:38:44',10),(209,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":123,\"params\":{},\"status\":0,\"teacherId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column \'course_id\' cannot be null\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\SelectionExceptionMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.SelectionExceptionMapper.insertSelectionException-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_selection_exception          ( course_id,               student_id,              exception_type,               create_time )           values ( ?,             ?,             ?,             CURRENT_TIMESTAMP )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Column \'course_id\' cannot be null\n; Column \'course_id\' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column \'course_id\' cannot be null','2025-10-31 21:45:14',15),(210,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSj001\",\"courseName\":\"123\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}','{\"msg\":\"课程编码已存在，系统已记录异常\",\"code\":200}',0,NULL,'2025-10-31 21:49:33',14),(211,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"123\",\"maxStudents\":12,\"params\":{},\"status\":0,\"teacherId\":1}','{\"msg\":\"课程编码已存在\",\"code\":200}',0,NULL,'2025-10-31 21:53:38',9),(212,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'','2025-10-31 21:54:58',8),(213,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','127.0.0.1','内网IP','{\"params\":{},\"studentName\":\"12\",\"studentNo\":\"S2023002\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentMapper.insertStudent-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student          ( student_no,             student_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\n; Duplicate entry \'S2023002\' for key \'tb_student.student_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'','2025-10-31 21:55:12',5),(214,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','127.0.0.1','内网IP','{\"params\":{},\"studentName\":\"12\",\"studentNo\":\"S2023002\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\StudentMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.StudentMapper.insertStudent-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_student          ( student_no,             student_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'\n; Duplicate entry \'S2023002\' for key \'tb_student.student_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'S2023002\' for key \'tb_student.student_no\'','2025-10-31 21:55:40',3),(215,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"id\":5,\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T0001\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:55:53',6),(216,'教师信息',3,'com.ruoyi.manage.controller.TeacherController.remove()','DELETE',1,'admin','研发部门','/manage/teacher/5','127.0.0.1','内网IP','[5]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 21:55:57',10),(217,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name )           values ( ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'','2025-10-31 21:56:03',6),(218,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name,             title )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'','2025-10-31 22:12:22',14),(219,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name,             title )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'','2025-10-31 22:12:47',4),(220,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\",\"title\":\"1\"}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\TeacherMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.TeacherMapper.insertTeacher-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_teacher          ( teacher_no,             teacher_name,             title )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'\n; Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'T001\' for key \'tb_teacher.teacher_no\'','2025-10-31 22:13:43',110),(221,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:15:22',114),(222,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:22:27',106),(223,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:25:47',109),(224,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"1\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:26:14',6),(225,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:26:43',5),(226,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"123\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:32:17',13),(227,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:33:12',106),(228,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:34:09',108),(229,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":200}',0,NULL,'2025-10-31 22:38:50',4),(230,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','127.0.0.1','内网IP','{\"id\":7,\"params\":{},\"studentName\":\"123\",\"studentNo\":\"S1\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 22:39:06',9),(231,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','127.0.0.1','内网IP','{\"params\":{},\"studentName\":\"1\",\"studentNo\":\"S1\"}','{\"msg\":\"您输入的学号已存在，请更换学号\",\"code\":200}',0,NULL,'2025-10-31 22:39:11',7),(232,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','127.0.0.1','内网IP','{\"params\":{},\"studentName\":\"1233\",\"studentNo\":\"S1\"}','{\"msg\":\"您输入的学号已存在，请更换学号\",\"code\":200}',0,NULL,'2025-10-31 22:39:48',6),(233,'学生信息（学生个人信息）',3,'com.ruoyi.manage.controller.StudentController.remove()','DELETE',1,'admin','研发部门','/manage/student/7','127.0.0.1','内网IP','[7]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 22:39:50',10),(234,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'admin','研发部门','/manage/score','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"score\":12,\"studentId\":1}',NULL,1,'\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'\r\n### The error may exist in file [D:\\RuoYi\\backend\\ruoyi-manage\\target\\classes\\mapper\\manage\\ScoreMapper.xml]\r\n### The error may involve com.ruoyi.manage.mapper.ScoreMapper.insertScore-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into tb_score          ( course_id,             student_id,             score )           values ( ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'\n; Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'tb_score.uk_course_student\'','2025-10-31 22:46:09',9),(235,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'admin','研发部门','/manage/score','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"score\":12,\"studentId\":1}','{\"msg\":\"操作失败\",\"code\":500}',0,NULL,'2025-10-31 22:51:33',110),(236,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'admin','研发部门','/manage/score','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"score\":12,\"studentId\":1}','{\"msg\":\"该学生在该课程中的成绩已存在，请不要重复添加\",\"code\":200}',0,NULL,'2025-10-31 22:52:53',11),(237,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'admin','研发部门','/manage/score','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"remark\":\"1\",\"score\":12,\"studentId\":1}','{\"msg\":\"该学生在该课程中的成绩已存在，请不要重复添加\",\"code\":500}',0,NULL,'2025-10-31 22:59:19',14),(238,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":12,\"params\":{},\"teacherId\":1}','{\"msg\":\"课程编码已存在\",\"code\":500}',0,NULL,'2025-10-31 23:00:27',110),(239,'课程信息',1,'com.ruoyi.manage.controller.CourseController.add()','POST',1,'admin','研发部门','/manage/course','127.0.0.1','内网IP','{\"courseCode\":\"JSJ001\",\"courseName\":\"12\",\"maxStudents\":1,\"params\":{},\"status\":0,\"teacherId\":1}','{\"msg\":\"课程编码已存在\",\"code\":500}',0,NULL,'2025-10-31 23:01:39',110),(240,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'admin','研发部门','/manage/score','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"remark\":\"2\",\"score\":12,\"studentId\":2}','{\"msg\":\"该学生在该课程中的成绩已存在，请不要重复添加\",\"code\":500}',0,NULL,'2025-10-31 23:01:57',10),(241,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"status\":0,\"studentId\":1}','{\"msg\":\"您已选过该课程，系统已记录重复选课异常\",\"code\":500}',0,NULL,'2025-10-31 23:02:10',28),(242,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/6','127.0.0.1','内网IP','[6]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 23:02:26',8),(243,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','127.0.0.1','内网IP','{\"courseId\":9,\"params\":{},\"status\":0,\"studentId\":2}','{\"msg\":\"该课程已达最大选课人数，系统已记录超员异常\",\"code\":500}',0,NULL,'2025-10-31 23:02:39',11),(244,'选课异常记录',3,'com.ruoyi.manage.controller.SelectionExceptionController.remove()','DELETE',1,'admin','研发部门','/manage/exception/7','127.0.0.1','内网IP','[7]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 23:02:47',5),(245,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','127.0.0.1','内网IP','{\"params\":{},\"studentName\":\"12\",\"studentNo\":\"S2023003\"}','{\"msg\":\"您输入的学号已存在，请更换学号\",\"code\":500}',0,NULL,'2025-10-31 23:03:00',7),(246,'教师信息',1,'com.ruoyi.manage.controller.TeacherController.add()','POST',1,'admin','研发部门','/manage/teacher','127.0.0.1','内网IP','{\"params\":{},\"teacherName\":\"12\",\"teacherNo\":\"T001\",\"title\":\"1\"}','{\"msg\":\"您输入的教师工号已存在，请更换工号\",\"code\":500}',0,NULL,'2025-10-31 23:03:13',7),(247,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'manage',NULL,'/manage/score','127.0.0.1','内网IP','{\"courseId\":9,\"id\":12,\"params\":{},\"score\":67,\"studentId\":1}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 23:04:09',9),(248,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'manage',NULL,'/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"id\":16,\"params\":{},\"selectTime\":\"2025-10-31\",\"status\":0,\"studentId\":4}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 23:04:42',9),(249,'学生选课',3,'com.ruoyi.manage.controller.StudentSelectionController.remove()','DELETE',1,'manage',NULL,'/manage/selection/16','127.0.0.1','内网IP','[16]','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2025-10-31 23:04:44',4),(250,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'manage',NULL,'/manage/selection','127.0.0.1','内网IP','{\"courseId\":1,\"params\":{},\"selectTime\":\"2025-10-03\",\"status\":0,\"studentId\":1}','{\"msg\":\"您已选过该课程，系统已记录重复选课异常\",\"code\":500}',0,NULL,'2025-10-31 23:04:50',8),(251,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','183.217.27.8','XX XX','{}','{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}',0,NULL,'2026-09-25 00:18:51',82),(252,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','183.217.27.8','XX XX','{}','{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}',0,NULL,'2026-09-25 00:19:06',77),(253,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','183.217.27.8','XX XX','{}','{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}',0,NULL,'2026-09-25 00:19:10',80),(254,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','183.217.27.8','XX XX','{}','{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}',0,NULL,'2026-09-25 00:19:15',80),(255,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','183.217.27.204','XX XX','{}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 00:58:55',249),(256,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updateProfile()','PUT',1,'admin','研发部门','/system/user/profile','183.217.27.204','XX XX','{\"admin\":false,\"email\":\"hgzoofong@163.com\",\"nickName\":\"hgz\",\"params\":{},\"phonenumber\":\"18279169759\",\"sex\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 01:00:32',22),(257,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updateProfile()','PUT',1,'admin','研发部门','/system/user/profile','183.217.27.204','XX XX','{\"admin\":false,\"email\":\"hgzoofong@163.com\",\"nickName\":\"hgz\",\"params\":{},\"phonenumber\":\"18279169759\",\"sex\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 01:00:37',17),(258,'用户头像',2,'com.ruoyi.web.controller.system.SysProfileController.avatar()','POST',1,'admin','研发部门','/system/user/profile/avatar','183.217.27.204','XX XX','','{\"msg\":\"操作成功\",\"imgUrl\":\"/profile/avatar/2026/09/25/0e177cf8506640fca02f018a19586034.png\",\"code\":200}',0,NULL,'2026-09-25 01:01:05',185),(259,'个人信息',2,'com.ruoyi.web.controller.system.SysProfileController.updatePwd()','PUT',1,'admin','研发部门','/system/user/profile/updatePwd','183.217.27.204','XX XX','{}','{\"msg\":\"修改密码失败，旧密码错误\",\"code\":500}',0,NULL,'2026-09-25 02:30:47',83),(260,'用户管理',1,'com.ruoyi.web.controller.system.SysUserController.add()','POST',1,'admin','研发部门','/system/user','117.164.17.52','XX XX','{\"admin\":false,\"createBy\":\"admin\",\"nickName\":\"唐礼正\",\"params\":{},\"postIds\":[],\"roleIds\":[101],\"sex\":\"0\",\"status\":\"0\",\"userId\":1002,\"userName\":\"Tl_94364\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 18:22:52',120),(261,'学生信息（学生个人信息）',1,'com.ruoyi.manage.controller.StudentController.add()','POST',1,'admin','研发部门','/manage/student','117.164.17.52','XX XX','{\"id\":21,\"params\":{},\"studentName\":\"唐礼正\",\"studentNo\":\"s2024000\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 18:24:29',14),(262,'用户管理',2,'com.ruoyi.web.controller.system.SysUserController.edit()','PUT',1,'admin','研发部门','/system/user','117.164.17.52','XX XX','{\"admin\":false,\"avatar\":\"\",\"createBy\":\"admin\",\"createTime\":\"2026-09-25 18:22:52\",\"delFlag\":\"0\",\"deptId\":100,\"email\":\"\",\"loginDate\":\"2026-09-25 18:23:29\",\"loginIp\":\"223.160.218.57\",\"nickName\":\"唐礼正\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[101],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":0,\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":1002,\"userName\":\"Tl_94364\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 18:25:08',23),(263,'学生选课',1,'com.ruoyi.manage.controller.StudentSelectionController.add()','POST',1,'admin','研发部门','/manage/selection','117.164.17.52','XX XX','{\"courseId\":6,\"id\":44,\"params\":{},\"selectTime\":\"2026-09-17\",\"status\":0,\"studentId\":21}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 18:27:50',21),(264,'学生成绩',1,'com.ruoyi.manage.controller.ScoreController.add()','POST',1,'admin','研发部门','/manage/score','117.164.17.52','XX XX','{\"courseId\":6,\"id\":44,\"params\":{},\"score\":59,\"studentId\":21}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2026-09-25 18:28:49',14);
+/*!40000 ALTER TABLE `sys_oper_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_post`
+--
+
 DROP TABLE IF EXISTS `sys_post`;
-CREATE TABLE `sys_post`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_post` (
   `post_id` bigint NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
   `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '岗位编码',
   `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '岗位名称',
   `post_sort` int NOT NULL COMMENT '显示顺序',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '状态（0正常 1停用）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='岗位信息表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_post
--- ----------------------------
-INSERT INTO `sys_post` VALUES (1, 'ceo', '董事长', 1, '0', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_post` VALUES (2, 'se', '项目经理', 2, '0', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_post` VALUES (3, 'hr', '人力资源', 3, '0', 'admin', '2025-10-22 23:01:04', '', NULL, '');
-INSERT INTO `sys_post` VALUES (4, 'user', '普通员工', 4, '0', 'admin', '2025-10-22 23:01:04', '', NULL, '');
+--
+-- Dumping data for table `sys_post`
+--
 
--- ----------------------------
--- Table structure for sys_role
--- ----------------------------
+LOCK TABLES `sys_post` WRITE;
+/*!40000 ALTER TABLE `sys_post` DISABLE KEYS */;
+INSERT INTO `sys_post` VALUES (1,'ceo','董事长',1,'0','admin','2025-10-22 23:01:04','',NULL,''),(2,'se','项目经理',2,'0','admin','2025-10-22 23:01:04','',NULL,''),(3,'hr','人力资源',3,'0','admin','2025-10-22 23:01:04','',NULL,''),(4,'user','普通员工',4,'0','admin','2025-10-22 23:01:04','',NULL,'');
+/*!40000 ALTER TABLE `sys_post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_role`
+--
+
 DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_role` (
   `role_id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色ID',
   `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
   `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色权限字符串',
   `role_sort` int NOT NULL COMMENT '显示顺序',
-  `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
-  `menu_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '菜单树选择项是否关联显示',
-  `dept_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '部门树选择项是否关联显示',
+  `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
+  `menu_check_strictly` tinyint(1) DEFAULT '1' COMMENT '菜单树选择项是否关联显示',
+  `dept_check_strictly` tinyint(1) DEFAULT '1' COMMENT '部门树选择项是否关联显示',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='角色信息表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_role
--- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2025-10-22 23:01:04', '', NULL, '普通角色');
-INSERT INTO `sys_role` VALUES (100, '教务员', 'manage', 0, '1', 1, 1, '0', '0', 'admin', '2025-10-23 10:54:29', 'admin', '2025-10-23 22:54:27', NULL);
-INSERT INTO `sys_role` VALUES (101, '学生', 'student', 0, '1', 1, 1, '0', '0', 'admin', '2025-10-23 10:57:44', 'admin', '2025-10-31 20:43:07', NULL);
-INSERT INTO `sys_role` VALUES (102, '老师', 'teacher', 0, '1', 1, 1, '0', '0', 'admin', '2025-10-23 11:00:10', 'admin', '2025-10-31 20:41:33', NULL);
+--
+-- Dumping data for table `sys_role`
+--
 
--- ----------------------------
--- Table structure for sys_role_dept
--- ----------------------------
+LOCK TABLES `sys_role` WRITE;
+/*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
+INSERT INTO `sys_role` VALUES (1,'超级管理员','admin',1,'1',1,1,'0','0','admin','2025-10-22 23:01:04','',NULL,'超级管理员'),(2,'普通角色','common',2,'2',1,1,'0','0','admin','2025-10-22 23:01:04','',NULL,'普通角色'),(100,'教务员','manage',0,'1',1,1,'0','0','admin','2025-10-23 10:54:29','admin','2025-10-23 22:54:27',NULL),(101,'学生','student',0,'1',1,1,'0','0','admin','2025-10-23 10:57:44','admin','2025-10-31 20:43:07',NULL),(102,'老师','teacher',0,'1',1,1,'0','0','admin','2025-10-23 11:00:10','admin','2025-10-31 20:41:33',NULL);
+/*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_role_dept`
+--
+
 DROP TABLE IF EXISTS `sys_role_dept`;
-CREATE TABLE `sys_role_dept`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_role_dept` (
   `role_id` bigint NOT NULL COMMENT '角色ID',
   `dept_id` bigint NOT NULL COMMENT '部门ID',
-  PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色和部门关联表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`role_id`,`dept_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='角色和部门关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_role_dept
--- ----------------------------
-INSERT INTO `sys_role_dept` VALUES (2, 100);
-INSERT INTO `sys_role_dept` VALUES (2, 101);
-INSERT INTO `sys_role_dept` VALUES (2, 105);
+--
+-- Dumping data for table `sys_role_dept`
+--
 
--- ----------------------------
--- Table structure for sys_role_menu
--- ----------------------------
+LOCK TABLES `sys_role_dept` WRITE;
+/*!40000 ALTER TABLE `sys_role_dept` DISABLE KEYS */;
+INSERT INTO `sys_role_dept` VALUES (2,100),(2,101),(2,105);
+/*!40000 ALTER TABLE `sys_role_dept` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_role_menu`
+--
+
 DROP TABLE IF EXISTS `sys_role_menu`;
-CREATE TABLE `sys_role_menu`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_role_menu` (
   `role_id` bigint NOT NULL COMMENT '角色ID',
   `menu_id` bigint NOT NULL COMMENT '菜单ID',
-  PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`role_id`,`menu_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='角色和菜单关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_role_menu
--- ----------------------------
-INSERT INTO `sys_role_menu` VALUES (2, 1);
-INSERT INTO `sys_role_menu` VALUES (2, 2);
-INSERT INTO `sys_role_menu` VALUES (2, 3);
-INSERT INTO `sys_role_menu` VALUES (2, 4);
-INSERT INTO `sys_role_menu` VALUES (2, 100);
-INSERT INTO `sys_role_menu` VALUES (2, 101);
-INSERT INTO `sys_role_menu` VALUES (2, 102);
-INSERT INTO `sys_role_menu` VALUES (2, 103);
-INSERT INTO `sys_role_menu` VALUES (2, 104);
-INSERT INTO `sys_role_menu` VALUES (2, 105);
-INSERT INTO `sys_role_menu` VALUES (2, 106);
-INSERT INTO `sys_role_menu` VALUES (2, 107);
-INSERT INTO `sys_role_menu` VALUES (2, 108);
-INSERT INTO `sys_role_menu` VALUES (2, 109);
-INSERT INTO `sys_role_menu` VALUES (2, 110);
-INSERT INTO `sys_role_menu` VALUES (2, 111);
-INSERT INTO `sys_role_menu` VALUES (2, 112);
-INSERT INTO `sys_role_menu` VALUES (2, 113);
-INSERT INTO `sys_role_menu` VALUES (2, 114);
-INSERT INTO `sys_role_menu` VALUES (2, 115);
-INSERT INTO `sys_role_menu` VALUES (2, 116);
-INSERT INTO `sys_role_menu` VALUES (2, 117);
-INSERT INTO `sys_role_menu` VALUES (2, 500);
-INSERT INTO `sys_role_menu` VALUES (2, 501);
-INSERT INTO `sys_role_menu` VALUES (2, 1000);
-INSERT INTO `sys_role_menu` VALUES (2, 1001);
-INSERT INTO `sys_role_menu` VALUES (2, 1002);
-INSERT INTO `sys_role_menu` VALUES (2, 1003);
-INSERT INTO `sys_role_menu` VALUES (2, 1004);
-INSERT INTO `sys_role_menu` VALUES (2, 1005);
-INSERT INTO `sys_role_menu` VALUES (2, 1006);
-INSERT INTO `sys_role_menu` VALUES (2, 1007);
-INSERT INTO `sys_role_menu` VALUES (2, 1008);
-INSERT INTO `sys_role_menu` VALUES (2, 1009);
-INSERT INTO `sys_role_menu` VALUES (2, 1010);
-INSERT INTO `sys_role_menu` VALUES (2, 1011);
-INSERT INTO `sys_role_menu` VALUES (2, 1012);
-INSERT INTO `sys_role_menu` VALUES (2, 1013);
-INSERT INTO `sys_role_menu` VALUES (2, 1014);
-INSERT INTO `sys_role_menu` VALUES (2, 1015);
-INSERT INTO `sys_role_menu` VALUES (2, 1016);
-INSERT INTO `sys_role_menu` VALUES (2, 1017);
-INSERT INTO `sys_role_menu` VALUES (2, 1018);
-INSERT INTO `sys_role_menu` VALUES (2, 1019);
-INSERT INTO `sys_role_menu` VALUES (2, 1020);
-INSERT INTO `sys_role_menu` VALUES (2, 1021);
-INSERT INTO `sys_role_menu` VALUES (2, 1022);
-INSERT INTO `sys_role_menu` VALUES (2, 1023);
-INSERT INTO `sys_role_menu` VALUES (2, 1024);
-INSERT INTO `sys_role_menu` VALUES (2, 1025);
-INSERT INTO `sys_role_menu` VALUES (2, 1026);
-INSERT INTO `sys_role_menu` VALUES (2, 1027);
-INSERT INTO `sys_role_menu` VALUES (2, 1028);
-INSERT INTO `sys_role_menu` VALUES (2, 1029);
-INSERT INTO `sys_role_menu` VALUES (2, 1030);
-INSERT INTO `sys_role_menu` VALUES (2, 1031);
-INSERT INTO `sys_role_menu` VALUES (2, 1032);
-INSERT INTO `sys_role_menu` VALUES (2, 1033);
-INSERT INTO `sys_role_menu` VALUES (2, 1034);
-INSERT INTO `sys_role_menu` VALUES (2, 1035);
-INSERT INTO `sys_role_menu` VALUES (2, 1036);
-INSERT INTO `sys_role_menu` VALUES (2, 1037);
-INSERT INTO `sys_role_menu` VALUES (2, 1038);
-INSERT INTO `sys_role_menu` VALUES (2, 1039);
-INSERT INTO `sys_role_menu` VALUES (2, 1040);
-INSERT INTO `sys_role_menu` VALUES (2, 1041);
-INSERT INTO `sys_role_menu` VALUES (2, 1042);
-INSERT INTO `sys_role_menu` VALUES (2, 1043);
-INSERT INTO `sys_role_menu` VALUES (2, 1044);
-INSERT INTO `sys_role_menu` VALUES (2, 1045);
-INSERT INTO `sys_role_menu` VALUES (2, 1046);
-INSERT INTO `sys_role_menu` VALUES (2, 1047);
-INSERT INTO `sys_role_menu` VALUES (2, 1048);
-INSERT INTO `sys_role_menu` VALUES (2, 1049);
-INSERT INTO `sys_role_menu` VALUES (2, 1050);
-INSERT INTO `sys_role_menu` VALUES (2, 1051);
-INSERT INTO `sys_role_menu` VALUES (2, 1052);
-INSERT INTO `sys_role_menu` VALUES (2, 1053);
-INSERT INTO `sys_role_menu` VALUES (2, 1054);
-INSERT INTO `sys_role_menu` VALUES (2, 1055);
-INSERT INTO `sys_role_menu` VALUES (2, 1056);
-INSERT INTO `sys_role_menu` VALUES (2, 1057);
-INSERT INTO `sys_role_menu` VALUES (2, 1058);
-INSERT INTO `sys_role_menu` VALUES (2, 1059);
-INSERT INTO `sys_role_menu` VALUES (2, 1060);
-INSERT INTO `sys_role_menu` VALUES (100, 2000);
-INSERT INTO `sys_role_menu` VALUES (100, 2001);
-INSERT INTO `sys_role_menu` VALUES (100, 2002);
-INSERT INTO `sys_role_menu` VALUES (100, 2003);
-INSERT INTO `sys_role_menu` VALUES (100, 2004);
-INSERT INTO `sys_role_menu` VALUES (100, 2005);
-INSERT INTO `sys_role_menu` VALUES (100, 2006);
-INSERT INTO `sys_role_menu` VALUES (100, 2007);
-INSERT INTO `sys_role_menu` VALUES (100, 2008);
-INSERT INTO `sys_role_menu` VALUES (100, 2010);
-INSERT INTO `sys_role_menu` VALUES (100, 2011);
-INSERT INTO `sys_role_menu` VALUES (100, 2012);
-INSERT INTO `sys_role_menu` VALUES (100, 2013);
-INSERT INTO `sys_role_menu` VALUES (100, 2014);
-INSERT INTO `sys_role_menu` VALUES (100, 2015);
-INSERT INTO `sys_role_menu` VALUES (100, 2016);
-INSERT INTO `sys_role_menu` VALUES (100, 2017);
-INSERT INTO `sys_role_menu` VALUES (100, 2018);
-INSERT INTO `sys_role_menu` VALUES (100, 2019);
-INSERT INTO `sys_role_menu` VALUES (100, 2020);
-INSERT INTO `sys_role_menu` VALUES (100, 2021);
-INSERT INTO `sys_role_menu` VALUES (100, 2022);
-INSERT INTO `sys_role_menu` VALUES (100, 2023);
-INSERT INTO `sys_role_menu` VALUES (100, 2024);
-INSERT INTO `sys_role_menu` VALUES (100, 2025);
-INSERT INTO `sys_role_menu` VALUES (100, 2026);
-INSERT INTO `sys_role_menu` VALUES (100, 2027);
-INSERT INTO `sys_role_menu` VALUES (100, 2028);
-INSERT INTO `sys_role_menu` VALUES (100, 2029);
-INSERT INTO `sys_role_menu` VALUES (100, 2030);
-INSERT INTO `sys_role_menu` VALUES (100, 2031);
-INSERT INTO `sys_role_menu` VALUES (100, 2032);
-INSERT INTO `sys_role_menu` VALUES (100, 2033);
-INSERT INTO `sys_role_menu` VALUES (100, 2034);
-INSERT INTO `sys_role_menu` VALUES (100, 2035);
-INSERT INTO `sys_role_menu` VALUES (100, 2036);
-INSERT INTO `sys_role_menu` VALUES (101, 2000);
-INSERT INTO `sys_role_menu` VALUES (101, 2001);
-INSERT INTO `sys_role_menu` VALUES (101, 2002);
-INSERT INTO `sys_role_menu` VALUES (101, 2006);
-INSERT INTO `sys_role_menu` VALUES (101, 2013);
-INSERT INTO `sys_role_menu` VALUES (101, 2014);
-INSERT INTO `sys_role_menu` VALUES (101, 2018);
-INSERT INTO `sys_role_menu` VALUES (101, 2019);
-INSERT INTO `sys_role_menu` VALUES (101, 2020);
-INSERT INTO `sys_role_menu` VALUES (101, 2024);
-INSERT INTO `sys_role_menu` VALUES (101, 2025);
-INSERT INTO `sys_role_menu` VALUES (101, 2030);
-INSERT INTO `sys_role_menu` VALUES (102, 2000);
-INSERT INTO `sys_role_menu` VALUES (102, 2001);
-INSERT INTO `sys_role_menu` VALUES (102, 2002);
-INSERT INTO `sys_role_menu` VALUES (102, 2006);
-INSERT INTO `sys_role_menu` VALUES (102, 2013);
-INSERT INTO `sys_role_menu` VALUES (102, 2014);
-INSERT INTO `sys_role_menu` VALUES (102, 2015);
-INSERT INTO `sys_role_menu` VALUES (102, 2016);
-INSERT INTO `sys_role_menu` VALUES (102, 2017);
-INSERT INTO `sys_role_menu` VALUES (102, 2018);
-INSERT INTO `sys_role_menu` VALUES (102, 2019);
-INSERT INTO `sys_role_menu` VALUES (102, 2020);
-INSERT INTO `sys_role_menu` VALUES (102, 2024);
-INSERT INTO `sys_role_menu` VALUES (102, 2025);
-INSERT INTO `sys_role_menu` VALUES (102, 2026);
-INSERT INTO `sys_role_menu` VALUES (102, 2030);
-INSERT INTO `sys_role_menu` VALUES (102, 2031);
-INSERT INTO `sys_role_menu` VALUES (102, 2036);
+--
+-- Dumping data for table `sys_role_menu`
+--
 
--- ----------------------------
--- Table structure for sys_user
--- ----------------------------
+LOCK TABLES `sys_role_menu` WRITE;
+/*!40000 ALTER TABLE `sys_role_menu` DISABLE KEYS */;
+INSERT INTO `sys_role_menu` VALUES (2,1),(2,2),(2,3),(2,4),(2,100),(2,101),(2,102),(2,103),(2,104),(2,105),(2,106),(2,107),(2,108),(2,109),(2,110),(2,111),(2,112),(2,113),(2,114),(2,115),(2,116),(2,117),(2,500),(2,501),(2,1000),(2,1001),(2,1002),(2,1003),(2,1004),(2,1005),(2,1006),(2,1007),(2,1008),(2,1009),(2,1010),(2,1011),(2,1012),(2,1013),(2,1014),(2,1015),(2,1016),(2,1017),(2,1018),(2,1019),(2,1020),(2,1021),(2,1022),(2,1023),(2,1024),(2,1025),(2,1026),(2,1027),(2,1028),(2,1029),(2,1030),(2,1031),(2,1032),(2,1033),(2,1034),(2,1035),(2,1036),(2,1037),(2,1038),(2,1039),(2,1040),(2,1041),(2,1042),(2,1043),(2,1044),(2,1045),(2,1046),(2,1047),(2,1048),(2,1049),(2,1050),(2,1051),(2,1052),(2,1053),(2,1054),(2,1055),(2,1056),(2,1057),(2,1058),(2,1059),(2,1060),(100,2000),(100,2001),(100,2002),(100,2003),(100,2004),(100,2005),(100,2006),(100,2007),(100,2008),(100,2010),(100,2011),(100,2012),(100,2013),(100,2014),(100,2015),(100,2016),(100,2017),(100,2018),(100,2019),(100,2020),(100,2021),(100,2022),(100,2023),(100,2024),(100,2025),(100,2026),(100,2027),(100,2028),(100,2029),(100,2030),(100,2031),(100,2032),(100,2033),(100,2034),(100,2035),(100,2036),(101,2000),(101,2001),(101,2002),(101,2006),(101,2013),(101,2014),(101,2018),(101,2019),(101,2020),(101,2024),(101,2025),(101,2030),(102,2000),(102,2001),(102,2002),(102,2006),(102,2013),(102,2014),(102,2015),(102,2016),(102,2017),(102,2018),(102,2019),(102,2020),(102,2024),(102,2025),(102,2026),(102,2030),(102,2031),(102,2036);
+/*!40000 ALTER TABLE `sys_role_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_user`
+--
+
 DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE `sys_user`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_user` (
   `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `dept_id` bigint NULL DEFAULT NULL COMMENT '部门ID',
+  `dept_id` bigint DEFAULT NULL COMMENT '部门ID',
   `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户账号',
   `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户昵称',
-  `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00' COMMENT '用户类型（00系统用户）',
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户邮箱',
-  `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '手机号码',
-  `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
-  `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '头像地址',
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '密码',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '账号状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-  `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '最后登录IP',
-  `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
-  `pwd_update_date` datetime NULL DEFAULT NULL COMMENT '密码最后更新时间',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '00' COMMENT '用户类型（00系统用户）',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '用户邮箱',
+  `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '手机号码',
+  `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+  `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '头像地址',
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '密码',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '账号状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '最后登录IP',
+  `login_date` datetime DEFAULT NULL COMMENT '最后登录时间',
+  `pwd_update_date` datetime DEFAULT NULL COMMENT '密码最后更新时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=1003 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='用户信息表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_user
--- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$pFDW5yfyqphrzfGXnrebmuHfN1hzcnLEgK8Kd1Q6r6I62hRyvtBhG', '0', '0', '127.0.0.1', '2025-10-31 21:37:53', '2025-10-23 23:24:29', 'admin', '2025-10-22 23:01:04', '', '2025-10-23 23:24:29', '管理员');
-INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-10-22 23:01:04', '2025-10-22 23:01:04', 'admin', '2025-10-22 23:01:04', '', NULL, '测试员');
-INSERT INTO `sys_user` VALUES (100, NULL, 'manage', '教务员', '00', '', '', '0', '', '$2a$10$HC6U4qmTqaov5ztckFsa5OZQY5UmTIeG/oe5oP11t93VspWYLVbq6', '0', '0', '127.0.0.1', '2025-10-31 23:25:59', '2025-10-23 23:24:05', 'admin', '2025-10-23 11:01:06', 'admin', '2025-10-23 23:24:05', NULL);
-INSERT INTO `sys_user` VALUES (101, NULL, 'teacher-li', '李讲师', '00', '', '', '0', '', '$2a$10$Cc0DqtZLKdHUVPQ2js0Zmumz16sJxOrsyj9Qfshx62bH9evzOFFyG', '0', '0', '127.0.0.1', '2025-10-31 23:25:31', '2025-10-23 23:25:15', 'admin', '2025-10-23 11:01:49', 'admin', '2025-10-31 20:41:45', NULL);
-INSERT INTO `sys_user` VALUES (102, NULL, 'student-xm', '小明', '00', '', '', '0', '', '$2a$10$zYt0Sz2YulzbsDsQGRiF/OGcGSXVLpc0TynPcAXdmjPnMqiGeFsdu', '0', '0', '127.0.0.1', '2025-10-31 23:06:28', '2025-10-23 23:26:11', 'admin', '2025-10-23 20:05:54', '', '2025-10-23 23:26:11', NULL);
-INSERT INTO `sys_user` VALUES (103, NULL, 'teacher-zhang', '张教授', '00', '', '', '0', '', '$2a$10$xC6mwj5wUnEBakPJrMKpnO32PDAZHIJH8gus7c8cr3URr8MiC7A0m', '0', '0', '127.0.0.1', '2025-10-31 23:24:00', '2025-10-31 16:33:32', 'admin', '2025-10-23 21:17:34', '', '2025-10-31 16:33:32', NULL);
-INSERT INTO `sys_user` VALUES (104, NULL, 'student-xh', '小红', '00', '', '', '0', '', '$2a$10$7JlwRROReo28xfDFi62aZuL7ivgSAXp3FgM1wHz3TXSHubQ5KQj7K', '0', '0', '127.0.0.1', '2025-10-31 23:05:21', '2025-10-23 23:25:35', 'admin', '2025-10-23 21:18:13', 'admin', '2025-10-23 23:25:35', NULL);
+--
+-- Dumping data for table `sys_user`
+--
 
--- ----------------------------
--- Table structure for sys_user_post
--- ----------------------------
+LOCK TABLES `sys_user` WRITE;
+/*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
+INSERT INTO `sys_user` VALUES (1,103,'admin','hgz','00','hgzoofong@163.com','18279169759','0','/profile/avatar/2026/09/25/0e177cf8506640fca02f018a19586034.png','$2a$10$aQjw43s5900WMjiH6H9Q0Of48tGosPerS86rvuMZkLeBb2exUd1/C','0','0','127.0.0.1','2026-10-11 23:03:26','2026-09-25 00:58:55','admin','2025-10-22 23:01:04','','2026-09-25 01:01:05','管理员'),(2,105,'ry','若依','00','ry@qq.com','15666666666','1','','$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2','0','0','127.0.0.1','2025-10-22 23:01:04','2025-10-22 23:01:04','admin','2025-10-22 23:01:04','',NULL,'测试员'),(3,NULL,'manage','教务员','00','','','0','','$2a$10$HC6U4qmTqaov5ztckFsa5OZQY5UmTIeG/oe5oP11t93VspWYLVbq6','0','0','127.0.0.1','2026-10-11 23:05:50','2025-10-23 23:24:05','admin','2025-10-23 11:01:06','admin','2025-10-23 23:24:05',NULL),(100,NULL,'T002','李慧敏','00','','','0','','$2a$10$Cc0DqtZLKdHUVPQ2js0Zmumz16sJxOrsyj9Qfshx62bH9evzOFFyG','0','0','117.164.17.52','2026-09-25 21:07:31','2025-10-23 23:25:15','admin','2025-10-23 11:01:49','admin','2025-10-31 20:41:45',NULL),(101,NULL,'T001','陈志远','00','','','0','','$2a$10$xC6mwj5wUnEBakPJrMKpnO32PDAZHIJH8gus7c8cr3URr8MiC7A0m','0','0','127.0.0.1','2025-10-31 23:24:00','2025-10-31 16:33:32','admin','2025-10-23 21:17:34','','2025-10-31 16:33:32',NULL),(1000,NULL,'S2023001','张伟','00','','','0','','$2a$10$zYt0Sz2YulzbsDsQGRiF/OGcGSXVLpc0TynPcAXdmjPnMqiGeFsdu','0','0','127.0.0.1','2025-10-31 23:06:28','2025-10-23 23:26:11','admin','2025-10-23 20:05:54','','2025-10-23 23:26:11',NULL),(1001,NULL,'S2023002','王芳','00','','','0','','$2a$10$7JlwRROReo28xfDFi62aZuL7ivgSAXp3FgM1wHz3TXSHubQ5KQj7K','0','0','127.0.0.1','2025-10-31 23:05:21','2025-10-23 23:25:35','admin','2025-10-23 21:18:13','admin','2025-10-23 23:25:35',NULL),(1002,100,'S2024000','唐礼正','00','','','0','','$2a$10$3v/EUMN.tZRg3URom82kmu2rDxR7WGfqVg2XX.PZpWvAgk2pQ3asu','0','0','127.0.0.1','2026-10-11 22:56:15',NULL,'admin','2026-09-25 18:22:52','admin','2026-09-25 18:25:08',NULL);
+/*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_user_post`
+--
+
 DROP TABLE IF EXISTS `sys_user_post`;
-CREATE TABLE `sys_user_post`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_user_post` (
   `user_id` bigint NOT NULL COMMENT '用户ID',
   `post_id` bigint NOT NULL COMMENT '岗位ID',
-  PRIMARY KEY (`user_id`, `post_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`user_id`,`post_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='用户与岗位关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_user_post
--- ----------------------------
-INSERT INTO `sys_user_post` VALUES (1, 1);
-INSERT INTO `sys_user_post` VALUES (2, 2);
+--
+-- Dumping data for table `sys_user_post`
+--
 
--- ----------------------------
--- Table structure for sys_user_role
--- ----------------------------
+LOCK TABLES `sys_user_post` WRITE;
+/*!40000 ALTER TABLE `sys_user_post` DISABLE KEYS */;
+INSERT INTO `sys_user_post` VALUES (1,1),(2,2);
+/*!40000 ALTER TABLE `sys_user_post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_user_role`
+--
+
 DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_user_role` (
   `user_id` bigint NOT NULL COMMENT '用户ID',
   `role_id` bigint NOT NULL COMMENT '角色ID',
-  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户和角色关联表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`user_id`,`role_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='用户和角色关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-INSERT INTO `sys_user_role` VALUES (1, 1);
-INSERT INTO `sys_user_role` VALUES (2, 2);
-INSERT INTO `sys_user_role` VALUES (100, 100);
-INSERT INTO `sys_user_role` VALUES (101, 102);
-INSERT INTO `sys_user_role` VALUES (102, 101);
-INSERT INTO `sys_user_role` VALUES (103, 102);
-INSERT INTO `sys_user_role` VALUES (104, 101);
+--
+-- Dumping data for table `sys_user_role`
+--
 
--- ----------------------------
--- Table structure for tb_course
--- ----------------------------
+LOCK TABLES `sys_user_role` WRITE;
+/*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
+INSERT INTO `sys_user_role` VALUES (1,1),(2,2),(3,100),(100,102),(101,102),(1000,101),(1001,101),(1002,101);
+/*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_course`
+--
+
 DROP TABLE IF EXISTS `tb_course`;
-CREATE TABLE `tb_course`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_course` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '课程ID（主键）',
   `course_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '课程编码（如JSJ001）',
   `course_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '课程名称',
+  `college` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属学院',
   `teacher_id` bigint NOT NULL COMMENT '授课教师ID（关联tb_teacher.id）',
-  `max_students` int NULL DEFAULT 50 COMMENT '最大选课人数',
-  `status` tinyint NULL DEFAULT 0 COMMENT '状态（0-正常，1-停用）',
+  `max_students` int DEFAULT '50' COMMENT '最大选课人数',
+  `status` tinyint DEFAULT '0' COMMENT '状态（0-正常，1-停用）',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `course_code`(`course_code` ASC) USING BTREE,
-  INDEX `teacher_id`(`teacher_id` ASC) USING BTREE,
+  UNIQUE KEY `course_code` (`course_code`) USING BTREE,
+  KEY `teacher_id` (`teacher_id`) USING BTREE,
   CONSTRAINT `tb_course_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tb_teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表（教务员管理+教师授课关联）' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='课程信息表（教务员管理+教师授课关联）';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tb_course
--- ----------------------------
-INSERT INTO `tb_course` VALUES (1, 'JSJ001', 'Java程序设计', 1, 30, 0);
-INSERT INTO `tb_course` VALUES (2, 'JSJ002', 'Python基础', 1, 40, 0);
-INSERT INTO `tb_course` VALUES (3, 'DB001', '数据库原理', 2, 25, 0);
-INSERT INTO `tb_course` VALUES (9, 'JSJ003', '操作系统', 3, 1, 0);
+--
+-- Dumping data for table `tb_course`
+--
 
--- ----------------------------
--- Table structure for tb_score
--- ----------------------------
+LOCK TABLES `tb_course` WRITE;
+/*!40000 ALTER TABLE `tb_course` DISABLE KEYS */;
+INSERT INTO `tb_course` VALUES (1,'JSJ001','Java程序设计','计算机学院',1,60,0),(2,'JSJ002','Python程序设计','计算机学院',1,60,0),(3,'DB001','数据库原理','计算机学院',2,50,0),(4,'JSJ003','操作系统','计算机学院',2,45,0),(5,'JSJ004','数据结构与算法','计算机学院',1,55,0),(6,'WEB001','Web前端开发','计算机学院',2,50,0),(7,'NET001','大学英语','外国语学院',3,45,0),(8,'SE001','英语听说','外国语学院',4,50,0),(9,'AI001','管理学原理','经济管理学院',5,40,0),(10,'ML001','机械设计基础','机械工程学院',6,35,0);
+/*!40000 ALTER TABLE `tb_course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_score`
+--
+
 DROP TABLE IF EXISTS `tb_score`;
-CREATE TABLE `tb_score`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_score` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '成绩ID（主键）',
   `course_id` bigint NOT NULL COMMENT '课程ID（关联tb_course.id）',
   `student_id` bigint NOT NULL COMMENT '学生ID（关联tb_student.id）',
-  `score` decimal(5, 2) NULL DEFAULT NULL COMMENT '成绩（如85.5，NULL表示未录入）',
-  `remark` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注（如缺考/缓考）',
+  `score` decimal(5,2) DEFAULT NULL COMMENT '成绩（如85.5，NULL表示未录入）',
+  `remark` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注（如缺考/缓考）',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_course_student`(`course_id` ASC, `student_id` ASC) USING BTREE,
-  INDEX `student_id`(`student_id` ASC) USING BTREE,
+  UNIQUE KEY `uk_course_student` (`course_id`,`student_id`) USING BTREE,
+  KEY `student_id` (`student_id`) USING BTREE,
   CONSTRAINT `tb_score_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `tb_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_score_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `tb_student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生成绩表（教师录入/修改成绩）' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='学生成绩表（教师录入/修改成绩）';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tb_score
--- ----------------------------
-INSERT INTO `tb_score` VALUES (1, 1, 1, 88.00, NULL);
-INSERT INTO `tb_score` VALUES (2, 1, 2, 76.50, NULL);
-INSERT INTO `tb_score` VALUES (3, 2, 1, 92.00, NULL);
-INSERT INTO `tb_score` VALUES (4, 2, 3, 0.00, '缺考');
-INSERT INTO `tb_score` VALUES (5, 3, 2, 85.00, NULL);
-INSERT INTO `tb_score` VALUES (6, 3, 4, 79.00, NULL);
-INSERT INTO `tb_score` VALUES (12, 9, 1, 67.00, NULL);
+--
+-- Dumping data for table `tb_score`
+--
 
--- ----------------------------
--- Table structure for tb_selection_exception
--- ----------------------------
+LOCK TABLES `tb_score` WRITE;
+/*!40000 ALTER TABLE `tb_score` DISABLE KEYS */;
+INSERT INTO `tb_score` VALUES (1,1,1,88.00,NULL),(2,1,2,76.50,NULL),(3,1,4,92.00,NULL),(4,1,7,65.00,NULL),(5,1,11,58.00,NULL),(6,1,18,81.50,NULL),(7,2,3,85.00,NULL),(8,2,5,74.00,NULL),(9,2,9,90.50,NULL),(10,2,13,62.00,NULL),(11,2,20,96.00,NULL),(12,3,1,91.00,NULL),(13,3,3,0.00,'缺考'),(14,3,6,79.00,NULL),(15,3,10,68.50,NULL),(16,3,16,83.00,NULL),(17,3,20,72.00,NULL),(18,4,2,88.50,NULL),(19,4,7,55.00,NULL),(20,4,12,77.00,NULL),(21,4,19,93.00,NULL),(22,5,4,69.00,NULL),(23,5,8,84.00,NULL),(24,5,13,0.00,'缺考'),(25,5,16,61.50,NULL),(26,6,1,95.00,NULL),(27,6,5,78.00,NULL),(28,6,10,82.00,NULL),(29,6,15,66.00,NULL),(30,6,19,87.50,NULL),(31,7,6,73.00,NULL),(32,7,11,64.00,NULL),(33,7,17,89.00,NULL),(34,8,8,75.50,NULL),(35,8,14,59.00,NULL),(36,8,18,86.00,NULL),(37,9,7,71.00,NULL),(38,9,12,94.00,NULL),(39,9,15,68.00,NULL),(40,10,9,80.00,NULL),(41,10,14,92.50,NULL),(42,10,17,63.00,NULL),(43,10,20,0.00,'缺考'),(44,6,21,59.00,NULL);
+/*!40000 ALTER TABLE `tb_score` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_selection_exception`
+--
+
 DROP TABLE IF EXISTS `tb_selection_exception`;
-CREATE TABLE `tb_selection_exception`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_selection_exception` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '异常ID（主键）',
   `course_id` bigint NOT NULL COMMENT '课程ID（关联tb_course.id）',
   `student_id` bigint NOT NULL COMMENT '学生ID（关联tb_student.id）',
   `exception_type` tinyint NOT NULL COMMENT '异常类型（1-重复选课，2-超员选课）',
-  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录时间',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '记录时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `course_id`(`course_id` ASC) USING BTREE,
-  INDEX `student_id`(`student_id` ASC) USING BTREE,
+  KEY `course_id` (`course_id`) USING BTREE,
+  KEY `student_id` (`student_id`) USING BTREE,
   CONSTRAINT `tb_selection_exception_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `tb_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_selection_exception_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `tb_student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '选课异常记录表（教务员处理重复/超员选课）' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='选课异常记录表（教务员处理重复/超员选课）';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tb_selection_exception
--- ----------------------------
-INSERT INTO `tb_selection_exception` VALUES (8, 1, 1, 1, '2025-10-31 23:02:10');
-INSERT INTO `tb_selection_exception` VALUES (9, 9, 2, 2, '2025-10-31 23:02:39');
-INSERT INTO `tb_selection_exception` VALUES (10, 1, 1, 1, '2025-10-31 23:04:50');
+--
+-- Dumping data for table `tb_selection_exception`
+--
 
--- ----------------------------
--- Table structure for tb_student
--- ----------------------------
+LOCK TABLES `tb_selection_exception` WRITE;
+/*!40000 ALTER TABLE `tb_selection_exception` DISABLE KEYS */;
+INSERT INTO `tb_selection_exception` VALUES (1,3,3,1,'2024-09-01 11:05:00'),(2,9,7,1,'2024-09-01 11:20:00'),(3,10,11,2,'2024-09-02 10:15:00'),(4,6,16,2,'2024-09-02 10:40:00');
+/*!40000 ALTER TABLE `tb_selection_exception` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_student`
+--
+
 DROP TABLE IF EXISTS `tb_student`;
-CREATE TABLE `tb_student`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_student` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '学生ID（主键）',
   `student_no` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '学号（如S2023001）',
   `student_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '学生姓名',
-  `user_id` bigint NULL DEFAULT NULL COMMENT '关联系统用户ID（对应sys_user.id）',
+  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '性别',
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '手机号',
+  `major` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '专业',
+  `college` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '学院',
+  `class_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '班级',
+  `grade` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '年级（如2023）',
+  `user_id` bigint DEFAULT NULL COMMENT '关联系统用户ID（对应sys_user.id）',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `student_no`(`student_no` ASC) USING BTREE,
-  UNIQUE INDEX `uk_student_user`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表（学生个人信息）' ROW_FORMAT = Dynamic;
+  UNIQUE KEY `student_no` (`student_no`) USING BTREE,
+  UNIQUE KEY `uk_student_user` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='学生信息表（学生个人信息）';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tb_student
--- ----------------------------
-INSERT INTO `tb_student` VALUES (1, 'S2023001', '小明', 102);
-INSERT INTO `tb_student` VALUES (2, 'S2023002', '小红', 104);
-INSERT INTO `tb_student` VALUES (3, 'S2023003', '小李', 105);
-INSERT INTO `tb_student` VALUES (4, 'S2023004', '小张', 106);
+--
+-- Dumping data for table `tb_student`
+--
 
--- ----------------------------
--- Table structure for tb_student_selection
--- ----------------------------
+LOCK TABLES `tb_student` WRITE;
+/*!40000 ALTER TABLE `tb_student` DISABLE KEYS */;
+INSERT INTO `tb_student` VALUES (1,'S2023001','张伟','男','13800000001','软件工程','计算机学院','软件工程2023-01','2023',1000),(2,'S2023002','王芳','女','13800000002','计算机科学与技术','计算机学院','计算机科学与技术2023-02','2023',1001),(3,'S2023003','李娜','女','13800000003','英语','外国语学院','英语2023-01','2023',NULL),(4,'S2023004','刘洋','男','13800000004','机械设计制造及其自动化','机械工程学院','机械设计制造及其自动化2023-01','2023',NULL),(5,'S2023005','陈静','女','13800000005','工商管理','经济管理学院','工商管理2023-01','2023',NULL),(6,'S2023006','杨帆','男','13800000006','软件工程','计算机学院','软件工程2023-01','2023',NULL),(7,'S2023007','赵磊','男','13800000007','计算机科学与技术','计算机学院','计算机科学与技术2023-02','2023',NULL),(8,'S2023008','黄敏','女','13800000008','英语','外国语学院','英语2023-01','2023',NULL),(9,'S2023009','周杰','男','13800000009','机械设计制造及其自动化','机械工程学院','机械设计制造及其自动化2023-01','2023',NULL),(10,'S2023010','吴倩','女','13800000010','工商管理','经济管理学院','工商管理2023-01','2023',NULL),(11,'S2023011','徐明','男','13800000011','软件工程','计算机学院','软件工程2023-02','2023',NULL),(12,'S2023012','孙丽','女','13800000012','计算机科学与技术','计算机学院','计算机科学与技术2023-01','2023',NULL),(13,'S2023013','马超','男','13800000013','英语','外国语学院','英语2023-02','2023',NULL),(14,'S2023014','朱婷','女','13800000014','机械设计制造及其自动化','机械工程学院','机械设计制造及其自动化2023-02','2023',NULL),(15,'S2023015','胡军','男','13800000015','工商管理','经济管理学院','工商管理2023-02','2023',NULL),(16,'S2023016','郭雪','女','13800000016','软件工程','计算机学院','软件工程2023-01','2023',NULL),(17,'S2023017','何平','男','13800000017','计算机科学与技术','计算机学院','计算机科学与技术2023-02','2023',NULL),(18,'S2023018','高翔','男','13800000018','英语','外国语学院','英语2023-01','2023',NULL),(19,'S2023019','林悦','女','13800000019','工商管理','经济管理学院','工商管理2023-01','2023',NULL),(20,'S2023020','罗成','男','13800000020','机械设计制造及其自动化','机械工程学院','机械设计制造及其自动化2023-01','2023',NULL),(21,'S2024000','唐礼正','男','13800000021','软件工程','计算机学院','软件工程2024-01','2024',1002);
+/*!40000 ALTER TABLE `tb_student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_student_selection`
+--
+
 DROP TABLE IF EXISTS `tb_student_selection`;
-CREATE TABLE `tb_student_selection`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_student_selection` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '选课ID（主键）',
   `course_id` bigint NOT NULL COMMENT '课程ID（关联tb_course.id）',
   `student_id` bigint NOT NULL COMMENT '学生ID（关联tb_student.id）',
-  `status` tinyint NULL DEFAULT 0 COMMENT '状态（0-已选，1-已退）',
-  `select_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '选课时间',
+  `status` tinyint DEFAULT '0' COMMENT '状态（0-已选，1-已退）',
+  `select_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '选课时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_course_student`(`course_id` ASC, `student_id` ASC) USING BTREE,
-  INDEX `student_id`(`student_id` ASC) USING BTREE,
+  UNIQUE KEY `uk_course_student` (`course_id`,`student_id`) USING BTREE,
+  KEY `student_id` (`student_id`) USING BTREE,
   CONSTRAINT `tb_student_selection_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `tb_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_student_selection_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `tb_student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生选课表（学生选课/退课记录）' ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='学生选课表（学生选课/退课记录）';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tb_student_selection
--- ----------------------------
-INSERT INTO `tb_student_selection` VALUES (1, 1, 1, 0, '2024-09-01 08:30:00');
-INSERT INTO `tb_student_selection` VALUES (2, 1, 2, 0, '2024-09-01 08:35:00');
-INSERT INTO `tb_student_selection` VALUES (3, 2, 1, 0, '2024-09-01 09:00:00');
-INSERT INTO `tb_student_selection` VALUES (4, 2, 3, 0, '2024-09-01 09:05:00');
-INSERT INTO `tb_student_selection` VALUES (5, 3, 2, 0, '2024-09-01 09:10:00');
-INSERT INTO `tb_student_selection` VALUES (6, 3, 4, 0, '2024-09-01 09:15:00');
-INSERT INTO `tb_student_selection` VALUES (14, 9, 1, 0, '2025-10-31 00:00:00');
+--
+-- Dumping data for table `tb_student_selection`
+--
 
--- ----------------------------
--- Table structure for tb_teacher
--- ----------------------------
+LOCK TABLES `tb_student_selection` WRITE;
+/*!40000 ALTER TABLE `tb_student_selection` DISABLE KEYS */;
+INSERT INTO `tb_student_selection` VALUES (1,1,1,0,'2024-09-01 08:30:00'),(2,3,1,0,'2024-09-01 08:35:00'),(3,6,1,0,'2024-09-01 08:40:00'),(4,1,2,0,'2024-09-01 08:45:00'),(5,4,2,0,'2024-09-01 08:50:00'),(6,2,3,0,'2024-09-01 08:55:00'),(7,3,3,0,'2024-09-01 09:00:00'),(8,1,4,0,'2024-09-01 09:05:00'),(9,5,4,0,'2024-09-01 09:10:00'),(10,2,5,0,'2024-09-01 09:15:00'),(11,6,5,0,'2024-09-01 09:20:00'),(12,3,6,0,'2024-09-01 09:25:00'),(13,7,6,0,'2024-09-01 09:30:00'),(14,1,7,0,'2024-09-01 09:35:00'),(15,4,7,0,'2024-09-01 09:40:00'),(16,9,7,0,'2024-09-01 09:45:00'),(17,5,8,0,'2024-09-01 09:50:00'),(18,8,8,0,'2024-09-01 09:55:00'),(19,2,9,0,'2024-09-01 10:00:00'),(20,10,9,0,'2024-09-01 10:05:00'),(21,3,10,0,'2024-09-02 09:00:00'),(22,6,10,0,'2024-09-02 09:05:00'),(23,1,11,0,'2024-09-02 09:10:00'),(24,7,11,0,'2024-09-02 09:15:00'),(25,4,12,0,'2024-09-02 09:20:00'),(26,9,12,0,'2024-09-02 09:25:00'),(27,2,13,0,'2024-09-02 09:30:00'),(28,5,13,0,'2024-09-02 09:35:00'),(29,8,14,0,'2024-09-02 09:40:00'),(30,10,14,0,'2024-09-02 09:45:00'),(31,6,15,0,'2024-09-02 09:50:00'),(32,9,15,0,'2024-09-02 09:55:00'),(33,3,16,0,'2024-09-02 10:00:00'),(34,5,16,0,'2024-09-02 10:05:00'),(35,7,17,0,'2024-09-02 10:10:00'),(36,10,17,0,'2024-09-02 10:15:00'),(37,1,18,0,'2024-09-02 10:20:00'),(38,8,18,0,'2024-09-02 10:25:00'),(39,4,19,0,'2024-09-02 10:30:00'),(40,6,19,0,'2024-09-02 10:35:00'),(41,2,20,0,'2024-09-02 10:40:00'),(42,3,20,0,'2024-09-02 10:45:00'),(43,10,20,0,'2024-09-02 10:50:00'),(44,6,21,0,'2026-09-17 00:00:00');
+/*!40000 ALTER TABLE `tb_student_selection` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_teacher`
+--
+
 DROP TABLE IF EXISTS `tb_teacher`;
-CREATE TABLE `tb_teacher`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_teacher` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '教师ID（主键）',
   `teacher_no` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '教师工号（如T001）',
   `teacher_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '教师姓名',
-  `title` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '职称（如教授/讲师）',
-  `user_id` bigint NULL DEFAULT NULL COMMENT '关联系统用户ID（对应sys_user.id）',
+  `title` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职称（如教授/讲师）',
+  `user_id` bigint DEFAULT NULL COMMENT '关联系统用户ID（对应sys_user.id）',
+  `college` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属学院',
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `teacher_no`(`teacher_no` ASC) USING BTREE,
-  UNIQUE INDEX `uk_teacher_user`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表（教师个人信息+关联课程）' ROW_FORMAT = Dynamic;
+  UNIQUE KEY `teacher_no` (`teacher_no`) USING BTREE,
+  UNIQUE KEY `uk_teacher_user` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='教师信息表（教师个人信息+关联课程）';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of tb_teacher
--- ----------------------------
-INSERT INTO `tb_teacher` VALUES (1, 'T001', '张教授', '教授', 103);
-INSERT INTO `tb_teacher` VALUES (2, 'T002', '李讲师', '讲师', 101);
-INSERT INTO `tb_teacher` VALUES (3, 'T003', '王讲师', '讲师', NULL);
+--
+-- Dumping data for table `tb_teacher`
+--
 
-SET FOREIGN_KEY_CHECKS = 1;
+LOCK TABLES `tb_teacher` WRITE;
+/*!40000 ALTER TABLE `tb_teacher` DISABLE KEYS */;
+INSERT INTO `tb_teacher` VALUES (1,'T001','陈志远','教授',101,'计算机学院','13800138001'),(2,'T002','李慧敏','副教授',100,'计算机学院','13800138002'),(3,'T003','王建国','讲师',NULL,'外国语学院','13800138003'),(4,'T004','赵晓燕','讲师',NULL,'外国语学院','13800138004'),(5,'T005','孙立军','副教授',NULL,'经济管理学院','13800138005'),(6,'T006','周文静','教授',NULL,'机械工程学院','13800138006');
+/*!40000 ALTER TABLE `tb_teacher` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-10-14 23:46:06

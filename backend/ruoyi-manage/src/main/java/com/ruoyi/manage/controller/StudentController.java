@@ -9,6 +9,8 @@ import com.ruoyi.manage.domain.Course;
 import com.ruoyi.manage.domain.Teacher;
 import com.ruoyi.manage.mapper.CourseMapper;
 import com.ruoyi.manage.mapper.TeacherMapper;
+import com.ruoyi.manage.mapper.StudentSelectionMapper;
+import com.ruoyi.manage.service.ICourseService;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,10 @@ public class StudentController extends BaseController
     private TeacherMapper teacherMapper;
     @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private StudentSelectionMapper studentSelectionMapper;
+    @Autowired
+    private ICourseService courseService;
     @Autowired
     private ISysUserService sysUserService;
 
@@ -85,6 +91,21 @@ public class StudentController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(Student student)
     {
+        // 教师角色：只看选了自己课程的学生
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        List<String> roles = sysUserService.selectRoleKeysByUserId(loginUser.getUserId());
+        if (roles.contains("teacher") && !roles.contains("admin") && !roles.contains("manage")) {
+            List<Course> myCourses = courseService.selectCourseByTeacherUserId(loginUser.getUserId());
+            if (myCourses.isEmpty()) {
+                return getDataTable(new java.util.ArrayList<>());
+            }
+            List<Long> courseIds = myCourses.stream().map(Course::getId).collect(java.util.stream.Collectors.toList());
+            List<Long> studentIds = studentSelectionMapper.selectStudentIdsByCourseIds(courseIds);
+            if (studentIds.isEmpty()) {
+                return getDataTable(new java.util.ArrayList<>());
+            }
+            student.setStudentIds(studentIds);
+        }
         startPage();
         List<Student> list = studentService.selectStudentList(student);
         return getDataTable(list);

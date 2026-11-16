@@ -7,6 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.manage.domain.Teacher;
+import com.ruoyi.manage.mapper.TeacherMapper;
+import com.ruoyi.manage.service.ICourseService;
+import com.ruoyi.manage.domain.Course;
+import com.ruoyi.system.service.ISysUserService;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
@@ -39,23 +47,30 @@ public class ScoreController extends BaseController
     @Autowired
     private IScoreService scoreService;
 
+    @Autowired
+    private TeacherMapper teacherMapper;
+
+    @Autowired
+    private ICourseService courseService;
+
+    @Autowired
+    private ISysUserService sysUserService;
+
     // 新增：获取成绩分布（用于ECharts）
     @GetMapping("/statDistribution")
 
-    // 复用成绩查看权限，无需新增
-    public AjaxResult getScoreDistribution() {
-        // 1. 获取当前登录用户的角色（和你之前获取角色判断数据权限的代码一样）
-        LoginUser loginUser = SecurityUtils.getLoginUser(); // 这行你肯定熟悉，之前用过
-        String roleKey = loginUser.getUser().getRoles().get(0).getRoleKey(); // 获取角色标识（manage/teacher）
+    // 复用成绩查看权限，无需新增；courseId 可选：传了则按课程统计分布
+    public AjaxResult getScoreDistribution(@RequestParam(value = "courseId", required = false) Long courseId,
+                                           @RequestParam(value = "college", required = false) String college,
+                                           @RequestParam(value = "className", required = false) String className) {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        String roleKey = loginUser.getUser().getRoles().get(0).getRoleKey();
 
-        // 2. 只允许manage和teacher访问（和你限制老师看自己信息的判断逻辑类似）
         if (!"manage".equals(roleKey) && !"teacher".equals(roleKey) && !"admin".equals(roleKey)){
-            return AjaxResult.error("没有权限访问"); // 非这两个角色，返回无权限
+            return AjaxResult.error("没有权限访问");
         }
 
-        // 3. 有权限，返回图表数据（和你之前返回数据的逻辑一样）
-        Map<String, Integer> chartData = new HashMap<>();
-        return AjaxResult.success(scoreService.getScoreDistribution());
+        return AjaxResult.success(scoreService.getScoreDistribution(courseId, college, className));
     }
 
     /**
@@ -65,6 +80,20 @@ public class ScoreController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(Score score)
     {
+        // 教师角色：只查自己教的课程的成绩
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        List<String> roles = sysUserService.selectRoleKeysByUserId(loginUser.getUserId());
+        if (roles.contains("teacher") && !roles.contains("admin") && !roles.contains("manage")) {
+            Teacher teacher = teacherMapper.selectTeacherByUserId(loginUser.getUserId());
+            if (teacher != null) {
+                List<Course> myCourses = courseService.selectCourseByTeacherUserId(loginUser.getUserId());
+                List<Long> courseIds = myCourses.stream().map(Course::getId).collect(Collectors.toList());
+                if (courseIds.isEmpty()) {
+                    return getDataTable(new java.util.ArrayList<>());
+                }
+                score.setCourseIds(courseIds);
+            }
+        }
         startPage();
         List<Score> list = scoreService.selectScoreList(score);
         return getDataTable(list);

@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.ServletUtils;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.manage.mapper.TeacherMapper;
@@ -56,6 +58,13 @@ public class TeacherServiceImpl implements ITeacherService
             teacher.setUserId(currentUserId); // 强制过滤当前用户的userId
         }
         // 管理员：可查看所有
+
+        // 角色查询消耗了 Controller 的 startPage()，这里重新启动分页
+        Integer pageNum = ServletUtils.getParameterToInt("pageNum");
+        Integer pageSize = ServletUtils.getParameterToInt("pageSize");
+        if (pageNum != null && pageSize != null) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
 
         return teacherMapper.selectTeacherList(teacher);
     }

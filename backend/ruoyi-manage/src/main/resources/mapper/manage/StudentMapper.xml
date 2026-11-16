@@ -8,18 +8,23 @@
         <result property="id"    column="id"    />
         <result property="studentNo"    column="student_no"    />
         <result property="studentName"    column="student_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="phone"    column="phone"    />
+        <result property="major"    column="major"    />
+        <result property="college"    column="college"    />
+        <result property="className"    column="class_name"    />
+        <result property="grade"    column="grade"    />
         <result property="userId"    column="user_id"    />
     </resultMap>
 
     <sql id="selectStudentVo">
-        select id, student_no, student_name, user_id from tb_student <!-- 统一表名 tb_student -->
+        select id, student_no, student_name, gender, phone, major, college, class_name, grade, user_id from tb_student
     </sql>
 
-    <!-- 新增：根据学生ID列表查询详情 -->
     <select id="selectStudentsByIds" resultType="com.ruoyi.manage.domain.Student">
         SELECT
-        id, student_no AS studentNo, student_name AS studentName
-        -- 按需添加其他字段（如性别、班级等），至少保留id和studentName（下拉框显示用）
+        id, student_no AS studentNo, student_name AS studentName,
+        gender AS gender, phone AS phone, major AS major, college AS college, class_name AS className, grade AS grade
         FROM tb_student
         WHERE id IN
         <foreach collection="studentIds" item="id" open="(" separator="," close=")">
@@ -27,7 +32,6 @@
         </foreach>
     </select>
 
-    <!-- 仅保留一个 selectStudentByUserId 方法，使用 resultMap 映射 -->
     <select id="selectStudentByUserId" parameterType="Long" resultMap="StudentResult">
         <include refid="selectStudentVo"/>
         where user_id = #{userId}
@@ -38,7 +42,15 @@
         <where>
             <if test="studentNo != null  and studentNo != ''"> and student_no = #{studentNo}</if>
             <if test="studentName != null  and studentName != ''"> and student_name like concat('%', #{studentName}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="className != null  and className != ''"> and class_name like concat('%', #{className})</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
             <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="studentIds != null and studentIds.size() > 0"> and id in
+                <foreach item="sid" collection="studentIds" open="(" separator="," close=")">#{sid}</foreach>
+            </if>
         </where>
     </select>
 
@@ -52,11 +64,23 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="studentNo != null and studentNo != ''">student_no,</if>
             <if test="studentName != null and studentName != ''">student_name,</if>
+            <if test="gender != null and gender != ''">gender,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="college != null and college != ''">college,</if>
+            <if test="major != null and major != ''">major,</if>
+            <if test="className != null and className != ''">class_name,</if>
+            <if test="grade != null and grade != ''">grade,</if>
             <if test="userId != null">user_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="studentNo != null and studentNo != ''">#{studentNo},</if>
             <if test="studentName != null and studentName != ''">#{studentName},</if>
+            <if test="gender != null and gender != ''">#{gender},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="college != null and college != ''">#{college},</if>
+            <if test="major != null and major != ''">#{major},</if>
+            <if test="className != null and className != ''">#{className},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
             <if test="userId != null">#{userId},</if>
         </trim>
     </insert>
@@ -66,6 +90,12 @@
         <trim prefix="SET" suffixOverrides=",">
             <if test="studentNo != null and studentNo != ''">student_no = #{studentNo},</if>
             <if test="studentName != null and studentName != ''">student_name = #{studentName},</if>
+            <if test="gender != null and gender != ''">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="college != null and college != ''">college = #{college},</if>
+            <if test="major != null and major != ''">major = #{major},</if>
+            <if test="className != null and className != ''">class_name = #{className},</if>
+            <if test="grade != null and grade != ''">grade = #{grade},</if>
             <if test="userId != null">user_id = #{userId},</if>
         </trim>
         where id = #{id}

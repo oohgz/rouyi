@@ -38,6 +38,10 @@ public class Course extends BaseEntity
     @Excel(name = "课程名称")
     private String courseName;
 
+    /** 所属学院 */
+    @Excel(name = "所属学院")
+    private String college;
+
     /** 授课教师ID（关联tb_teacher.id） */
     @Excel(name = "授课教师ID", readConverterExp = "关=联tb_teacher.id")
     private Long teacherId;
@@ -80,6 +84,9 @@ public class Course extends BaseEntity
         return courseName;
     }
 
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
+
     public void setTeacherId(Long teacherId) 
     {
         this.teacherId = teacherId;
@@ -116,6 +123,7 @@ public class Course extends BaseEntity
             .append("id", getId())
             .append("courseCode", getCourseCode())
             .append("courseName", getCourseName())
+            .append("college", getCollege())
             .append("teacherId", getTeacherId())
             .append("maxStudents", getMaxStudents())
             .append("status", getStatus())
