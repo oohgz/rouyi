@@ -4,3 +4,11 @@
 # ç³»ç»Ÿæ–‡ä»¶
 .DS_Store
 Thumbs.db
+
+# GitHub æ–‡æ¡£æ•´ç†æ—¶è¡¥å……
+.resume_build/
+docs/images/*.tmp
+
+# º¬ÕæÊµÊı¾İµÄÊı¾İ¿â±¸·İ£¬²»ÉÏ´«
+backend/sql/*_backup.sql
+
